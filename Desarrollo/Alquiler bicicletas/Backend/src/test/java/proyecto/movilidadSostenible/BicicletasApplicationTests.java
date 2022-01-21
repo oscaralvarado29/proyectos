@@ -1,10 +1,10 @@
-package com.usa.hackaton;
+package proyecto.movilidadSostenible;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HackatonApplicationTests {
+class BicicletasApplicationTests {
 
 	@Test
 	void contextLoads() {

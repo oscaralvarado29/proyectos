@@ -1,13 +1,13 @@
-package com.usa.hackaton;
+package proyecto.movilidadSostenible;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HackatonApplication {
+public class BicicletasApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HackatonApplication.class, args);
+		SpringApplication.run(BicicletasApplication.class, args);
 	}
 
 }
