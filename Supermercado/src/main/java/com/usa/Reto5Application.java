@@ -1,9 +1,9 @@
 package com.usa;
 
-import com.usa.controlador.Controlador;
-import com.usa.modelo.ProductoRepository;
-import com.usa.vista.VentanaActualizar;
-import com.usa.vista.Vista;
+import com.usa.controlador.Controller;
+import com.usa.modelo.ProductRepository;
+import com.usa.vista.WindowUpdate;
+import com.usa.vista.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,7 +20,7 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 public class Reto5Application {
 
     @Autowired
-    ProductoRepository repositorio;
+    ProductRepository repositorio;
 
     public static void main(String[] args) {
         SpringApplicationBuilder builder = new SpringApplicationBuilder(Reto5Application.class);
@@ -31,9 +31,9 @@ public class Reto5Application {
     @Bean
     ApplicationRunner applicationRunner() {
         return args -> {
-            Vista vista = new Vista();
-            VentanaActualizar ventanaActualizar= new VentanaActualizar();
-            Controlador controlador = new Controlador(repositorio, vista, ventanaActualizar);
+            View view = new View();
+            WindowUpdate windowUpdate = new WindowUpdate();
+            Controller controlador = new Controller(repositorio, view, windowUpdate);
         };
     }
 }

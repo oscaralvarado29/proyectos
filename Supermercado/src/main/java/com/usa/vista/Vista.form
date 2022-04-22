@@ -120,14 +120,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelPrecio">
       <Properties>
-        <Property name="text" type="java.lang.String" value="precio"/>
+        <Property name="text" type="java.lang.String" value="price"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoPrecio">
     </Component>
     <Component class="javax.swing.JLabel" name="labelInventario">
       <Properties>
-        <Property name="text" type="java.lang.String" value="inventario"/>
+        <Property name="text" type="java.lang.String" value="inventory"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoInventario">
@@ -139,7 +139,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labelCodigo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="codigo"/>
+        <Property name="text" type="java.lang.String" value="code"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="textoCodigo">
@@ -155,10 +155,10 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="0">
-                <Column editable="false" title="codigo" type="java.lang.Object"/>
-                <Column editable="false" title="nombre" type="java.lang.Object"/>
-                <Column editable="false" title="precio" type="java.lang.Object"/>
-                <Column editable="false" title="inventario" type="java.lang.Object"/>
+                <Column editable="false" title="code" type="java.lang.Object"/>
+                <Column editable="false" title="name" type="java.lang.Object"/>
+                <Column editable="false" title="price" type="java.lang.Object"/>
+                <Column editable="false" title="inventory" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
