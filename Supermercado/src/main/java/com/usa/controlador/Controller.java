@@ -42,6 +42,8 @@ public class Controller implements ActionListener {
 
     public Controller(ProductRepository repository, View view, WindowUpdate windowUpdate) {
         super();
+        this.nameHigherPrice = "";
+        this.nameLowerPrice = "";
         this.repository = repository;
         this.view = view;
         view.setVisible(true);
@@ -277,13 +279,15 @@ public class Controller implements ActionListener {
     public void generateReport() {
         List<Product> inventory ;
         inventory = extractData();
+        this.nameHigherPrice = inventory.get(0).getName();
+        this.nameLowerPrice = inventory.get(0).getName();
         double sum = 0;
         double inventoryCalculation = 0;
-        double higherValue = inventory.get(0).getPrice();
-        double lowerValue = higherValue;
+        double higherPriceValue = inventory.get(0).getPrice();
+        double lowerPriceValue = higherPriceValue;
         for (Product product : inventory) {
-            higherValue = calculateHigher(product.getPrice(), product.getName(), higherValue);
-            lowerValue = calculateLower(product.getPrice(), product.getName(), lowerValue);
+            higherPriceValue = calculateHigher(product.getPrice(), product.getName(), higherPriceValue);
+            lowerPriceValue = calculateLower(product.getPrice(), product.getName(), lowerPriceValue);
             sum = summation(product.getPrice(), sum);
             inventoryCalculation = inventoryCalculation(product.getPrice(), product.getInventory(), inventoryCalculation);
         }
