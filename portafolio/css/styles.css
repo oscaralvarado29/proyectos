@@ -110,11 +110,11 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
 }
 
 h1, .h1 {
-  font-size: calc(1.375rem + 1.5vw);
+  font-size: calc(1rem + 1.5vw);
 }
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -491,6 +491,7 @@ progress {
 .lead {
   font-size: 1.25rem;
   font-weight: 300;
+  text-align: justify
 }
 
 .display-1 {
@@ -602,6 +603,7 @@ progress {
 .img-fluid {
   max-width: 100%;
   height: auto;
+  margin-bottom: 20px;
 }
 
 .img-thumbnail {
@@ -11506,4 +11508,10 @@ html {
 
 .copyright {
   background-color: #1a252f;
+}
+.text-contact {
+  color: #000;
+  text-align: justify;
+  text-align-last: center;
+  font-size: 1.25rem;
 }
