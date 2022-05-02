@@ -1,9 +1,9 @@
 package com.usa;
 
-import com.usa.controlador.Controller;
-import com.usa.modelo.ProductRepository;
-import com.usa.vista.WindowUpdate;
-import com.usa.vista.View;
+import com.usa.controlller.Controller;
+import com.usa.model.ProductRepository;
+import com.usa.view.WindowUpdate;
+import com.usa.view.View;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,8 +14,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 
 @SpringBootApplication
-@ComponentScan("com.usa.modelo")
-@EnableJdbcRepositories("com.usa.modelo")
+@ComponentScan("com.usa.model")
+@EnableJdbcRepositories("com.usa.model")
 
 public class Reto5Application {
 
