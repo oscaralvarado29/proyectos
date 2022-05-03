@@ -31,4 +31,11 @@ public class Category implements Serializable {
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="category")
     @JsonIgnoreProperties("category")
     private List<Machine> machines;
+
+    public Category(CategoryDTO categoryDTO) {
+        this.id = categoryDTO.getId();
+        this.name = categoryDTO.getName();
+        this.description = categoryDTO.getDescription();
+        this.machines = categoryDTO.getMachines();
+    }
 }

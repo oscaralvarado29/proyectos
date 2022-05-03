@@ -18,7 +18,7 @@ public class CategoryRepository {
 
     /**
      * Select
-     * @return
+     * @return categoryInterface.findAll()
      */
     public List<Category> getAll(){
         return (List<Category>) categoryInterface.findAll();
@@ -26,17 +26,17 @@ public class CategoryRepository {
 
     /**
      * Select by specific id
-     * @param id
-     * @return
+     * @param id id of the category
+     * @return categoryInterface.findById(id)
      */
     public Optional<Category> getCategory(int id){
         return categoryInterface.findById(id);
     }
 
     /**
-     * Insert
-     * @param category
-     * @return
+     * Save
+     * @param category category to save
+     * @return categoryInterface.save(category)
      */
     public Category save(Category category){
         return categoryInterface.save(category);
@@ -44,7 +44,7 @@ public class CategoryRepository {
 
     /**
      * Delete
-     * @param category
+     * @param category category to delete
      */
     public void delete(Category category){
         categoryInterface.delete(category);

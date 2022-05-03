@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.reto5.model.Category;
 import com.reto5.service.CategoryService;
+import com.reto5.model.CategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,7 +34,7 @@ public class CategoryController {
 
     /**
      * GET
-     * @return
+     * @return categoryService.getAll()
      */
     @GetMapping("/all")
     public List<Category> getCategory(){
@@ -42,8 +43,8 @@ public class CategoryController {
 
     /**
      * GET for specific id
-     * @param categoryId
-     * @return
+     * @param categoryId id of the category
+     * @return categoryService.getCategory(categoryId)
      */
     @GetMapping("/{id}")
     public Optional<Category> getCategory(@PathVariable("id") int categoryId) {
@@ -52,30 +53,32 @@ public class CategoryController {
 
     /**
      * POST
-     * @param category
-     * @return
+     * @param categoryDTO DTO of the category
+     * @return categoryService.save(category)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category save(@RequestBody Category category) {
+    public Category save(@RequestBody CategoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO);
         return categoryService.save(category);
     }
 
     /**
      * PUT
-     * @param category
-     * @return
+     * @param categoryDTO DTO of the category
+     * @return categoryService.update(category)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category update(@RequestBody Category category) {
+    public Category update(@RequestBody CategoryDTO categoryDTO) {
+        Category category = new Category(categoryDTO);
         return categoryService.update(category);
     }
 
     /**
      * DELETE
-     * @param categoryId
-     * @return
+     * @param categoryId id of the category
+     * @return categoryService.deleteCategory(categoryId
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

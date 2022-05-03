@@ -10,17 +10,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  *
  * @author Oscar Alvarado
  */
-@Data                                           // Le dice a LOMBOK que cree los getter y setters.
+
 @AllArgsConstructor                             // Le dice a LOMBOK que cree un constructor con todos los argumentos
 @NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "reservation")
 public class Reservation implements Serializable{
@@ -30,6 +31,7 @@ public class Reservation implements Serializable{
     private Date startDate;
     private Date devolutionDate;
     private String status="created";
+    private String score;
 
     @ManyToOne
     @JoinColumn(name = "id")
@@ -41,5 +43,13 @@ public class Reservation implements Serializable{
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
 
-    private String score;
+    public Reservation(ReservationDTO reservationDTO) {
+        this.idReservation = reservationDTO.getIdReservation();
+        this.startDate = reservationDTO.getStartDate();
+        this.devolutionDate = reservationDTO.getDevolutionDate();
+        this.status = reservationDTO.getStatus();
+        this.score = reservationDTO.getScore();
+        this.machine = reservationDTO.getMachine();
+        this.client = reservationDTO.getClient();
+    }
 }

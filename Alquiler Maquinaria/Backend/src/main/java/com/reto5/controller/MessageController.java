@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.reto5.model.Message;
+import com.reto5.model.MessageDTO;
 import com.reto5.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +33,7 @@ public class MessageController {
 
     /**
      * GET
-     * @return
+     * @return messageService.getAll()
      */
     @GetMapping("/all")
     public List<Message> getMessages(){
@@ -41,8 +42,8 @@ public class MessageController {
 
     /**
      * GET for specif id
-     * @param messageId
-     * @return
+     * @param messageId id of the message
+     * @return messageService.getMessage(messageId)
      */
     @GetMapping("/{id}")
     public Optional<Message> getMessage(@PathVariable("id") int messageId) {
@@ -51,30 +52,32 @@ public class MessageController {
 
     /**
      * POST
-     * @param message
-     * @return
+     * @param messageDTO DTO of the message
+     * @return messageService.save(message)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody Message message) {
+    public Message save(@RequestBody MessageDTO messageDTO) {
+        Message message = new Message(messageDTO);
         return messageService.save(message);
     }
 
     /**
      * PUT
-     * @param message
-     * @return
+     * @param messageDTO DTO of the message
+     * @return messageService.update(message)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message update(@RequestBody Message message) {
+    public Message update(@RequestBody MessageDTO messageDTO) {
+        Message message = new Message(messageDTO);
         return messageService.update(message);
     }
 
     /**
      * DELETE
-     * @param messageId
-     * @return
+     * @param messageId id of the message
+     * @return messageService.deleteMessage(messageId)
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -3,6 +3,7 @@ package com.reto5.controller;
 import java.util.List;
 import java.util.Optional;
 import com.reto5.model.Reservation;
+import com.reto5.model.ReservationDTO;
 import com.reto5.report.ClientCount;
 import com.reto5.report.ReservationStatus;
 import com.reto5.service.ReservationService;
@@ -24,7 +25,7 @@ public class ReservationController {
 
     /**
      * GET
-     * @return reservationService
+     * @return reservationService.getAll()
      */
     @GetMapping("/all")
     public List<Reservation> getReservations(){
@@ -33,8 +34,8 @@ public class ReservationController {
 
     /**
      * GET for specific id
-     * @param reservationId
-     * @return
+     * @param reservationId id of reservation
+     * @return reservationService.getReservation(reservationId)
      */
     @GetMapping("/{id}")
     public Optional<Reservation> getReservation(@PathVariable("id") int reservationId) {
@@ -43,30 +44,32 @@ public class ReservationController {
 
     /**
      * post
-     * @param reservation
-     * @return
+     * @param reservationDTO DTO of reservation
+     * @return reservationService.save(reservation)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation save(@RequestBody Reservation reservation) {
+    public Reservation save(@RequestBody ReservationDTO reservationDTO) {
+        Reservation reservation = new Reservation(reservationDTO);
         return reservationService.save(reservation);
     }
 
     /**
      * PUT
-     * @param reservation
-     * @return
+     * @param reservationDTO DTO of reservation
+     * @return reservationService.update(reservation)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation update(@RequestBody Reservation reservation) {
+    public Reservation update(@RequestBody ReservationDTO reservationDTO) {
+        Reservation reservation = new Reservation(reservationDTO);
         return reservationService.update(reservation);
     }
 
     /**
      * DELETE
-     * @param reservationId
-     * @return
+     * @param reservationId id of reservation
+     * @return reservationService.deleteReservation(reservationId)
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

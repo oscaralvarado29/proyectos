@@ -4,17 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  *
  * @author Oscar Alvarado
  */
-@Data                                           // Le dice a LOMBO que cree los getter y setters.
+
 @AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
-@NoArgsConstructor                              // Le dice a LOMBO que cree un constructor sin argumentos
+@NoArgsConstructor
+@Getter
+@Setter                              // Le dice a LOMBO que cree un constructor sin argumentos
 @Entity
 @Table(name = "machine")
 public class Machine implements Serializable{
@@ -35,13 +36,22 @@ public class Machine implements Serializable{
     @JsonIgnoreProperties("machines")
     private Category category;
 
-    @Column(nullable=true)
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "machine")
     @JsonIgnoreProperties({"machine", "client"})
     private List<Message> messages;
 
-    @Column(nullable=true)
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy = "machine")
     @JsonIgnoreProperties({"machine", "messages"})
     private List<Reservation> reservations;
+
+    public Machine(MachineDTO machineDTO) {
+        this.id = machineDTO.getId();
+        this.name = machineDTO.getName();
+        this.brand = machineDTO.getBrand();
+        this.year = machineDTO.getYear();
+        this.description = machineDTO.getDescription();
+        this.category = machineDTO.getCategory();
+        this.messages = machineDTO.getMessages();
+        this.reservations = machineDTO.getReservations();
+    }
 }

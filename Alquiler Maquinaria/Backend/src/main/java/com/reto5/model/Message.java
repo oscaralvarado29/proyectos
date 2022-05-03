@@ -3,17 +3,18 @@ package com.reto5.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
 
 /**
  *
  * @author Oscar Alvarado
  */
-@Data                                           // Le dice a LOMBO que cree los getter y setters.
+
 @AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
-@NoArgsConstructor                              // Le dice a LOMBO que cree un constructor sin argumentos
+@NoArgsConstructor
+@Getter
+@Setter                              // Le dice a LOMBO que cree un constructor sin argumentos
 @Entity
 @Table(name = "message")
 public class Message implements Serializable{
@@ -32,4 +33,11 @@ public class Message implements Serializable{
     @JoinColumn(name="idClient")
     @JsonIgnoreProperties({"messages", "reservations", "client"})
     private Client client;
+
+    public Message(MessageDTO messageDTO) {
+        this.idMessage = messageDTO.getIdMessage();
+        this.messageText = messageDTO.getMessageText();
+        this.machine = messageDTO.getMachine();
+        this.client = messageDTO.getClient();
+    }
 }

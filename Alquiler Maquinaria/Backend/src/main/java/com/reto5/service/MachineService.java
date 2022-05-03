@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.reto5.model.Machine;
 import com.reto5.repository.MachineRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,7 @@ public class MachineService {
 
     /**
      * GET
-     * @return
+     * @return machineRepository.getAll()
      */
     public List<Machine> getAll(){
         return machineRepository.getAll();
@@ -27,8 +28,8 @@ public class MachineService {
 
     /**
      * GET select a specific id
-     * @param machineId
-     * @return
+     * @param machineId id  of the machine
+     * @return machineRepository.getMachine(machineId)
      */
     public Optional<Machine> getMachine(int machineId) {
         return machineRepository.getMachine(machineId);
@@ -36,15 +37,15 @@ public class MachineService {
 
     /**
      * POST
-     * @param machine
-     * @return
+     * @param machine machine to save
+     * @return machineRepository.save(machine) if machine.getId() is null or not exist else return machine
      */
     public Machine save(Machine machine){
         if(machine.getId()==null){
             return machineRepository.save(machine);
         }else{
-            Optional<Machine> e= machineRepository.getMachine(machine.getId());
-            if(e.isEmpty()){
+            Optional<Machine> machine1= machineRepository.getMachine(machine.getId());
+            if(machine1.isEmpty()){
                 return machineRepository.save(machine);
             }else{
                 return machine;
@@ -54,30 +55,30 @@ public class MachineService {
 
     /**
      * UPDATE
-     * @param machine
-     * @return
+     * @param machine machine to update
+     * @return machineUpdate.get() if machine.getId() is not null or exist else return machine
      */
-    public Machine update(Machine machine){
+    public Machine update(@NotNull Machine machine){
         if(machine.getId()!=null){
-            Optional<Machine> e= machineRepository.getMachine(machine.getId());
-            if(!e.isEmpty()){
+            Optional<Machine> machineUpdate= machineRepository.getMachine(machine.getId());
+            if(machineUpdate.isPresent()){
                 if(machine.getName()!=null){
-                    e.get().setName(machine.getName());
+                    machineUpdate.get().setName(machine.getName());
                 }
                 if(machine.getBrand()!=null){
-                    e.get().setBrand(machine.getBrand());
+                    machineUpdate.get().setBrand(machine.getBrand());
                 }
                 if(machine.getYear()!=null){
-                    e.get().setYear(machine.getYear());
+                    machineUpdate.get().setYear(machine.getYear());
                 }
                 if(machine.getDescription()!=null){
-                    e.get().setDescription(machine.getDescription());
+                    machineUpdate.get().setDescription(machine.getDescription());
                 }
                 if(machine.getCategory()!=null){
-                    e.get().setCategory(machine.getCategory());
+                    machineUpdate.get().setCategory(machine.getCategory());
                 }
-                machineRepository.save(e.get());
-                return e.get();
+                machineRepository.save(machineUpdate.get());
+                return machineUpdate.get();
             }else{
                 return machine;
             }
@@ -88,14 +89,13 @@ public class MachineService {
 
     /**
      * DELETE
-     * @param machineId
-     * @return
+     * @param machineId id of the machine to delete
+     * @return true if machine is deleted else return false
      */
     public boolean deleteMachine(Integer machineId) {
-        Boolean aBoolean = getMachine(machineId).map(machine -> {
+        return getMachine(machineId).map(machine -> {
             machineRepository.delete(machine);
             return true;
         }).orElse(false);
-        return aBoolean;
     }
 }

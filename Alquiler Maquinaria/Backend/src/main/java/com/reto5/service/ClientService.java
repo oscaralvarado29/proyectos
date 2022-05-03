@@ -19,7 +19,7 @@ public class ClientService {
 
     /**
      * GET
-     * @return
+     * @return clientRepository.getAll()
      */
     public List<Client> getAll(){
         return clientRepository.getAll();
@@ -27,8 +27,8 @@ public class ClientService {
 
     /**
      * GET select a specific id
-     * @param clientId
-     * @return
+     * @param clientId id of the client
+     * @return clientRepository.getClient(clientId)
      */
     public Optional<Client> getClient(int clientId) {
         return clientRepository.getClient(clientId);
@@ -36,15 +36,16 @@ public class ClientService {
 
     /**
      * POST
-     * @param client
-     * @return
+     * @param client client to save
+     * @return clientRepository.save(client) if client.getIdClient() is null or or clientRepository.getClient(client.getId()).isEmpty()
+     * else client
      */
     public Client save(Client client){
         if(client.getIdClient()==null){
             return clientRepository.save(client);
         }else{
-            Optional<Client> e= clientRepository.getClient(client.getIdClient());
-            if(e.isEmpty()){
+            Optional<Client> client1= clientRepository.getClient(client.getIdClient());
+            if(client1.isEmpty()){
                 return clientRepository.save(client);
             }else{
                 return client;
@@ -54,24 +55,24 @@ public class ClientService {
 
     /**
      * UPDATE
-     * @param client
-     * @return
+     * @param client client to update
+     * @return clientUpdate.get() if client.getIdClient() is not null and clientUpdate.isPresent() else return client
      */
     public Client update(Client client){
         if(client.getIdClient()!=null){
-            Optional<Client> e= clientRepository.getClient(client.getIdClient());
-            if(!e.isEmpty()){
+            Optional<Client> clientUpdate= clientRepository.getClient(client.getIdClient());
+            if(clientUpdate.isPresent()){
                 if(client.getName()!=null){
-                    e.get().setName(client.getName());
+                    clientUpdate.get().setName(client.getName());
                 }
                 if(client.getAge()!=null){
-                    e.get().setAge(client.getAge());
+                    clientUpdate.get().setAge(client.getAge());
                 }
                 if(client.getPassword()!=null){
-                    e.get().setPassword(client.getPassword());
+                    clientUpdate.get().setPassword(client.getPassword());
                 }
-                clientRepository.save(e.get());
-                return e.get();
+                clientRepository.save(clientUpdate.get());
+                return clientUpdate.get();
             }else{
                 return client;
             }
@@ -82,14 +83,13 @@ public class ClientService {
 
     /**
      * DELETE
-     * @param clientId
-     * @return
+     * @param clientId id of the client to delete
+     * @return true if the client is deleted else return false
      */
     public boolean deleteClient(Integer clientId) {
-        Boolean aBoolean = getClient(clientId).map(client -> {
+        return getClient(clientId).map(client -> {
             clientRepository.delete(client);
             return true;
         }).orElse(false);
-        return aBoolean;
     }
 }

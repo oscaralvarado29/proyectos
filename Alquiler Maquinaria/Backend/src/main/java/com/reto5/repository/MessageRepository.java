@@ -18,7 +18,7 @@ public class MessageRepository {
 
     /**
      * Select
-     * @return
+     * @return messageInterface.findAll()
      */
     public List<Message> getAll(){
         return (List<Message>) messageInterface.findAll();
@@ -26,17 +26,17 @@ public class MessageRepository {
 
     /**
      * Select by id
-     * @param id
-     * @return
+     * @param id id of the message
+     * @return messageInterface.findById(id)
      */
     public Optional<Message> getMessage(int id){
         return messageInterface.findById(id);
     }
 
     /**
-     * Insert
-     * @param message
-     * @return
+     * Save
+     * @param message  message to save
+     * @return messageInterface.save(message)
      */
     public Message save(Message message){
         return messageInterface.save(message);
@@ -44,7 +44,7 @@ public class MessageRepository {
 
     /**
      * Delete
-     * @param message
+     * @param message  message to delete
      */
     public void delete(Message message){
         messageInterface.delete(message);

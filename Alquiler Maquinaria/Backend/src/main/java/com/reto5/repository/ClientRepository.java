@@ -18,7 +18,7 @@ public class ClientRepository {
 
     /**
      * Select
-     * @return
+     * @return clientInterface.findAll()
      */
     public List<Client> getAll(){
         return (List<Client>) clientInterface.findAll();
@@ -26,17 +26,17 @@ public class ClientRepository {
 
     /**
      * Select by id
-     * @param id
-     * @return
+     * @param id id of client
+     * @return clientInterface.findById(id)
      */
     public Optional<Client> getClient(int id){
         return clientInterface.findById(id);
     }
 
     /**
-     * Insert
-     * @param client
-     * @return
+     * Save
+     * @param client client to save
+     * @return clientInterface.save(client)
      */
     public Client save(Client client){
         return clientInterface.save(client);
@@ -44,7 +44,7 @@ public class ClientRepository {
 
     /**
      * Delete
-     * @param client
+     * @param client client to delete
      */
     public void delete(Client client){
         clientInterface.delete(client);

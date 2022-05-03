@@ -3,6 +3,7 @@ package com.reto5.controller;
 import java.util.List;
 import java.util.Optional;
 import com.reto5.model.Client;
+import com.reto5.model.ClientDTO;
 import com.reto5.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class ClientController {
 
     /**
      * GET
-     * @return
+     * @return clientService.getAll()
      */
     @GetMapping("/all")
     public List<Client> getClients(){
@@ -40,8 +41,8 @@ public class ClientController {
 
     /**
      * GET for specific id
-     * @param clientId
-     * @return
+     * @param clientId id of client
+     * @return clientService.getClient(clientId)
      */
     @GetMapping("/{id}")
     public Optional<Client> getClient(@PathVariable("id") int clientId) {
@@ -50,30 +51,32 @@ public class ClientController {
 
     /**
      * POST
-     * @param client
-     * @return
+     * @param clientDTO DTO of client
+     * @return clientService.save(client)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client save(@RequestBody Client client) {
+    public Client save(@RequestBody ClientDTO clientDTO) {
+        Client client = new Client(clientDTO);
         return clientService.save(client);
     }
 
     /**
      * PUT
-     * @param client
-     * @return
+     * @param clientDTO DTO of client
+     * @return clientService.update(client)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Client update(@RequestBody Client client) {
+    public Client update(@RequestBody ClientDTO clientDTO) {
+        Client client = new Client(clientDTO);
         return clientService.update(client);
     }
 
     /**
      * DELETE
-     * @param clientId
-     * @return
+     * @param  clientId id of client
+     * @return clientService.deleteClient(clientId)
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

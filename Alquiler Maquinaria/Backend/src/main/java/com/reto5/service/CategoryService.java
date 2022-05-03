@@ -19,7 +19,7 @@ public class CategoryService {
 
     /**
      * GET
-     * @return
+     * @return categoryRepository.getAll()
      */
     public List<Category> getAll() {
         return categoryRepository.getAll();
@@ -27,8 +27,8 @@ public class CategoryService {
 
     /**
      * GET select a specific id
-     * @param categoryId
-     * @return
+     * @param categoryId id of the category
+     * @return categoryRepository.getCategory(categoryId)
      */
     public Optional<Category> getCategory(int categoryId) {
         return categoryRepository.getCategory(categoryId);
@@ -36,8 +36,9 @@ public class CategoryService {
 
     /**
      * POST
-     * @param category
-     * @return
+     * @param category category to save
+     * @return categoryRepository.save(category) if category.getId()==null or categoryRepository.getCategory(category.getId()).isEmpty()
+     * else return category
      */
     public Category save(Category category) {
         if (category.getId()== null) {
@@ -54,20 +55,21 @@ public class CategoryService {
 
     /**
      * UPDATE
-     * @param category
-     * @return
+     * @param category category to update
+     * @return categoryRepository.save(categoryUpdate.get()) if category.getId()!=null and categoryRepository.getCategory(category.getId()).isPresent()
+     * else return category
      */
     public Category update(Category category){
         if(category.getId()!=null){
-            Optional<Category>g= categoryRepository.getCategory(category.getId());
-            if(!g.isEmpty()){
+            Optional<Category>categoryUpdate= categoryRepository.getCategory(category.getId());
+            if(categoryUpdate.isPresent()){
                 if(category.getDescription()!=null){
-                    g.get().setDescription(category.getDescription());
+                    categoryUpdate.get().setDescription(category.getDescription());
                 }
                 if(category.getName()!=null){
-                    g.get().setName(category.getName());
+                    categoryUpdate.get().setName(category.getName());
                 }
-                return categoryRepository.save(g.get());
+                return categoryRepository.save(categoryUpdate.get());
             }
         }
         return category;
@@ -75,15 +77,14 @@ public class CategoryService {
 
     /**
      * DELETE
-     * @param categoryId
-     * @return
+     * @param categoryId id of the category to delete
+     * @return true if the category is deleted else return false
      */
     public boolean deleteCategory(Integer categoryId){
-        Boolean d=getCategory(categoryId).map(category -> {
+        return getCategory(categoryId).map(category -> {
             categoryRepository.delete(category);
             return true;
         }).orElse(false);
-        return d;
     }
 
 }

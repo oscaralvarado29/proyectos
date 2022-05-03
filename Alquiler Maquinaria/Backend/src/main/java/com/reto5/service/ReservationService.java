@@ -24,7 +24,7 @@ public class ReservationService {
 
     /**
      * GET
-     * @return List<Reservation>
+     * @return resRepository.getAll()
      */
     public List<Reservation> getAll(){
         return resRepository.getAll();
@@ -33,7 +33,7 @@ public class ReservationService {
     /**
      * GET select a specific id
      * @param reservationId reservationId
-     * @return Optional<Reservation>
+     * @return resRepository.getReservation(reservationId)
      */
     public Optional<Reservation> getReservation(int reservationId) {
         return resRepository.getReservation(reservationId);
@@ -42,14 +42,15 @@ public class ReservationService {
     /**
      * POST
      * @param reservation reservation
-     * @return Reservation
+     * @return resRepository.save(reservation) if reservation.getIdReservation() is null or
+     * reservation1 is empty else return reservation
      */
     public Reservation save(Reservation reservation){
         if(reservation.getIdReservation()==null){
             return resRepository.save(reservation);
         }else{
-            Optional<Reservation> evt= resRepository.getReservation(reservation.getIdReservation());
-            if(evt.isEmpty()){
+            Optional<Reservation> reservation1= resRepository.getReservation(reservation.getIdReservation());
+            if(reservation1.isEmpty()){
                 return resRepository.save(reservation);
             }else{
                 return reservation;
@@ -59,25 +60,29 @@ public class ReservationService {
 
     /**
      * UPDATE
-     * @param reservation reservation
-     * @return Reservation
+     * @param reservation reservation to update
+     * @return reservationUpdate.get() if reservation.getIdReservation() is not null and reservationUpdate is
+     * not empty else return reservation
      */
     public Reservation update(Reservation reservation){
         if(reservation.getIdReservation()!=null){
-            Optional<Reservation> evt= resRepository.getReservation(reservation.getIdReservation());
-            if(evt.isPresent()){
+            Optional<Reservation> reservationUpdate= resRepository.getReservation(reservation.getIdReservation());
+            if(reservationUpdate.isPresent()){
 
                 if(reservation.getStartDate()!=null){
-                    evt.get().setStartDate(reservation.getStartDate());
+                    reservationUpdate.get().setStartDate(reservation.getStartDate());
                 }
                 if(reservation.getDevolutionDate()!=null){
-                    evt.get().setDevolutionDate(reservation.getDevolutionDate());
+                    reservationUpdate.get().setDevolutionDate(reservation.getDevolutionDate());
                 }
                 if(reservation.getStatus()!=null){
-                    evt.get().setStatus(reservation.getStatus());
+                    reservationUpdate.get().setStatus(reservation.getStatus());
                 }
-                resRepository.save(evt.get());
-                return evt.get();
+                if(reservation.getScore()!=null){
+                    reservationUpdate.get().setScore(reservation.getScore());
+                }
+                resRepository.save(reservationUpdate.get());
+                return reservationUpdate.get();
             }else{
                 return reservation;
             }

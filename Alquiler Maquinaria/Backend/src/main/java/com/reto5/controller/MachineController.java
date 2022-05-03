@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.reto5.model.Machine;
+import com.reto5.model.MachineDTO;
 import com.reto5.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,17 +33,8 @@ public class MachineController {
     private MachineService machineService;
 
     /**
-     * Welcome message
-     * @return
-     */
-    @GetMapping("/holaMundo")
-    public String saludad(){
-        return "Hola Mundo Tutoria";
-    }
-
-    /**
      * GET
-     * @return
+     * @return machineService.getAll()
      */
     @GetMapping("/all")
     public List<Machine> getMachines(){
@@ -51,8 +43,8 @@ public class MachineController {
 
     /**
      * GET for specific id
-     * @param machineId
-     * @return
+     * @param machineId id of the machine
+     * @return machineService.getMachine(machineId)
      */
     @GetMapping("/{id}")
     public Optional<Machine> getMachine(@PathVariable("id") int machineId) {
@@ -61,30 +53,32 @@ public class MachineController {
 
     /**
      * POST
-     * @param machine
-     * @return
+     * @param machineDTO DTo of the machine
+     * @return machineService.save(machine)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine save(@RequestBody Machine machine) {
+    public Machine save(@RequestBody MachineDTO machineDTO) {
+        Machine machine = new Machine(machineDTO);
         return machineService.save(machine);
     }
 
     /**
      * PUT
-     * @param machine
-     * @return
+     * @param machineDTO DTo of the machine
+     * @return machineService.update(machine)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine update(@RequestBody Machine machine) {
+    public Machine update(@RequestBody MachineDTO machineDTO) {
+        Machine machine = new Machine(machineDTO);
         return machineService.update(machine);
     }
 
     /**
      *DELETE
-     * @param machineId
-     * @return
+     * @param machineId id of the machine
+     * @return machineService.deleteMachine(machineId)
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

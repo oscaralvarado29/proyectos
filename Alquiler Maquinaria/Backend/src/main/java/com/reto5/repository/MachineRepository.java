@@ -19,7 +19,7 @@ public class MachineRepository {
 
     /**
      * Select
-     * @return
+     * @return machineInterface.findAll()
      */
     public List<Machine> getAll(){
         return (List<Machine>) machineInterface.findAll();
@@ -27,17 +27,17 @@ public class MachineRepository {
 
     /**
      * select by id
-     * @param id
-     * @return
+     * @param id id of machine
+     * @return machineInterface.findById(id)
      */
     public Optional<Machine> getMachine(int id){
         return machineInterface.findById(id);
     }
 
     /**
-     * Insert
-     * @param machine
-     * @return
+     * Save
+     * @param machine machine to save
+     * @return machineInterface.save(machine)
      */
     public Machine save(Machine machine){
         return machineInterface.save(machine);
@@ -45,7 +45,7 @@ public class MachineRepository {
 
     /**
      * Delete
-     * @param machine
+     * @param machine machine to delete
      */
     public void delete(Machine machine){
         machineInterface.delete(machine);
