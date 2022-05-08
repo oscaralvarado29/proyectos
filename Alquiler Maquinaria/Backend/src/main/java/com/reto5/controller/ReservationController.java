@@ -3,7 +3,7 @@ package com.reto5.controller;
 import java.util.List;
 import java.util.Optional;
 import com.reto5.model.Reservation;
-import com.reto5.model.ReservationDTO;
+import com.reto5.model.ReservationPOJO;
 import com.reto5.report.ClientCount;
 import com.reto5.report.ReservationStatus;
 import com.reto5.service.ReservationService;
@@ -44,24 +44,24 @@ public class ReservationController {
 
     /**
      * post
-     * @param reservationDTO DTO of reservation
+     * @param reservationDTO POJO of reservation
      * @return reservationService.save(reservation)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation save(@RequestBody ReservationDTO reservationDTO) {
+    public Reservation save(@RequestBody ReservationPOJO reservationDTO) {
         Reservation reservation = new Reservation(reservationDTO);
         return reservationService.save(reservation);
     }
 
     /**
      * PUT
-     * @param reservationDTO DTO of reservation
+     * @param reservationDTO POJO of reservation
      * @return reservationService.update(reservation)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Reservation update(@RequestBody ReservationDTO reservationDTO) {
+    public Reservation update(@RequestBody ReservationPOJO reservationDTO) {
         Reservation reservation = new Reservation(reservationDTO);
         return reservationService.update(reservation);
     }

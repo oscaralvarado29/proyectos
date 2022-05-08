@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.reto5.model.Machine;
-import com.reto5.model.MachineDTO;
+import com.reto5.model.MachinePOJO;
 import com.reto5.service.MachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -53,25 +53,25 @@ public class MachineController {
 
     /**
      * POST
-     * @param machineDTO DTo of the machine
+     * @param machinePOJO POJO of machine
      * @return machineService.save(machine)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine save(@RequestBody MachineDTO machineDTO) {
-        Machine machine = new Machine(machineDTO);
+    public Machine save(@RequestBody MachinePOJO machinePOJO) {
+        Machine machine = new Machine(machinePOJO);
         return machineService.save(machine);
     }
 
     /**
      * PUT
-     * @param machineDTO DTo of the machine
+     * @param machinePOJO POJO of machine
      * @return machineService.update(machine)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine update(@RequestBody MachineDTO machineDTO) {
-        Machine machine = new Machine(machineDTO);
+    public Machine update(@RequestBody MachinePOJO machinePOJO) {
+        Machine machine = new Machine(machinePOJO);
         return machineService.update(machine);
     }
 

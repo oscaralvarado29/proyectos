@@ -8,14 +8,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 
-public class MachineDTO {
+public class CategoryPOJO {
     private Integer id;
     private String name;
-    private String brand;
-    private Integer year;
     private String description;
-    private Category category;
-    private List<Message> messages;
-    private List<Reservation> reservations;
-
+    private List<Machine> machines;
 }

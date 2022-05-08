@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.reto5.model.Category;
 import com.reto5.service.CategoryService;
-import com.reto5.model.CategoryDTO;
+import com.reto5.model.CategoryPOJO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -53,24 +53,24 @@ public class CategoryController {
 
     /**
      * POST
-     * @param categoryDTO DTO of the category
+     * @param categoryDTO POJO of the category
      * @return categoryService.save(category)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category save(@RequestBody CategoryDTO categoryDTO) {
+    public Category save(@RequestBody CategoryPOJO categoryDTO) {
         Category category = new Category(categoryDTO);
         return categoryService.save(category);
     }
 
     /**
      * PUT
-     * @param categoryDTO DTO of the category
+     * @param categoryDTO POJO of the category
      * @return categoryService.update(category)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Category update(@RequestBody CategoryDTO categoryDTO) {
+    public Category update(@RequestBody CategoryPOJO categoryDTO) {
         Category category = new Category(categoryDTO);
         return categoryService.update(category);
     }

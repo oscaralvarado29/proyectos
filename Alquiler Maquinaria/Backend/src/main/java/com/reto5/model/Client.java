@@ -39,7 +39,7 @@ public class Client implements Serializable {
     @JsonIgnoreProperties("client")
     private List<Reservation>reservations;
 
-    public Client(ClientDTO clientDTO) {
+    public Client(ClientPOJO clientDTO) {
         this.idClient = clientDTO.getIdClient();
         this.email = clientDTO.getEmail();
         this.password = clientDTO.getPassword();

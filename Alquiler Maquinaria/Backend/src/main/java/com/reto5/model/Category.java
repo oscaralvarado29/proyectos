@@ -32,7 +32,7 @@ public class Category implements Serializable {
     @JsonIgnoreProperties("category")
     private List<Machine> machines;
 
-    public Category(CategoryDTO categoryDTO) {
+    public Category(CategoryPOJO categoryDTO) {
         this.id = categoryDTO.getId();
         this.name = categoryDTO.getName();
         this.description = categoryDTO.getDescription();

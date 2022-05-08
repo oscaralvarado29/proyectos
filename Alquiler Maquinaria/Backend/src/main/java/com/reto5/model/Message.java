@@ -34,10 +34,10 @@ public class Message implements Serializable{
     @JsonIgnoreProperties({"messages", "reservations", "client"})
     private Client client;
 
-    public Message(MessageDTO messageDTO) {
-        this.idMessage = messageDTO.getIdMessage();
-        this.messageText = messageDTO.getMessageText();
-        this.machine = messageDTO.getMachine();
-        this.client = messageDTO.getClient();
+    public Message(MessagePOJO messagePOJO) {
+        this.idMessage = messagePOJO.getIdMessage();
+        this.messageText = messagePOJO.getMessageText();
+        this.machine = messagePOJO.getMachine();
+        this.client = messagePOJO.getClient();
     }
 }

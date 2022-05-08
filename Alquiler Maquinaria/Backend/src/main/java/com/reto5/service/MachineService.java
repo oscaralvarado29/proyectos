@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import com.reto5.model.Machine;
 import com.reto5.repository.MachineRepository;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +57,7 @@ public class MachineService {
      * @param machine machine to update
      * @return machineUpdate.get() if machine.getId() is not null or exist else return machine
      */
-    public Machine update(@NotNull Machine machine){
+    public Machine update( Machine machine){
         if(machine.getId()!=null){
             Optional<Machine> machineUpdate= machineRepository.getMachine(machine.getId());
             if(machineUpdate.isPresent()){

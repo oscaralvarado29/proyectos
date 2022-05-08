@@ -8,7 +8,7 @@ import java.util.List;
 @Data                                           // Le dice a LOMBO que cree los getter y setters.
 @AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
 
-public class ClientDTO {
+public class ClientPOJO {
     private Integer idClient;
     private String email;
     private String password;

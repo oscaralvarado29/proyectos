@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class ReservationDTO {
+public class ReservationPOJO {
     private Integer idReservation;
     private Date startDate;
     private Date devolutionDate;

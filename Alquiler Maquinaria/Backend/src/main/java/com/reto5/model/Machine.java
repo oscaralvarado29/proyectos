@@ -44,14 +44,14 @@ public class Machine implements Serializable{
     @JsonIgnoreProperties({"machine", "messages"})
     private List<Reservation> reservations;
 
-    public Machine(MachineDTO machineDTO) {
-        this.id = machineDTO.getId();
-        this.name = machineDTO.getName();
-        this.brand = machineDTO.getBrand();
-        this.year = machineDTO.getYear();
-        this.description = machineDTO.getDescription();
-        this.category = machineDTO.getCategory();
-        this.messages = machineDTO.getMessages();
-        this.reservations = machineDTO.getReservations();
+    public Machine(MachinePOJO machinePOJO) {
+        this.id = machinePOJO.getId();
+        this.name = machinePOJO.getName();
+        this.brand = machinePOJO.getBrand();
+        this.year = machinePOJO.getYear();
+        this.description = machinePOJO.getDescription();
+        this.category = machinePOJO.getCategory();
+        this.messages = machinePOJO.getMessages();
+        this.reservations = machinePOJO.getReservations();
     }
 }

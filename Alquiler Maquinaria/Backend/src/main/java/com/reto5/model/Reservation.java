@@ -43,7 +43,7 @@ public class Reservation implements Serializable{
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
 
-    public Reservation(ReservationDTO reservationDTO) {
+    public Reservation(ReservationPOJO reservationDTO) {
         this.idReservation = reservationDTO.getIdReservation();
         this.startDate = reservationDTO.getStartDate();
         this.devolutionDate = reservationDTO.getDevolutionDate();

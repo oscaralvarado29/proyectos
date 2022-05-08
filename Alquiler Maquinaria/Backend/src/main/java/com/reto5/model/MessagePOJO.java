@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 
-public class MessageDTO {
+public class MessagePOJO {
     private Integer idMessage;
     private String messageText;
     private Machine machine;

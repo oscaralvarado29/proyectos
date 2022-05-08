@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.reto5.model.Message;
-import com.reto5.model.MessageDTO;
+import com.reto5.model.MessagePOJO;
 import com.reto5.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,25 +52,25 @@ public class MessageController {
 
     /**
      * POST
-     * @param messageDTO DTO of the message
+     * @param messagePOJO POJO of the message
      * @return messageService.save(message)
      */
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody MessageDTO messageDTO) {
-        Message message = new Message(messageDTO);
+    public Message save(@RequestBody MessagePOJO messagePOJO) {
+        Message message = new Message(messagePOJO);
         return messageService.save(message);
     }
 
     /**
      * PUT
-     * @param messageDTO DTO of the message
+     * @param messagePOJO POJO of the message
      * @return messageService.update(message)
      */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message update(@RequestBody MessageDTO messageDTO) {
-        Message message = new Message(messageDTO);
+    public Message update(@RequestBody MessagePOJO messagePOJO) {
+        Message message = new Message(messagePOJO);
         return messageService.update(message);
     }
 
