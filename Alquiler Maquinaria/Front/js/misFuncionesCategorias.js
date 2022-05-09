@@ -1,8 +1,8 @@
 function traerInformacionCategorias() {
     console.log("test");
     $.ajax({
-        //url:"http://168.138.142.130:8080/api/Category/all",
-        url: "http://localhost:8080/api/Category/all",
+        url: "http://168.138.142.130:8080/api/Category/all",
+        //url: "http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
@@ -34,8 +34,8 @@ function pintarCategoria(respuesta) {
 function cargarDatosCategorias(id) {
     $.ajax({
         dataType: 'json',
-        //url:"http://168.138.142.130:8080/api/Category/"+id,
-        url: "http://localhost:8080/api/Category/" + id,
+        url: "http://168.138.142.130:8080/api/Category/" + id,
+        //url: "http://localhost:8080/api/Category/" + id,
         type: 'GET',
 
         success: function (response) {
@@ -69,8 +69,8 @@ function guardarInformacionCategorias() {
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
             data: JSON.stringify(var2),
-            //url:"http://168.138.142.130:8080/api/Category/save",
-            url: "http://localhost:8080/api/Category/save",
+            url: "http://168.138.142.130:8080/api/Category/save",
+            //url: "http://localhost:8080/api/Category/save",
 
 
             success: function (response) {
@@ -109,8 +109,8 @@ function actualizarInformacionCategorias(idElemento) {
         console.log(myData);
         let dataToSend = JSON.stringify(myData);
         $.ajax({
-            //url:"http://168.138.142.130:8080/api/Category/update",
-            url: "http://localhost:8080/api/Category/update",
+            url: "http://168.138.142.130:8080/api/Category/update",
+            //url: "http://localhost:8080/api/Category/update",
             type: "PUT",
             data: dataToSend,
             contentType: "application/JSON",
@@ -135,8 +135,8 @@ function borrarCategoria(idElemento) {
     let dataToSend = JSON.stringify(myData);
     console.log(dataToSend);
     $.ajax({
-        //url:"http://168.138.142.130:8080/api/Category/"+idElemento,
-        url: "http://localhost:8080/api/Category/" + idElemento,
+        url: "http://168.138.142.130:8080/api/Category/" + idElemento,
+        //url: "http://localhost:8080/api/Category/" + idElemento,
         type: "DELETE",
         data: dataToSend,
         contentType: "application/JSON",

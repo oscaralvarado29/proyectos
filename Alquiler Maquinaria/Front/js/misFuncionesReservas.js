@@ -1,33 +1,34 @@
-function autoInicioRelacionCliente(){
-    
-    $.ajax({
-        //url:"http://132.226.242.58:8080/api/Client/all",
-        url:"http://localhost:8080/api/Client/all",
-        type:"GET",
-        datatype:"JSON",
-        success:function(respuesta){
-          
-            let $select = $("#select-client");
-            $.each(respuesta, function (id, name) {
-                $select.append('<option value='+name.idClient+'>'+name.name+'</option>');
-            
-            }); 
-        }
-    
-    })
-}
-function autoInicioMachine(){
+function autoInicioRelacionCliente() {
 
     $.ajax({
-        //url:"http://132.226.242.58:8080/api/Machine/all",
-        url:"http://localhost:8080/api/Machine/all",
-        type:"GET",
-        datatype:"JSON",
-        success:function(respuesta){
+        url: "http://168.138.142.130:8080/api/Client/all",
+        //url:"http://localhost:8080/api/Client/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function (respuesta) {
+
+            let $select = $("#select-client");
+            $.each(respuesta, function (id, name) {
+                $select.append('<option value=' + name.idClient + '>' + name.name + '</option>');
+
+            });
+        }
+
+    })
+}
+
+function autoInicioMachine() {
+
+    $.ajax({
+        url: "http://168.138.142.130:8080/api/Machine/all",
+        //url:"http://localhost:8080/api/Machine/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function (respuesta) {
 
             let $select = $("#select-machine");
             $.each(respuesta, function (id, name) {
-                $select.append('<option value='+name.id+'>'+name.name+'</option>');
+                $select.append('<option value=' + name.id + '>' + name.name + '</option>');
 
             });
         }
@@ -37,17 +38,21 @@ function autoInicioMachine(){
 
 //Manejador "POST"
 function agregarReservation() {
-    
-    if($("#startDate").val().length == 0 || $("#devolutionDate").val().length == 0 || $("#status").val().length == 0){
+
+    if ($("#startDate").val().length == 0 || $("#devolutionDate").val().length == 0 || $("#status").val().length == 0) {
         alert("Todos los campos son Obligatorios")
-    }else{  
+    } else {
         let elemento = {
             startDate: $("#startDate").val(),
             devolutionDate: $("#devolutionDate").val(),
             status: $("#status").val(),
-            machine:{id: +$("#select-machine").val()},
-            client:{idClient: +$("#select-client").val()},
-            
+            machine: {
+                id: +$("#select-machine").val()
+            },
+            client: {
+                idClient: +$("#select-client").val()
+            },
+
         }
 
         let dataToSend = JSON.stringify(elemento);
@@ -55,8 +60,8 @@ function agregarReservation() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            //url:"http://132.226.242.58:8080/api/Reservation/save",
-            url: "http://localhost:8080/api/Reservation/save",
+            url: "http://168.138.142.130:8080/api/Reservation/save",
+            //url: "http://localhost:8080/api/Reservation/save",
             data: dataToSend,
             datatype: "json",
 
@@ -79,10 +84,10 @@ function agregarReservation() {
 
 
 
-function listarReservation(){
+function listarReservation() {
     $.ajax({
-        //url:"http://132.226.242.58:8080/api/Reservation/all",
-        url: "http://localhost:8080/api/Reservation/all",
+        url: "http://168.138.142.130:8080/api/Reservation/all",
+        //url: "http://localhost:8080/api/Reservation/all",
         type: "GET",
         datatype: "JSON",
         success: function (response) {
@@ -92,30 +97,30 @@ function listarReservation(){
     });
 }
 
-function pintarRespuestaReservation(response){
-   
-    let myTable="<table>";
-    myTable+="<tr>";
-        myTable+="<td>Fecha Inicio</td>";
-        myTable+="<td>fecha Devolucion</td>";
-        myTable+="<td>Estado</td>";
-        myTable+="<td>Maquina</td>";
-        myTable+="<td>Cliente</td>";
-     "</tr>";
-      
-    for(i=0;i<response.length;i++){
-    myTable+="<tr>";
-        myTable+="<td>"+response[i].startDate+"</td>";
-        myTable+="<td>"+response[i].devolutionDate+"</td>";
-        myTable+="<td>"+response[i].status+"</td>";
-        myTable+="<td>"+response[i].machine.name+"</td>";
-        myTable+="<td>"+response[i].client.name+"</td>";
-        myTable+='<td><button  onclick="borrarReservation(' + response[i].idReservation + ')">Borrar</button></td>';
-        myTable+='<td><button  onclick="cargarDatosReservation(' + response[i].idReservation + ')">Lanzar</button></td>';
-        myTable+='<td><button  onclick="actualizarReservation(' + response[i].idReservation + ')">Actualizar</button></td>';
-        myTable+="</tr>";
+function pintarRespuestaReservation(response) {
+
+    let myTable = "<table>";
+    myTable += "<tr>";
+    myTable += "<td>Fecha Inicio</td>";
+    myTable += "<td>fecha Devolucion</td>";
+    myTable += "<td>Estado</td>";
+    myTable += "<td>Maquina</td>";
+    myTable += "<td>Cliente</td>";
+    "</tr>";
+
+    for (i = 0; i < response.length; i++) {
+        myTable += "<tr>";
+        myTable += "<td>" + response[i].startDate + "</td>";
+        myTable += "<td>" + response[i].devolutionDate + "</td>";
+        myTable += "<td>" + response[i].status + "</td>";
+        myTable += "<td>" + response[i].machine.name + "</td>";
+        myTable += "<td>" + response[i].client.name + "</td>";
+        myTable += '<td><button  onclick="borrarReservation(' + response[i].idReservation + ')">Borrar</button></td>';
+        myTable += '<td><button  onclick="cargarDatosReservation(' + response[i].idReservation + ')">Lanzar</button></td>';
+        myTable += '<td><button  onclick="actualizarReservation(' + response[i].idReservation + ')">Actualizar</button></td>';
+        myTable += "</tr>";
     }
-    myTable+="</table>";
+    myTable += "</table>";
     $("#miListaReservation").html(myTable);
 }
 
@@ -128,32 +133,31 @@ function borrarReservation(idElemento) {
 
     let dataToSend = JSON.stringify(elemento);
 
-    $.ajax(
-        {
-            dataType: 'json',
-            data: dataToSend,
-            //url:"http://132.226.242.58:8080/api/Reservation/"+idElemento,
-            url: "http://localhost:8080/api/Reservation/" + idElemento,
-            type: 'DELETE',
-            contentType: "application/JSON",
-            success: function (response) {
-                console.log(response);
-                $("#miListaReservation").empty();
-                alert("se ha Eliminado Correctamente!")
-            },
+    $.ajax({
+        dataType: 'json',
+        data: dataToSend,
+        url: "http://168.138.142.130:8080/api/Reservation/" + idElemento,
+        //url: "http://localhost:8080/api/Reservation/" + idElemento,
+        type: 'DELETE',
+        contentType: "application/JSON",
+        success: function (response) {
+            console.log(response);
+            $("#miListaReservation").empty();
+            alert("se ha Eliminado Correctamente!")
+        },
 
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("No se Elimino Correctamente!")
-            }
-        });
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("No se Elimino Correctamente!")
+        }
+    });
 }
 
 //Capturar informacion para Actualizar
 function cargarDatosReservation(id) {
     $.ajax({
         dataType: 'json',
-        //url:"http://132.226.242.58:8080/api/Reservation/"+id,
-        url: "http://localhost:8080/api/Reservation/" + id,
+        url: "http://168.138.142.130:8080/api/Reservation/" + id,
+        //url: "http://localhost:8080/api/Reservation/" + id,
         type: 'GET',
 
         success: function (response) {
@@ -174,17 +178,21 @@ function cargarDatosReservation(id) {
 
 //Manejador PUT
 function actualizarReservation(idElemento) {
-    
-    if($("#startDate").val().length == 0 || $("#devolutionDate").val().length == 0 || $("#status").val().length == 0){
+
+    if ($("#startDate").val().length == 0 || $("#devolutionDate").val().length == 0 || $("#status").val().length == 0) {
         alert("Todos los campos deben estar llenos")
-    }else{
+    } else {
         let elemento = {
             idReservation: idElemento,
             startDate: $("#startDate").val(),
             devolutionDate: $("#devolutionDate").val(),
             status: $("#status").val(),
-            machine:{id: +$("#select-machine").val()},
-            client:{idClient: +$("#select-client").val()},
+            machine: {
+                id: +$("#select-machine").val()
+            },
+            client: {
+                idClient: +$("#select-client").val()
+            },
         }
 
         let dataToSend = JSON.stringify(elemento);
@@ -193,8 +201,8 @@ function actualizarReservation(idElemento) {
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            //url:"http://132.226.242.58:8080/api/Reservation/update",
-            url: "http://localhost:8080/api/Reservation/update",
+            url: "http://168.138.142.130:8080/api/Reservation/update",
+            //url: "http://localhost:8080/api/Reservation/update",
             type: "PUT",
 
             success: function (response) {
