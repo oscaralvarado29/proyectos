@@ -19,17 +19,3 @@ i
 9src/main/java/com/alquiler/intrface/MachineInterface.java,4\5\45e3c1d688d0f8b091dcd2f32fc87f6db9467fcb
 i
 9src/main/java/com/alquiler/intrface/MessageInterface.java,b\3\b3e839c7539e3114f6952a9955e440285b94d0e0
-^
-.src/main/java/com/alquiler/model/Category.java,1\f\1f34d0a759f048c7313ab06fcb0d23bfc9e3935d
-b
-2src/main/java/com/alquiler/model/CategoryPOJO.java,0\4\04c7462d8941e0464aa1d7a2ef931de107390347
-\
-,src/main/java/com/alquiler/model/Client.java,8\5\85099c13ea43af882ef4d2c5657048c596db9633
-`
-0src/main/java/com/alquiler/model/ClientPOJO.java,7\7\77ad22fd72d535ca4593fcf9d76fed6ddb5384fc
-]
--src/main/java/com/alquiler/model/Message.java,f\7\f78e32e16dead81654657f9983d86cd2e8321ee0
-e
-5src/main/java/com/alquiler/MaquinariaApplication.java,1\1\11a3b5bb525dfdc910ae92e94f8f8ba00eb26328
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
