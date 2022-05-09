@@ -1,7 +1,7 @@
 function autoInicioCategoria() {
     console.log("se esta ejecutando")
     $.ajax({
-        url: "http://168.138.142.130:8080/api/Category/all",
+        url: "http://144.22.148.114:8080/api/Category/all",
         //url:"http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
@@ -19,7 +19,7 @@ function autoInicioCategoria() {
 //Manejador GET
 function traerInformacionMaquina() {
     $.ajax({
-        url: "http://168.138.142.130:8080/api/Machine/all",
+        url: "http://144.22.148.114:8080/api/Machine/all",
         //url: "http://localhost:8080/api/Machine/all",
         type: "GET",
         datatype: "JSON",
@@ -62,7 +62,7 @@ function pintarMaquina(response) {
 function cargarDatosMaquina(id) {
     $.ajax({
         dataType: 'json',
-        url: "http://168.138.142.130:8080/api/Machine/" + id,
+        url: "http://144.22.148.114:8080/api/Machine/" + id,
         //url: "http://localhost:8080/api/Machine/" + id,
         type: 'GET',
 
@@ -106,7 +106,7 @@ function agregarMaquina() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://168.138.142.130:8080/api/Machine/save",
+            url: "http://144.22.148.114:8080/api/Machine/save",
             //url: "http://localhost:8080/api/Machine/save",
             data: dataToSend,
             datatype: 'json',
@@ -140,7 +140,7 @@ function borrar(idElemento) {
     $.ajax({
         dataType: 'json',
         data: dataToSend,
-        url: "http://168.138.142.130:8080/api/Machine/" + idElemento,
+        url: "http://144.22.148.114:8080/api/Machine/" + idElemento,
         //url: "http://localhost:8080/api/Machine/" + idElemento,
         type: 'DELETE',
         contentType: "application/JSON",
@@ -188,7 +188,7 @@ function actualizar(idElemento) {
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            url: "http://168.138.142.130:8080/api/Machine/update",
+            url: "http://144.22.148.114:8080/api/Machine/update",
             //url: "http://localhost:8080/api/Machine/update",
             type: "PUT",
 
