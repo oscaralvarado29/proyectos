@@ -1,8 +1,4 @@
 
-l
-<src/main/java/com/alquiler/controller/MachineController.java,d\5\d55c0bd2808b312c5e1ba4421ab3764580fc0b2f
-l
-<src/main/java/com/alquiler/controller/MessageController.java,8\5\859bab9ecc7ac3de9c0d313574a6f6a36cd8e7fa
 p
 @src/main/java/com/alquiler/controller/ReservationController.java,5\5\55fa9bb1bd023eb4a0af4f71e064fd466908f5e8
 k
@@ -19,3 +15,21 @@ i
 9src/main/java/com/alquiler/intrface/MachineInterface.java,4\5\45e3c1d688d0f8b091dcd2f32fc87f6db9467fcb
 i
 9src/main/java/com/alquiler/intrface/MessageInterface.java,b\3\b3e839c7539e3114f6952a9955e440285b94d0e0
+^
+.src/main/java/com/alquiler/model/Category.java,1\f\1f34d0a759f048c7313ab06fcb0d23bfc9e3935d
+b
+2src/main/java/com/alquiler/model/CategoryPOJO.java,0\4\04c7462d8941e0464aa1d7a2ef931de107390347
+\
+,src/main/java/com/alquiler/model/Client.java,8\5\85099c13ea43af882ef4d2c5657048c596db9633
+`
+0src/main/java/com/alquiler/model/ClientPOJO.java,7\7\77ad22fd72d535ca4593fcf9d76fed6ddb5384fc
+]
+-src/main/java/com/alquiler/model/Machine.java,a\2\a2a2eb82be426b71c1e22a368d8c3b3f8f1e7aea
+f
+6src/main/java/com/alquiler/service/MessageService.java,a\7\a73dc0a4f7b25b48570f943b911955ea93cce49e
+l
+<src/main/java/com/alquiler/repository/MessageRepository.java,2\6\26c3fa5b0b358544a946e93b793d3d20f5110fa7
+l
+<src/main/java/com/alquiler/controller/MachineController.java,d\5\d55c0bd2808b312c5e1ba4421ab3764580fc0b2f
+a
+1src/main/java/com/alquiler/model/MessagePOJO.java,f\7\f7c3a6bcbd52935c2f0b32de907381972b4204a0
