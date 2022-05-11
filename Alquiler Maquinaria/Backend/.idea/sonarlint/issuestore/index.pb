@@ -33,3 +33,11 @@ l
 <src/main/java/com/alquiler/controller/MachineController.java,d\5\d55c0bd2808b312c5e1ba4421ab3764580fc0b2f
 a
 1src/main/java/com/alquiler/model/MessagePOJO.java,f\7\f7c3a6bcbd52935c2f0b32de907381972b4204a0
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+l
+<src/main/java/com/alquiler/controller/MessageController.java,8\5\859bab9ecc7ac3de9c0d313574a6f6a36cd8e7fa
+]
+-src/main/java/com/alquiler/model/Message.java,f\7\f78e32e16dead81654657f9983d86cd2e8321ee0
+e
+5src/main/java/com/alquiler/MaquinariaApplication.java,1\1\11a3b5bb525dfdc910ae92e94f8f8ba00eb26328
