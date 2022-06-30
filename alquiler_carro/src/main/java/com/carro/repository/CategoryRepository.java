@@ -24,6 +24,7 @@ public class CategoryRepository {
     public List<Category> getAll(){
         return (List<Category>) categoryInterface.findAll();
     }
+
     /**
      * get by specific id
      * @param categoryId category id to get

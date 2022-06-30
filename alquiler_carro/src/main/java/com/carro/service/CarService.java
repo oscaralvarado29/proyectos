@@ -37,14 +37,14 @@ public class CarService {
     /**
      * POST
      * @param car object with car data
-     * @return the call of the save method of the class carRepository if the category id don´t exist or is empty else return to car
+     * @return the call of the save method of the class carRepository if the car id don´t exist or is empty else return to car
      */
     public Car save(Car car){
         if (car.getIdCar() == null) {
             return carRepository.save(car);
         }else {
-        Optional<Car> carData = carRepository.getCar(car.getIdCar());
-        if (carData.isEmpty()){
+        Optional<Car> carSave = carRepository.getCar(car.getIdCar());
+        if (carSave.isEmpty()){
             return carRepository.save(car);
         }else {
             return car;
@@ -55,31 +55,31 @@ public class CarService {
     /**
      * UPDATE
      * @param car object with car data
-     * @return the call of the save method of the class carRepository if the category exist else return to car
+     * @return the call of the update method of the class carRepository if the category exist else return to car
      */
     public Car update (Car car) {
         if (car.getIdCar() != null){
-            Optional<Car> carData = carRepository.getCar(car.getIdCar());
-            if (carData.isPresent()){
+            Optional<Car> carUpdate = carRepository.getCar(car.getIdCar());
+            if (carUpdate.isPresent()){
                 if (car.getColor() != null) {
-                    carData.get().setColor(car.getColor());
+                    carUpdate.get().setColor(car.getColor());
                 }
                 if (car.getBranch() != null) {
-                    carData.get().setBranch(car.getBranch());
+                    carUpdate.get().setBranch(car.getBranch());
                 }
                 if (car.getModel() != null) {
-                    carData.get().setModel(car.getModel());
+                    carUpdate.get().setModel(car.getModel());
                 }
                 if (car.getHorsepower() != null) {
-                    carData.get().setHorsepower(car.getHorsepower());
+                    carUpdate.get().setHorsepower(car.getHorsepower());
                 }
                 if (car.getEngineCylinders() != null) {
-                    carData.get().setEngineCylinders(car.getEngineCylinders());
+                    carUpdate.get().setEngineCylinders(car.getEngineCylinders());
                 }
                 if (car.getSeating() != null) {
-                    carData.get().setSeating(car.getSeating());
+                    carUpdate.get().setSeating(car.getSeating());
                 }
-                return carRepository.save(carData.get());
+                return carRepository.save(carUpdate.get());
             }
         }
         return car;

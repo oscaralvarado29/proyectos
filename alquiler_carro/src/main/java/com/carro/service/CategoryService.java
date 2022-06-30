@@ -19,7 +19,7 @@ public class CategoryService {
 
     /**
      * GET ALL
-     * @return  the call of the getAll method of the class categoryRepository
+     * @return  the call of the getAll method of the class CategoryRepository
      */
     public List<Category> getAll() {
         return categoryRepository.getAll();
@@ -28,7 +28,7 @@ public class CategoryService {
     /**
      * GET by specific id
      * @param categoryId category id to get
-     * @return the call of the getCategory method of the class categoryRepository
+     * @return the call of the getCategory method of the class CategoryRepository
      */
     public Optional<Category> getCategory (int categoryId) {
         return categoryRepository.getCategory(categoryId);
@@ -37,14 +37,14 @@ public class CategoryService {
     /**
      * POST
      * @param category object with category data
-     * @return the call of the save method of the class categoryRepository if the category id don´t exist or is empty else return to category
+     * @return the call of the save method of the class CategoryRepository if the category id don´t exist or is empty else return to category
      */
     public Category save(Category category) {
         if (category.getIdCategory() == null) {
             return categoryRepository.save(category);
         } else {
-            Optional<Category> categoryData = categoryRepository.getCategory(category.getIdCategory());
-            if (categoryData.isEmpty()) {
+            Optional<Category> categorySave = categoryRepository.getCategory(category.getIdCategory());
+            if (categorySave.isEmpty()) {
                 return categoryRepository.save(category);
             } else {
                 return category;
@@ -55,19 +55,19 @@ public class CategoryService {
     /**
      * UPDATE
      * @param category object with category data
-     * @return the call of the save method of the class categoryRepository if the category exist else return to category
+     * @return the call of the update method of the class CategoryRepository if the category exist else return to category
      */
     public Category update (Category category){
         if (category.getIdCategory() != null) {
-            Optional<Category> categoryData = categoryRepository.getCategory(category.getIdCategory());
-            if (categoryData.isPresent()) {
+            Optional<Category> categoryUpdate = categoryRepository.getCategory(category.getIdCategory());
+            if (categoryUpdate.isPresent()) {
                 if (category.getName() != null) {
-                    categoryData.get().setName(category.getName());
+                    categoryUpdate.get().setName(category.getName());
                 }
                 if (category.getDescription() != null) {
-                    categoryData.get().setDescription(category.getDescription());
+                    categoryUpdate.get().setDescription(category.getDescription());
                 }
-                return categoryRepository.save(categoryData.get());
+                return categoryRepository.save(categoryUpdate.get());
             }
         }
         return category;
