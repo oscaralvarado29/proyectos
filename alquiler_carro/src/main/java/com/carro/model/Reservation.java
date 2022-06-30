@@ -48,7 +48,7 @@ public class Reservation implements Serializable{
     private Client client;
 
 
-    @OneToOne(mappedBy = "reservation", optional = true)
+    @OneToOne(mappedBy = "reservation",optional = true)
     @JsonIgnoreProperties({"reservations","messages","client","car"})
     private Message message;
 
