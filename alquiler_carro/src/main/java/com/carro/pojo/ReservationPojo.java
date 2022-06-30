@@ -18,5 +18,4 @@ public class ReservationPojo {
     private String status;
     private Car car;
     private Client client;
-    private Message message;
 }

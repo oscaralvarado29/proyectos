@@ -15,5 +15,4 @@ public class MessagePojo {
     private double score;
     private Car car;
     private Client client;
-    private Reservation reservation;
 }

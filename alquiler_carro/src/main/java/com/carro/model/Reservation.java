@@ -34,7 +34,6 @@ public class Reservation implements Serializable{
         this.status = reservationPojo.getStatus();
         this.car = reservationPojo.getCar();
         this.client = reservationPojo.getClient();
-        this.message = reservationPojo.getMessage();
     }
 
     @ManyToOne
@@ -46,10 +45,4 @@ public class Reservation implements Serializable{
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
-
-
-    @OneToOne(mappedBy = "reservation",optional = true)
-    @JsonIgnoreProperties({"reservations","messages","client","car"})
-    private Message message;
-
 }
