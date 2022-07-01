@@ -1,0 +1,19 @@
+
+fjavascript:S905"FExpected an assignment or function call and instead saw an expression.(¯ÄÌÓüÿÿÿÿ
+xjavascript:S2703"WAdd the "let", "const" or "var" keyword to this declaration of "i" to make it explicit.(Ó£Ìúÿÿÿÿ
+}javascript:S1172R"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„
+‡javascript:S1172R"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„
+‰javascript:S1172R"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„
+…javascript:S1172i"iRemove the unused function parameter "respuesta" or rename it to "_respuesta" to make intention explicit.(‚ô†
+hjavascript:S905j"FExpected an assignment or function call and instead saw an expression.(¾‚âÖ8µè¼›0
+Cjavascript:S878j"!Unexpected use of comma operator.(¾‚âÖ8µè¼›0
+„javascript:S1172p"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8õÁ”¼›0
+javascript:S1172p"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8öÁ”¼›0
+javascript:S1172p"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8÷Á”¼›0
+†javascript:S1172…"iRemove the unused function parameter "respuesta" or rename it to "_respuesta" to make intention explicit.(‚ô†
+ijavascript:S905ˆ"FExpected an assignment or function call and instead saw an expression.(¾‚âÖ8·¨‘¼›0
+Djavascript:S878ˆ"!Unexpected use of comma operator.(¾‚âÖ8·¨‘¼›0
+–javascript:S3699‹"rRemove this use of the output from "traerInformacionClientes"; "traerInformacionClientes" doesn't return anything.(±‚Ä8¸¨‘¼›0
+…javascript:S1172"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8Ôî–¼›0
+javascript:S1172"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8Õî–¼›0
+‘javascript:S1172"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8Öî–¼›0

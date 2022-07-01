@@ -1,0 +1,17 @@
+
+vjavascript:S1172"[Remove the unused function parameter "id" or rename it to "_id" to make intention explicit.(§ßÕb
+fjavascript:S905/"FExpected an assignment or function call and instead saw an expression.(¯ÄÌÓüÿÿÿÿ
+rjavascript:S27031"WAdd the "let", "const" or "var" keyword to this declaration of "i" to make it explicit.(˜ùæ*
+„javascript:S1172\"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8­Åº›0
+javascript:S1172\"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8­Åº›0
+javascript:S1172\"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8‚­Åº›0
+Cjavascript:S1186\" Unexpected empty method 'error'.(·Ÿş„8·êäº›0
+…javascript:S1172‹"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8‚­Åº›0
+javascript:S1172‹"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8‚­Åº›0
+‘javascript:S1172‹"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8ƒ­Åº›0
+…javascript:S1172®"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8„­Åº›0
+javascript:S1172®"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8„­Åº›0
+‘javascript:S1172®"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8…­Åº›0
+…javascript:S1172Ş"aRemove the unused function parameter "jqXHR" or rename it to "_jqXHR" to make intention explicit.(·Ÿş„8Åêäº›0
+javascript:S1172Ş"kRemove the unused function parameter "textStatus" or rename it to "_textStatus" to make intention explicit.(·Ÿş„8Æêäº›0
+‘javascript:S1172Ş"mRemove the unused function parameter "errorThrown" or rename it to "_errorThrown" to make intention explicit.(·Ÿş„8Æêäº›0
