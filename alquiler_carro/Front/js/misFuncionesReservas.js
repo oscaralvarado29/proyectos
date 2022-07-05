@@ -1,8 +1,8 @@
 function autoInicioRelacionCliente() {
 
     $.ajax({
-        url: "http://144.22.148.114:8080/api/Client/all",
-        //url:"http://localhost:8080/api/Client/all",
+        //url: "http://144.22.148.114:8080/api/Client/all",
+        url:"http://localhost:8080/api/Client/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
@@ -17,19 +17,19 @@ function autoInicioRelacionCliente() {
     })
 }
 
-function autoInicioMachine() {
+function autoInicioVehicule() {
 
     $.ajax({
-        url: "http://144.22.148.114:8080/api/Machine/all",
-        //url:"http://localhost:8080/api/Machine/all",
+        //url: "http://144.22.148.114:8080/api/Vehicle/all",
+        url:"http://localhost:8080/api/Vehicle/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
-
-            let $select = $("#select-machine");
+            console.log(respuesta);
+            let $select = $("#select-vehicle");
             $.each(respuesta, function (id, name) {
-                $select.append('<option value=' + name.id + '>' + name.name + '</option>');
-
+                $select.append('<option value=' + name.idVehicle + '>' + name.name + '</option>');
+                console.log("select " + name.idVehicle);
             });
         }
 
@@ -46,8 +46,8 @@ function agregarReservation() {
             startDate: $("#startDate").val(),
             devolutionDate: $("#devolutionDate").val(),
             status: $("#status").val(),
-            machine: {
-                id: +$("#select-machine").val()
+            vehicle: {
+                idVehicle: +$("#select-vehicle").val()
             },
             client: {
                 idClient: +$("#select-client").val()
@@ -60,8 +60,8 @@ function agregarReservation() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://144.22.148.114:8080/api/Reservation/save",
-            //url: "http://localhost:8080/api/Reservation/save",
+            //url: "http://144.22.148.114:8080/api/Reservation/save",
+            url: "http://localhost:8080/api/Reservation/save",
             data: dataToSend,
             datatype: "json",
 
@@ -86,8 +86,8 @@ function agregarReservation() {
 
 function listarReservation() {
     $.ajax({
-        url: "http://144.22.148.114:8080/api/Reservation/all",
-        //url: "http://localhost:8080/api/Reservation/all",
+        //url: "http://144.22.148.114:8080/api/Reservation/all",
+        url: "http://localhost:8080/api/Reservation/all",
         type: "GET",
         datatype: "JSON",
         success: function (response) {
@@ -102,18 +102,18 @@ function pintarRespuestaReservation(response) {
     let myTable = "<table>";
     myTable += "<tr>";
     myTable += "<td>Fecha Inicio</td>";
-    myTable += "<td>fecha Devolucion</td>";
+    myTable += "<td>Fecha Devolucion</td>";
     myTable += "<td>Estado</td>";
-    myTable += "<td>Maquina</td>";
+    myTable += "<td>Vehiculo</td>";
     myTable += "<td>Cliente</td>";
     "</tr>";
 
     for (i = 0; i < response.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + response[i].startDate + "</td>";
-        myTable += "<td>" + response[i].devolutionDate + "</td>";
+        myTable += "<td>" + formatDate(new Date(response[i].startDate),1) + "</td>";
+        myTable += "<td>" + formatDate(new Date(response[i].devolutionDate),1) + "</td>";
         myTable += "<td>" + response[i].status + "</td>";
-        myTable += "<td>" + response[i].machine.name + "</td>";
+        myTable += "<td>" + response[i].vehicle.name + "</td>";
         myTable += "<td>" + response[i].client.name + "</td>";
         myTable += '<td><button  onclick="borrarReservation(' + response[i].idReservation + ')">Borrar</button></td>';
         myTable += '<td><button  onclick="cargarDatosReservation(' + response[i].idReservation + ')">Lanzar</button></td>';
@@ -128,7 +128,7 @@ function pintarRespuestaReservation(response) {
 //Manejador DELETE
 function borrarReservation(idElemento) {
     let elemento = {
-        id: idElemento
+        idReservation: idElemento
     }
 
     let dataToSend = JSON.stringify(elemento);
@@ -136,14 +136,16 @@ function borrarReservation(idElemento) {
     $.ajax({
         dataType: 'json',
         data: dataToSend,
-        url: "http://144.22.148.114:8080/api/Reservation/" + idElemento,
-        //url: "http://localhost:8080/api/Reservation/" + idElemento,
+        //url: "http://144.22.148.114:8080/api/Reservation/delete" ,
+        url: "http://localhost:8080/api/Reservation/delete" ,
         type: 'DELETE',
         contentType: "application/JSON",
         success: function (response) {
             console.log(response);
             $("#miListaReservation").empty();
             alert("se ha Eliminado Correctamente!")
+            listarReservation();
+
         },
 
         error: function (jqXHR, textStatus, errorThrown) {
@@ -151,21 +153,32 @@ function borrarReservation(idElemento) {
         }
     });
 }
-
+function  formatDate (date,version) {
+    let dia = date.getDate();
+    let month = (date.getMonth() + 1);
+    let year = date.getFullYear();
+    let formatted_date;
+    if (version == 1) {
+        formatted_date = dia +"-" + month +"-" +year;
+    }    else {
+        formatted_date = year +"-" + month +"-" + dia;
+    }
+    return formatted_date;
+}
 //Capturar informacion para Actualizar
 function cargarDatosReservation(id) {
     $.ajax({
         dataType: 'json',
-        url: "http://144.22.148.114:8080/api/Reservation/" + id,
-        //url: "http://localhost:8080/api/Reservation/" + id,
+        //url: "http://144.22.148.114:8080/api/Reservation/" + id,
+        url: "http://localhost:8080/api/Reservation/" + id,
         type: 'GET',
 
         success: function (response) {
             console.log(response);
             var item = response;
 
-            $("#startDate").val(item.startDate);
-            $("#devolutionDate").val(item.devolutionDate);
+            $("#startDate").val(formatDate(new Date(item.startDate),2));
+            $("#devolutionDate").val(formatDate(new Date(item.devolutionDate),2));
             $("#status").val(item.status);
 
         },
@@ -187,8 +200,8 @@ function actualizarReservation(idElemento) {
             startDate: $("#startDate").val(),
             devolutionDate: $("#devolutionDate").val(),
             status: $("#status").val(),
-            machine: {
-                id: +$("#select-machine").val()
+            vehicle: {
+                idVehicle: +$("#select-vehicle").val()
             },
             client: {
                 idClient: +$("#select-client").val()
@@ -201,8 +214,8 @@ function actualizarReservation(idElemento) {
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            url: "http://144.22.148.114:8080/api/Reservation/update",
-            //url: "http://localhost:8080/api/Reservation/update",
+            //url: "http://144.22.148.114:8080/api/Reservation/update",
+            url: "http://localhost:8080/api/Reservation/update",
             type: "PUT",
 
             success: function (response) {

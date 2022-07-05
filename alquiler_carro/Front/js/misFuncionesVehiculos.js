@@ -19,8 +19,8 @@ function autoInicioCategoria() {
 //Manejador GET
 function traerInformacionVehucilo() {
     $.ajax({
-        //url: "http://144.22.148.114:8080/api/Car/all",
-        url: "http://localhost:8080/api/Car/all",
+        //url: "http://144.22.148.114:8080/api/Vehicle/all",
+        url: "http://localhost:8080/api/Vehicle/all",
         type: "GET",
         datatype: "JSON",
         success: function (response) {
@@ -37,6 +37,7 @@ function pintarVehiculo(response) {
     let myTable = "<table>"
     myTable += "<tr>";
     myTable += "<td>Tipo de vehiculo</td>";
+    myTable += "<td>Nombre</td>";
     myTable += "<td>Color</td>";
     myTable += "<td>Marca</td>";
     myTable += "<td>Modelo</td>";
@@ -49,6 +50,7 @@ function pintarVehiculo(response) {
     for (i = 0; i < response.length; i++) {
         myTable += "<tr>";
         myTable += "<td>" + response[i].category.name + "</td>";
+        myTable += "<td>" + response[i].name + "</td>";
         myTable += "<td>" + response[i].color + "</td>";
         myTable += "<td>" + response[i].brand + "</td>";
         myTable += "<td>" + response[i].model + "</td>";
@@ -60,9 +62,9 @@ function pintarVehiculo(response) {
         } else {
             myTable += "<td>" + response[i].messages.messageText + "</td>";
         }
-        myTable += '<td><button class = "botonVehiculo" onclick="borrar(' + response[i].idCar + ')">Borrar</button></td>';
-        myTable += '<td><button class = "botonVehiculo" onclick="cargarDatosVehiculo(' + response[i].idCar + ')">Lanzar</button></td>';
-        myTable += '<td><button class = "botonVehiculo" onclick="actualizar(' + response[i].idCar + ')">Actualizar</button></td>';
+        myTable += '<td><button class = "botonVehiculo" onclick="borrar(' + response[i].idVehicle + ')">Borrar</button></td>';
+        myTable += '<td><button class = "botonVehiculo" onclick="cargarDatosVehiculo(' + response[i].idVehicle + ')">Lanzar</button></td>';
+        myTable += '<td><button class = "botonVehiculo" onclick="actualizar(' + response[i].idVehicle + ')">Actualizar</button></td>';
         myTable += "</tr>";
     }
     myTable += "</table>";
@@ -72,15 +74,16 @@ function pintarVehiculo(response) {
 function cargarDatosVehiculo(id) {
     $.ajax({
         dataType: 'json',
-        //url: "http://144.22.148.114:8080/api/Car/" + id,
-        url: "http://localhost:8080/api/Car/" + id,
+        //url: "http://144.22.148.114:8080/api/Vehicle/" + id,
+        url: "http://localhost:8080/api/Vehicle/" + id,
         type: 'GET',
 
         success: function (response) {
             console.log(response);
             var item = response;
 
-            $("#id").val(item.idCar);
+            $("#id").val(item.idVehicle);
+            $("#name").val(item.name);
             $("#color").val(item.color);
             $("#brand").val(item.brand);
             $("#model").val(item.model);
@@ -90,7 +93,7 @@ function cargarDatosVehiculo(id) {
         },
 
         error: function (jqXHR, textStatus, errorThrown) {
-
+            alert("No se obtuvieron los datos ")
         }
     });
 }
@@ -102,6 +105,7 @@ function agregarVehiculo() {
     } else {
 
         let elemento = {
+            name: $("#name").val(),
             color: $("#color").val(),
             brand: $("#brand").val(),
             model: $("#model").val(),
@@ -118,8 +122,8 @@ function agregarVehiculo() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            //url: "http://144.22.148.114:8080/api/Car/save",
-            url: "http://localhost:8080/api/Car/save",
+            //url: "http://144.22.148.114:8080/api/Vehicle/save",
+            url: "http://localhost:8080/api/Vehicle/save",
             data: dataToSend,
             datatype: 'json',
 
@@ -127,12 +131,13 @@ function agregarVehiculo() {
                 console.log(response);
                 console.log("Se guardo Correctamente");
                 //Limpiar Campos
-                $("#color").val();
-                $("#brand").val();
-                $("#model").val();
-                $("#horsepower").val();
-                $("#engineCylinders").val();
-                $("#seating").val();
+                $("#name").val("");
+                $("#color").val("");
+                $("#brand").val("");
+                $("#model").val("");
+                $("#horsepower").val("");
+                $("#engineCylinders").val("");
+                $("#seating").val("");
 
                 alert("Se ha guardado Correctamente!")
             },
@@ -145,15 +150,15 @@ function agregarVehiculo() {
 //Manejador DELETE
 function borrar(idElemento) {
     var elemento = {
-        idCar: idElemento
+        idVehicle: idElemento
     }
     var dataToSend = JSON.stringify(elemento);
     console.log(dataToSend);
     $.ajax({
         dataType: 'json',
         data: dataToSend,
-        //url: "http://144.22.148.114:8080/api/Car/delete" ,
-        url: "http://localhost:8080/api/Car/delete" ,
+        //url: "http://144.22.148.114:8080/api/Vehicle/delete" ,
+        url: "http://localhost:8080/api/Vehicle/delete" ,
         type: 'DELETE',
         contentType: "application/JSON",
         success: function (response) {
@@ -163,6 +168,7 @@ function borrar(idElemento) {
             alert("se ha Eliminado Correctamente!")
             //Limpiar Campos
             $("#resultado2").empty();
+            $("#name").val("");
             $("#color").val("");
             $("#brand").val("");
             $("#model").val("");
@@ -180,11 +186,12 @@ function borrar(idElemento) {
 //Manejador PUT
 function actualizar(idElemento) {
 
-    if ( $("#color").val().length == 0 || $("#brand").val().length == 0 || $("#model").val().length == 0 || $("#horsepower").val().length == 0 || $("#engineCylinders").val().length == 0 || $("#seating").val().length == 0) {
+    if (  $("#name").val().length == 0 || $("#color").val().length == 0 || $("#brand").val().length == 0 || $("#model").val().length == 0 || $("#horsepower").val().length == 0 || $("#engineCylinders").val().length == 0 || $("#seating").val().length == 0) {
         alert("Todos los campos son obligatorios")
     } else {
         let elemento = {
-            idCar: idElemento,
+            idVehicle: idElemento,
+            name: $("#name").val(),
             color: $("#color").val(),
             brand: $("#brand").val(),
             model: $("#model").val(),
@@ -195,15 +202,15 @@ function actualizar(idElemento) {
                 idCategory: +$("#select-category").val()
             },
         }
-        console.log(elemento);
+        //console.log(elemento);
         let dataToSend = JSON.stringify(elemento);
 
         $.ajax({
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            //url: "http://144.22.148.114:8080/api/Car/update",
-            url: "http://localhost:8080/api/Car/update",
+            //url: "http://144.22.148.114:8080/api/Vehicle/update",
+            url: "http://localhost:8080/api/Vehicle/update",
             type: "PUT",
 
             success: function (response) {
@@ -212,6 +219,7 @@ function actualizar(idElemento) {
                 traerInformacionVehucilo();
                 alert("se ha Actualizado Correctamente!")
                 //Limpiar Campos
+                $("#name").val(" ");
                 $("#color").val(" ");
                 $("#brand").val(" ");
                 $("#model").val(" ");

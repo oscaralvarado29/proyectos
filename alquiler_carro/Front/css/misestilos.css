@@ -159,7 +159,16 @@ td {
     border-collapse: collapse;
 }
 button{
-    margin: 10px auto;
+    margin: 5px auto;
+}
+input{
+    margin: 2px auto;
+}
+label{
+    margin: 2px auto;
+}
+select{
+    margin: 2px auto;
 }
 campos{
     text-align: center;

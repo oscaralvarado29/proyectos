@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <title>Front Final</title>
+    <title>Alquiler de vehiculos</title>
     <meta charset="utf-8">
     <meta name="description" content="Este es un documento HTML5">
     <meta name="keywords" content="HTML, CSS, JavaScript">
@@ -22,18 +22,20 @@
             <ul>
                 <li><a href="index.html">Principal</a></li>
                 <li><a href="Categorias.html">Categorias</a></li>
-                <li><a href="Vehiculos.html">Maquinas</a></li>
+                <li><a href="Vehiculos.html">Vehiculos</a></li>
                 <li><a href="Clientes.html">Clientes</a></li>
                 <li><a href="Reservaciones.html">Reservaciones</a></li>
                 <li><a href="Mensajes.html">Mensajes</a></li>
                 <li><a href="Reportes.html">Reportes</a></li>
             </ul>
+            <br>
         </div>
+        <br>
     </nav>
     <br>
-    <label>Escoja la Fecha Inicio de la Reservacion</label>
+    <label>Escoja la Fecha Inicio de la Reserva</label>
     <input class="controlReservation" type="date" id="startDate" placeholder="startDate"><br>
-    <label>Escoja la Fecha Devolucion de la Reservacion</label>
+    <label>Escoja la Fecha finalizacion de la Reserva</label>
     <input class="controlReservation" type="date" id="devolutionDate" placeholder="devolutionDate"><br>
     <label>Estado de la Reservacion </label>
     <input class="controlReservation" type="text" id="status"
@@ -44,9 +46,9 @@
     <script type="text/javascript">
         window.onload = autoInicioRelacionCliente();
     </script>
-    <select id="select-machine"></select>
+    <select id="select-vehicle"></select>
     <script type="text/javascript">
-        window.onload = autoInicioMachine();
+        window.onload = autoInicioVehicule();
     </script>
     <div id="buttons"></div>
     <button onclick=" agregarReservation()">Guardar Reserva</button>

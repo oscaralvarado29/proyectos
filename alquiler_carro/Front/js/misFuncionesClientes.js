@@ -58,63 +58,69 @@ function cargarDatosClientes(id) {
 }
 
 function guardarInformacionCliente() {
-    let var2 = {
-        email: $("#Clemail").val(),
-        name: $("#Clname").val(),
-        age: $("#Clage").val(),
-    };
+    if ($("#Clemail").val().length == 0 || $("#Clname").val().length == 0 || $("#Clage").val().length == 0) {
+        alert("Todos los campos son obligatorios")
+    } else{
+        let var2 = {
+            email: $("#Clemail").val(),
+            name: $("#Clname").val(),
+            age: $("#Clage").val(),
+        };
 
-    console.log(var2);
-    $.ajax({
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: 'JSON',
-        data: JSON.stringify(var2),
-        //url: "http://144.22.148.114:8080/api/Client/save",
-        url: "http://localhost:8080/api/Client/save",
-        success: function (response) {
-            console.log(response);
-            console.log("Se guardo correctamente");
-            alert("Se guardo correctamente");
-            window.location.reload()
-        },
+        console.log(var2);
+        $.ajax({
+            type: 'POST',
+            contentType: "application/json; charset=utf-8",
+            dataType: 'JSON',
+            data: JSON.stringify(var2),
+            //url: "http://144.22.148.114:8080/api/Client/save",
+            url: "http://localhost:8080/api/Client/save",
+            success: function (response) {
+                console.log(response);
+                console.log("Se guardo correctamente");
+                alert("Se guardo correctamente");
+                window.location.reload()
+            },
 
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("No se guardo correctamente");
-        }
-    });
-
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("No se guardo correctamente");
+            }
+        });
+    }
 }
 
 function actualizarInformacionCliente(idElemento) {
-    let myData = {
-        idClient: idElemento,
-        email: $("#Clemail").val(),
-        name: $("#Clname").val(),
-        age: $("#Clage").val(),
-    };
-    console.log(myData);
-    let dataToSend = JSON.stringify(myData);
-    $.ajax({
-        //url: "http://144.22.148.114:8080/api/Client/update",
-        url: "http://localhost:8080/api/Client/update",
-        type: "PUT",
-        data: dataToSend,
-        contentType: "application/JSON",
-        datatype: "JSON",
-        success: function (respuesta) {
-            $("#Clemail").val(" "),
-            $("#Clname").val(" "),
-            $("#Clage").val(" "),
-            alert("se ha Actualizado correctamente ")
-            traerInformacionClientes()
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            window.location.reload()
-            alert("No se actualizo correctamente");
-        }
-    });
-
+    if ($("#Clemail").val().length == 0 || $("#Clname").val().length == 0 || $("#Clage").val().length == 0) {
+        alert("Todos los campos son obligatorios")
+    } else{
+        let myData = {
+            idClient: idElemento,
+            email: $("#Clemail").val(),
+            name: $("#Clname").val(),
+            age: $("#Clage").val(),
+        };
+        console.log(myData);
+        let dataToSend = JSON.stringify(myData);
+        $.ajax({
+            //url: "http://144.22.148.114:8080/api/Client/update",
+            url: "http://localhost:8080/api/Client/update",
+            type: "PUT",
+            data: dataToSend,
+            contentType: "application/JSON",
+            datatype: "JSON",
+            success: function (respuesta) {
+                $("#Clemail").val(" "),
+                    $("#Clname").val(" "),
+                    $("#Clage").val(" "),
+                    alert("se ha Actualizado correctamente ")
+                traerInformacionClientes()
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                window.location.reload()
+                alert("No se actualizo correctamente");
+            }
+        });
+}
 }
 
 function borrarCliente(idElemento) {

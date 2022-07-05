@@ -32,16 +32,21 @@
         </div>
         <br>
     </nav>
-
-    <input type="text" id="messagetext" placeholder="mensaje">
+    <br>
+    <label>Comentarios: </label>
+    <input type="text" id="messagetext" placeholder="mensaje"><br>
+    <label>Cliente: </label>
     <select id="select-client"></select>
     <script type="text/javascript">
         window.onload = autoInicioRelacionCliente();
-    </script>
-    <select id="select-machine"></select>
+    </script><br>
+    <label>Vehiculo: </label>
+    <select id="select-vehicle"></select>
     <script type="text/javascript">
         window.onload = autoInicioVehiculo();
-    </script>
+    </script><br>
+    <label>Calificacion: </label>
+    <input type="text" id="score" placeholder="calificacion"><br>
     <button onclick="guardarInformacionMensajes()">Guardar Mensajes</button>
     <button onclick="autoInicioMensajes()">Consultar Mensajes</button>
     <div id="resultadoMensajes"></div>
