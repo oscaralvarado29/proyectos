@@ -1,7 +1,7 @@
 function autoInicioCategoria() {
     console.log("se esta ejecutando")
     $.ajax({
-        //url: "http://144.22.148.114:8080/api/Category/all",
+        url: "http://52.202.16.5:8080/api/Category/all",
         url:"http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
@@ -19,8 +19,8 @@ function autoInicioCategoria() {
 //Manejador GET
 function traerInformacionVehucilo() {
     $.ajax({
-        //url: "http://144.22.148.114:8080/api/Vehicle/all",
-        url: "http://localhost:8080/api/Vehicle/all",
+        url: "http://52.202.16.5:8080/api/Vehicle/all",
+        //url: "http://localhost:8080/api/Vehicle/all",
         type: "GET",
         datatype: "JSON",
         success: function (response) {
@@ -74,8 +74,8 @@ function pintarVehiculo(response) {
 function cargarDatosVehiculo(id) {
     $.ajax({
         dataType: 'json',
-        //url: "http://144.22.148.114:8080/api/Vehicle/" + id,
-        url: "http://localhost:8080/api/Vehicle/" + id,
+        url: "http://52.202.16.5:8080/api/Vehicle/" + id,
+        //url: "http://localhost:8080/api/Vehicle/" + id,
         type: 'GET',
 
         success: function (response) {
@@ -122,8 +122,8 @@ function agregarVehiculo() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            //url: "http://144.22.148.114:8080/api/Vehicle/save",
-            url: "http://localhost:8080/api/Vehicle/save",
+            url: "http://52.202.16.5:8080/api/Vehicle/save",
+            //url: "http://localhost:8080/api/Vehicle/save",
             data: dataToSend,
             datatype: 'json',
 
@@ -157,8 +157,8 @@ function borrar(idElemento) {
     $.ajax({
         dataType: 'json',
         data: dataToSend,
-        //url: "http://144.22.148.114:8080/api/Vehicle/delete" ,
-        url: "http://localhost:8080/api/Vehicle/delete" ,
+        url: "http://52.202.16.5:8080/api/Vehicle/delete" ,
+        //url: "http://localhost:8080/api/Vehicle/delete" ,
         type: 'DELETE',
         contentType: "application/JSON",
         success: function (response) {
@@ -209,8 +209,8 @@ function actualizar(idElemento) {
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            //url: "http://144.22.148.114:8080/api/Vehicle/update",
-            url: "http://localhost:8080/api/Vehicle/update",
+            url: "http://52.202.16.5:8080/api/Vehicle/update",
+            //url: "http://localhost:8080/api/Vehicle/update",
             type: "PUT",
 
             success: function (response) {
