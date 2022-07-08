@@ -72,8 +72,8 @@ function agregarReservation() {
                 $("#startDate").val("");
                 $("#devolutionDate").val("");
                 $("#status").val("");
-
                 alert("Se ha guardado Correctamente!")
+                window.location.reload()
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("No se guardo Correctamente!")
