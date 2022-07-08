@@ -154,17 +154,28 @@ function borrarReservation(idElemento) {
     });
 }
 function  formatDate (date,version) {
-    let dia = date.getDate();
+    let day = date.getDate() + 1;
     let month = (date.getMonth() + 1);
     let year = date.getFullYear();
     let formatted_date;
-    if ( dia.length === 1){
-        dia="0"+dia;
+    let dayString;
+    let monthString;
+    if (day <10){
+        dayString = "0" + day.toString()
+    }else{
+        dayString = day.toString()
     }
+    if (month <10){
+        monthString = "0" + month.toString()
+    }else{
+        monthString = month.toString()
+    }
+
     if (version == 1) {
-        formatted_date = dia +"-" + month +"-" +year;
+        formatted_date = dayString +"-" + monthString +"-" +year;
     }    else {
-        formatted_date = year +"-" + month +"-" + dia;
+        formatted_date = year +"-" + monthString +"-" + dayString;
+
     }
     return formatted_date;
 }

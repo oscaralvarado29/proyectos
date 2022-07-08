@@ -45,11 +45,23 @@ function traerReporteDate() {
 }
 
 function  formatDate (date) {
-    let dia = date.getDate();
+    let day = date.getDate();
     let month = (date.getMonth() + 1);
     let year = date.getFullYear();
     let formatted_date;
-        formatted_date = dia +"-" + month +"-" +year;
+    let diaString;
+    let monthString;
+    if (day <10){
+        diaString = "0" + day.toString()
+    }else{
+        diaString = day.toString()
+    }
+    if (month <10){
+        monthString = "0" + month.toString()
+    }else{
+        monthString = month.toString()
+    }
+        formatted_date = diaString +"-" + monthString +"-" +year;
     return formatted_date;
 }
 function pintarRespuestaDate(respuesta) {
