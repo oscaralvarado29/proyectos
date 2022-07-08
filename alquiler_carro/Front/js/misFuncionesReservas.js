@@ -158,6 +158,9 @@ function  formatDate (date,version) {
     let month = (date.getMonth() + 1);
     let year = date.getFullYear();
     let formatted_date;
+    if ( dia.length === 1){
+        dia="0"+dia;
+    }
     if (version == 1) {
         formatted_date = dia +"-" + month +"-" +year;
     }    else {
