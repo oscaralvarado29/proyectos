@@ -2,7 +2,7 @@ function autoInicioCategoria() {
     console.log("se esta ejecutando")
     $.ajax({
         url: "http://52.251.62.72:8080/api/Category/all",
-        url:"http://localhost:8080/api/Category/all",
+        //url:"http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
