@@ -5,6 +5,7 @@
       <persistence-unit name="Default">
         <packages>
           <package value="com.vehicle" />
+          <package value="com.vehicle" />
         </packages>
       </persistence-unit>
     </persistence-units>

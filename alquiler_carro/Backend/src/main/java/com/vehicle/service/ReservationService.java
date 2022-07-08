@@ -68,7 +68,7 @@ public class ReservationService {
             if(reservationUpdate.isPresent()){
 
                 if(reservation.getStartDate()!=null){
-                    reservationUpdate.get().setDevolutionDate(reservation.getStartDate());
+                    reservationUpdate.get().setStartDate(reservation.getStartDate());
                 }
                 if(reservation.getDevolutionDate()!=null){
                     reservationUpdate.get().setDevolutionDate(reservation.getDevolutionDate());
