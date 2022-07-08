@@ -10,8 +10,6 @@ B
 css/misestilos.css,b\d\bd0515f05387bc297128825d0c259a06cf150147
 =
 Mensajes.html,a\3\a3e69ae56140540a44273b238f239b4982da9326
-=
-Clientes.html,1\c\1ce62a7f0b148aca192513a51cdb61e70d6a82a2
 B
 Reservaciones.html,8\4\84b09bbf90f2f93154296574213d9c6dd63a3d77
 =

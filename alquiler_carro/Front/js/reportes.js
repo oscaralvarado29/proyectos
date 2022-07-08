@@ -44,21 +44,28 @@ function traerReporteDate() {
     });
 }
 
+function  formatDate (date) {
+    let dia = date.getDate();
+    let month = (date.getMonth() + 1);
+    let year = date.getFullYear();
+    let formatted_date;
+        formatted_date = dia +"-" + month +"-" +year;
+    return formatted_date;
+}
 function pintarRespuestaDate(respuesta) {
 
     let myTable = "<table>";
     myTable += "<tr>";
     myTable += "<td>Fecha Inicio</td>";
     myTable += "<td>Fecha Devolucion</td>";
+    myTable += "<td>Estado</td>";
     "</tr>";
 
     for (i = 0; i < respuesta.length; i++) {
         myTable += "<tr>";
-        myTable += "<td>" + respuesta[i].startDate + "</td>";
-        myTable += "<td>" + respuesta[i].devolutionDate + "</td>";
+        myTable += "<td>" + formatDate(new Date(respuesta[i].startDate)) + "</td>";
+        myTable += "<td>" + formatDate(new Date(respuesta[i].devolutionDate)) + "</td>";
         myTable += "<td>" + respuesta[i].status + "</td>";
-
-
         myTable += "</tr>";
     }
     myTable += "</table>";

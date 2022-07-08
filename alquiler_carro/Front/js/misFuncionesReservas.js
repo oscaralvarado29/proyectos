@@ -2,7 +2,7 @@ function autoInicioRelacionCliente() {
 
     $.ajax({
         url: "http://52.251.62.72:8080/api/Client/all",
-        url:"http://localhost:8080/api/Client/all",
+        //url:"http://localhost:8080/api/Client/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
@@ -21,7 +21,7 @@ function autoInicioVehicule() {
 
     $.ajax({
         url: "http://52.251.62.72:8080/api/Vehicle/all",
-        url:"http://localhost:8080/api/Vehicle/all",
+        //url:"http://localhost:8080/api/Vehicle/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
