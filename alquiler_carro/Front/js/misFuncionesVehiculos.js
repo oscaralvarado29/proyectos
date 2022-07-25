@@ -1,7 +1,7 @@
 function autoInicioCategoria() {
     console.log("se esta ejecutando")
     $.ajax({
-        url: "http://10.0.1.4:8080/api/Category/all",
+        url: "http://10.0.1.5:8080/api/Category/all",
         //url:"http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
@@ -19,7 +19,7 @@ function autoInicioCategoria() {
 //Manejador GET
 function traerInformacionVehucilo() {
     $.ajax({
-        url: "http://10.0.1.4:8080/api/Vehicle/all",
+        url: "http://10.0.1.5:8080/api/Vehicle/all",
         //url: "http://localhost:8080/api/Vehicle/all",
         type: "GET",
         datatype: "JSON",
@@ -74,7 +74,7 @@ function pintarVehiculo(response) {
 function cargarDatosVehiculo(id) {
     $.ajax({
         dataType: 'json',
-        url: "http://10.0.1.4:8080/api/Vehicle/" + id,
+        url: "http://10.0.1.5:8080/api/Vehicle/" + id,
         //url: "http://localhost:8080/api/Vehicle/" + id,
         type: 'GET',
 
@@ -122,7 +122,7 @@ function agregarVehiculo() {
         $.ajax({
             type: "POST",
             contentType: "application/json",
-            url: "http://10.0.1.4:8080/api/Vehicle/save",
+            url: "http://10.0.1.5:8080/api/Vehicle/save",
             //url: "http://localhost:8080/api/Vehicle/save",
             data: dataToSend,
             datatype: 'json',
@@ -157,7 +157,7 @@ function borrar(idElemento) {
     $.ajax({
         dataType: 'json',
         data: dataToSend,
-        url: "http://10.0.1.4:8080/api/Vehicle/delete" ,
+        url: "http://10.0.1.5:8080/api/Vehicle/delete" ,
         //url: "http://localhost:8080/api/Vehicle/delete" ,
         type: 'DELETE',
         contentType: "application/JSON",
@@ -209,7 +209,7 @@ function actualizar(idElemento) {
             datatype: 'json',
             data: dataToSend,
             contentType: "application/JSON",
-            url: "http://10.0.1.4:8080/api/Vehicle/update",
+            url: "http://10.0.1.5:8080/api/Vehicle/update",
             //url: "http://localhost:8080/api/Vehicle/update",
             type: "PUT",
 
