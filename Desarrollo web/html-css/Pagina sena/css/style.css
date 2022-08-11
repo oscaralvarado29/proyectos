@@ -1,0 +1,144 @@
+.ancho{
+    width: 100%;
+    height: 34px;
+}
+.espacio{
+    padding: 0 5%;
+    align-items: center;
+}
+#barra-logo{
+    height: 150px !important;
+    padding: 10px;
+}
+.contenedor-flex{
+    display: flex;
+}
+.laterales{
+    justify-content: space-between
+}
+.logo-sena{
+    max-width: 125px;
+}
+.logo-gov{
+    max-height: 25px;
+    padding: 5px;
+}
+#barra-gris{
+    background-color:#efefef;
+    position: sticky;
+    top: 0;
+    flex-direction: row-reverse;
+}
+#barra-azul{
+    background-color:#015dca;
+    top:34px;
+}
+body{
+    margin: 0;
+}
+
+.grid-min{
+    display: grid;
+    width: 100%;
+    height: 150px;
+    max-width: 300px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-rows: repeat(3,1fr);
+    gap: 5px;
+
+    grid-template-areas: "fecha inicio"
+                         "min min"
+                         "bus bus";
+    justify-items: center;
+    align-items: center;
+}
+
+.item-fecha{
+    grid-area: fecha;
+    height: 50px;
+}
+.item-inicio{
+    grid-area:inicio;
+    height: 50px;
+}
+.item-buscar{
+    grid-area:bus;
+}
+.item-min{
+    grid-area:min;
+}
+.grid-menu{
+    display: grid;
+    width: 100%;
+    height: 24px;
+    max-width: 660px;
+    margin: 0 auto;
+    grid-template-columns: repeat(9,1fr); 
+    grid-template-rows:1fr;
+    gap: 1px;
+    grid-template-areas: "Inicio Transparencia Atención Participa Entidad Formación Empleabilidad Empresarios Prensa";
+    justify-items: center;
+    align-items: center;
+}
+.item-iniciomenu{
+    grid-area:Inicio;
+} 
+.item-transparencia{
+    grid-area:Transparencia;
+} 
+.item-atención{
+    grid-area:Atención;
+    width: 80px;
+} 
+.item-participa{
+    grid-area:Participa;
+} 
+.item-entidad{
+    grid-area:Entidad;
+} 
+.item-formación{
+    grid-area:Formación;
+} 
+.item-empleabilidad{
+    grid-area:Empleabilidad;
+} 
+.item-empresarios{
+    grid-area:Empresarios;
+} 
+.item-prensa{
+    grid-area:Prensa;
+}
+.dropbtn {
+    background-color: rgb(250, 250, 211);
+    color: grey;
+    font-size: 14px;
+    border-right: 1px solid #ff6b00!important;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: lightgrey;
+    min-width: 200px;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    border: 1px solid white!important;
+}
+
+.dropdown-content a:hover {background-color: darkgray;}
+.dropdown:hover .dropdown-content {display: block;}
+.dropdown:hover .dropbtn {background-color: grey;}
+
