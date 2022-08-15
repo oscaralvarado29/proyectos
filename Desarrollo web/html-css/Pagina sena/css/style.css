@@ -2,7 +2,12 @@
     font-family: 'Dyna';
     src: url('../fonts/DynaPuff.ttf') format('truetype');
     font-style: normal;
+}
 
+@font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
 }
 
 .ancho {
@@ -39,9 +44,10 @@
 
 #barra-gris {
     background-color: #efefef;
-    position: sticky;
+    position: sticky !important;
     top: 0;
     flex-direction: row-reverse;
+    z-index: 300;
 }
 
 #barra-azul {
@@ -94,6 +100,9 @@ nav {
     height: 35px;
     box-shadow: 0 5px 10px rgb(0 0 0 / 30%), 0 0 20px rgb(0 0 0 / 10%) inset;
     background-color: #fdfdfd;
+    justify-content: center;
+    z-index: 150;
+    display: flex;
 }
 
 nav ul li {
@@ -117,30 +126,134 @@ nav ul a {
     padding: 10px;
     text-transform: capitalize;
     font-family: "Dyna";
+    border-right: 1px solid orange;
+}
 
+nav ul ul li a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden !important;
+    border: 1px solid #fdfdfd !important;
+    text-transform: capitalize;
+    font-family: "Raleway";
+    font-size: 14px;
+    text-align: center;
 }
 
 nav ul ul li a:hover {
     background-color: #575756;
     color: #e6e6e6;
-    width: 100% !important;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+}
+
+nav ul ul li {
+    width: 100%;
 }
 
 nav ul ul {
+    width: auto;
     display: none;
     position: absolute;
     top: 100%;
     padding: 0;
     background-color: #e6e6e6;
-
-
+    z-index: 200;
 }
 
 nav ul li:hover>ul {
     display: block;
+}
+
+section {
+    background: #ff6b00;
+}
+
+/*Estilos para el slider*/
+.container-slider {
+    width: 1024px;
+    height: 357px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    border-radius: 10px;
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-left: -100%;
+}
+
+.slider__section {
+    width: 100%;
+}
+
+.slider__img {
+    width: auto;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.slider__btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider__btn:hover {
+    background: #fff;
+}
+
+.slider__btn--left {
+    left: 10px;
+}
+
+.slider__btn--right {
+    right: 10px;
+}
+
+/*Estilo para los 4 botones*/
+.btn {
+    background-color: #fff;
+    color: #565655 !important;
+    width: 100%;
+    background-size: 48px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    font-size: 1.6em;
+    padding: 15px 15px;
+    font-family: calibri, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.btn:before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+    filter: invert(43%) sepia(98%) saturate(1916%) hue-rotate(360deg) brightness(101%) contrast(107%);
+}
+
+.estudie:before {
+    background-image: url('/img/lapiz.png');
 }
 
 /*
