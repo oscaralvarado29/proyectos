@@ -2,7 +2,28 @@
     font-family: 'Dyna';
     src: url('../fonts/DynaPuff.ttf') format('truetype');
     font-style: normal;
+}
 
+@font-face {
+    font-family: 'Raleway';
+    src: url('../fonts/Raleway-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+section {
+    background: #ff6b00;
 }
 
 .ancho {
@@ -39,9 +60,10 @@
 
 #barra-gris {
     background-color: #efefef;
-    position: sticky;
+    position: sticky !important;
     top: 0;
     flex-direction: row-reverse;
+    z-index: 300;
 }
 
 #barra-azul {
@@ -94,6 +116,9 @@ nav {
     height: 35px;
     box-shadow: 0 5px 10px rgb(0 0 0 / 30%), 0 0 20px rgb(0 0 0 / 10%) inset;
     background-color: #fdfdfd;
+    justify-content: center;
+    z-index: 150;
+    display: flex;
 }
 
 nav ul li {
@@ -117,31 +142,301 @@ nav ul a {
     padding: 10px;
     text-transform: capitalize;
     font-family: "Dyna";
+    border-right: 1px solid orange;
+}
 
+nav ul ul li a {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden !important;
+    border: 1px solid #fdfdfd !important;
+    text-transform: capitalize;
+    font-family: "Raleway";
+    font-size: 14px;
+    text-align: center;
 }
 
 nav ul ul li a:hover {
     background-color: #575756;
     color: #e6e6e6;
-    width: 100% !important;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+}
+
+nav ul ul li {
+    width: 100%;
 }
 
 nav ul ul {
+    width: auto;
     display: none;
     position: absolute;
     top: 100%;
     padding: 0;
     background-color: #e6e6e6;
-
-
+    z-index: 200;
 }
 
 nav ul li:hover>ul {
     display: block;
 }
+
+/*Estilos para el slider*/
+.container-slider {
+    width: 1024px;
+    height: 357px;
+    margin: auto;
+    margin-top: 10px;
+    overflow: hidden;
+    position: relative;
+    z-index: 100;
+    border-radius: 0px 0px 10px 10px;
+}
+
+.slider {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-left: -100%;
+}
+
+.slider__section {
+    width: 100%;
+}
+
+.slider__img {
+    width: auto;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.slider__btn {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    font-weight: bold;
+    font-family: monospace;
+    text-align: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.slider__btn:hover {
+    background: #fff;
+}
+
+.slider__btn--left {
+    left: 10px;
+}
+
+.slider__btn--right {
+    right: 10px;
+}
+
+/*Estilo para los 4 botones*/
+#menu-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#menu-botones ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu-botones ul li {
+    position: relative;
+    float: left;
+    margin-right: 4.5px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
+.btn {
+    background-color: #fff;
+    color: #565655 !important;
+    width: 100%;
+    background-size: 48px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    font-size: 1.25em;
+    padding: 15px 15px;
+    font-family: "montserrat";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    text-decoration: none;
+    border-radius: 10px;
+    border-bottom: 10px solid #fff;
+}
+
+.btn:hover {
+    border-bottom: 10px solid #333333;
+}
+
+.btn:before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 48px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+    filter: invert(43%) sepia(98%) saturate(1916%) hue-rotate(360deg) brightness(101%) contrast(107%);
+}
+
+.estudie:before {
+    background-image: url('/img/lapiz.png');
+}
+
+.busque-empleo:before {
+    background-image: url('/img/empleo.png');
+}
+
+.emprendedor:before {
+    background-image: url('/img/emprendedor.png');
+}
+
+.sala-prensa:before {
+    background-image: url('/img/sala-prensa.png');
+}
+
+/*Estilos para la seccion de noticias y redes*/
+.grid-informacion {
+    display: grid;
+    width: 1024px;
+    height: 2000px;
+    max-width: 1024px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2px;
+    grid-template-areas: "lo-ultmo para-ver";
+    background: #fff;
+    border-radius: 10px;
+}
+
+.item-lo-ultmo {
+    grid-area: lo-ultmo;
+    height: 100%;
+    margin: 0;
+}
+
+.item-para-ver {
+    grid-area: para-ver;
+    height: 100%;
+}
+
+.titulo {
+    width: 100%;
+    background-size: 48px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 12px;
+}
+
+.titulo:before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 4px;
+}
+
+.parlante:before {
+    background-image: url('/img/megaphone.png');
+}
+
+#titulo-noticias {
+    border-bottom: 3px solid #ff6b00;
+    margin-bottom: 10px;
+}
+
+#seccion-noticias {
+    display: block;
+}
+
+.grid-noticia {
+    display: grid;
+    width: 650px;
+    height: 100%;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 20px auto;
+    gap: 2px;
+    grid-template-areas: "foto titulo-noticia"
+        "foto fecha-noticia"
+        "foto desarrollo-noticia";
+}
+
+.item-foto {
+    grid-area: foto;
+    height: 200px;
+    margin-left: 12px;
+}
+
+.item-titulo-noticia {
+    grid-area: titulo-noticia;
+    height: auto;
+    float: left;
+    margin: 0;
+    text-align: justify;
+}
+
+.item-fecha-noticia {
+    margin: 0;
+    padding: 0;
+    grid-area: fecha-noticia;
+    height: 100%;
+}
+
+.item-desarrollo-noticia {
+    grid-area: desarrollo-noticia;
+    height: auto;
+    margin: 0;
+}
+
+.foto-noticia {
+    width: 300px;
+    height: 100%;
+    object-fit: contain;
+}
+
+.date {
+    margin: 0;
+    padding: 0;
+    font-size: 16.5px;
+    text-align: left;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    font-family: PlayfairDisplay;
+}
+
+p {
+    font-size: 18px;
+}
+
+.borde-noticia {
+    border-bottom: 1.5px solid #ff6b00;
+    margin-bottom: 15px;
+}
+
 
 /*
 .grid-menu{

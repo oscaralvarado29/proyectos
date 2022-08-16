@@ -10,8 +10,8 @@
 </head>
 
 <body>
+    <div class="ancho contenedor-flex" id="barra-gris"><a href="" title="ayuda">?</a></div>
     <header>
-        <div class="ancho contenedor-flex" id="barra-gris"><a href="" title="ayuda">?</a></div>
         <div class=" ancho" id="barra-azul">
             <div class="espacio contenedor-flex laterales">
                 <div><a href="https://www.gov.co/"><img class="logo-gov" src="\img\header_govco.png"
@@ -25,7 +25,7 @@
                 <div><img class="logo-sena" src="\img\logoSena.png" alt="logo SENA"></div>
                 <div class="grid-min">
 
-                    <div class="item-fecha">LUNES, 8 DE AGOSTO 2022</div>
+                    <div class="item-fecha" id="fecha"></div>
                     <div class="item-inicio"><a href="">INICIO SESIÓN</a></div>
                     <div class="item-min"><img src="\img\Logo-Mintrabajo-s72.png" alt="logo Ministerio del Trabajo">
                     </div>
@@ -37,11 +37,11 @@
                     </div>
                 </div>
             </div>
+            <script src="/js/fecha.js"></script>
         </div>
 
         <nav>
             <ul>
-
                 <li><a href="http://">Inicio</a></li>
                 <li><a href="http://">Transparencia</a></li>
                 <li><a href="http://">Atención y Servicio a la Ciudadania</a></li>
@@ -62,21 +62,125 @@
                 <li><a href="http://">Sala de Prensa</a></li>
             </ul>
         </nav>
-        </div>
     </header>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <section>
+        <div class="container-slider">
+            <div class="slider" id="slider">
+                <div class="slider__section">
+                    <img src="/img/convocatoria-formacion-titulada.png"
+                        alt="convocatoria de formacion presencial titulada"
+                        title="convocatoria de formacion presencial titulada" class="slider__img">
+                </div>
+                <div class="slider__section">
+                    <img src="/img/crecer.jpg" alt="Fondo emprender-linea crecer" title="Fondo emprender-linea crecer"
+                        class="slider__img">
+                </div>
+                <div class="slider__section">
+                    <img src="/img/descarga-sena-app.png" alt="Descarga SENA app click para ver"
+                        title="Descarga SENA app click para ver" class="slider__img">
+                </div>
+                <div class="slider__section">
+                    <img src="/img/senainnova.jpg" alt="SENNAinnova productividad para las empresas, informacion acá"
+                        title="SENNAinnova productividad para las empresas, informacion acá" class="slider__img">
+                </div>
+                <div class="slider__section">
+                    <img src="/img/tramites-servicios.png" alt="Tramites y otros procedimientos administrativos - OPA"
+                        title="Tramites y otros procedimientos administrativos - OPA" class="slider__img">
+                </div>
+            </div>
+            <div class="slider__btn slider__btn--right" id="btnRight"><img src="/assets/arrow-right.svg" alt=""
+                    onclick="Next()">
+            </div>
+            <div class="slider__btn slider__btn--left" id="btnLeft"><img src="/assets/arrow-left.svg" alt=""
+                    onclick="Prev()">
+            </div>
+            <script src="/js/slider.js"></script>
+        </div>
+        <div id="menu-botones">
+            <ul>
+                <li><a title="a al hacer click viajará a Estudie en el sena" class="btn estudie"
+                        href="/es-co/formacion/Paginas/Estudie-en-el-SENA.aspx">Estudie en el Sena</a>
+                </li>
+                <li>
+                    <a title="a al hacer click viajará a Busque empleo" class="btn busque-empleo" href="">Busque
+                        Empleo</a>
+                </li>
+                <li>
+                    <a title="a al hacer click viajará a Sea Emprendedor" class="btn emprendedor" href="">Sea
+                        Emprendedor</a>
+                </li>
+                <li>
+                    <a title="a al hacer click viajará a Sala de Prensa" class="btn sala-prensa" href="">Sala de
+                        Prensa</a>
+                </li>
+            </ul>
+        </div>
+        <div id="informacion" class="grid-informacion">
+            <div class="item-lo-ultimo">
+                <div id="titulo-noticias" class="titulo parlante">
+                    <h2>Lo último</h2>
+                </div>
+                <div id="seccion-noticias" class="contenedor-flex">
+                    <div class="grid-noticia borde-noticia">
+                        <div class="item-foto">
+                            <img src="/img/taxistas.jpg"
+                                alt="Para la Entidad, es muy importante el reconocer públicamente el esfuerzo, dedicación y logros obtenidos por cada uno de los candidatos"
+                                class="foto-noticia">
+                        </div>
+                        <div class="item-titulo-noticia">
+                            <h3>Taxistas del Caquetá avanzan en proceso de certificación de competencias laborales con
+                                el SENA.</h3>
+                        </div>
+                        <div class="item-fecha-noticia date">
+                            Viernes, 12 de agosto de 2022
+                        </div>
+                        <div class="item-desarrollo-noticia">
+                            <p>Se trata de 28 conductores caqueteños que se dedican a labores de transporte público como
+                                taxistas y recibieron la certificación SENA que respalda su experiencia y conocimiento.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid-noticia borde-noticia">
+                        <div class="item-foto">
+                            <img src="/img/piscicola.jpg"
+                                alt="Piscícola El Edén es una experiencia que permite evidenciar el compromiso de la Entidad para impulsar el emprendimiento de los jovenes"
+                                class="foto-noticia">
+                        </div>
+                        <div class="item-titulo-noticia">
+                            <h3>Piscícola El Edén, una experiencia de emprendimiento sostenible que crece en Caquetá
+                            </h3>
+                        </div>
+                        <div class="item-fecha-noticia date">
+                            Jueves, 11 de agosto de 2022
+                        </div>
+                        <div class="item-desarrollo-noticia">
+                            <p>Con educación y acompañamiento técnico en la creación de negocios, el SENA impulsa esta
+                                iniciativa empresarial ideada por el joven caqueteño Jahn Carlos Vargas Silva.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid-noticia borde-noticia">
+                        <div class="item-foto">
+                            <img src="/img/bilinguismo.jpg"
+                                alt="Los aspirantes deben tener mínimo 14 años y manejo de herramientas tecnológicas básicas para realizar el proceso de formación."
+                                class="foto-noticia">
+                        </div>
+                        <div class="item-titulo-noticia">
+                            <h3>Llegó el momento de aprender inglés con el SENA
+                            </h3>
+                        </div>
+                        <div class="item-fecha-noticia date">
+                            Jueves, 11 de agosto de 2022
+                        </div>
+                        <div class="item-desarrollo-noticia">
+                            <p>Son 10 niveles certificados por la Entidad y los interesados pueden inscribirse en
+                                www.senavirtual.edu.co
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </section>
 </body>
 
 </html>
