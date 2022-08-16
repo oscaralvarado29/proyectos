@@ -188,7 +188,7 @@ nav ul li:hover>ul {
     overflow: hidden;
     position: relative;
     z-index: 100;
-    border-radius: 10px;
+    border-radius: 0px 0px 10px 10px;
 }
 
 .slider {
@@ -274,6 +274,7 @@ nav ul li:hover>ul {
     box-sizing: border-box;
     text-decoration: none;
     border-radius: 10px;
+    border-bottom: 10px solid #fff;
 }
 
 .btn:hover {
@@ -318,8 +319,6 @@ nav ul li:hover>ul {
     grid-template-rows: 1fr;
     gap: 2px;
     grid-template-areas: "lo-ultmo para-ver";
-    justify-items: center;
-    align-items: center;
     background: #fff;
     border-radius: 10px;
 }
@@ -327,11 +326,23 @@ nav ul li:hover>ul {
 .item-lo-ultmo {
     grid-area: lo-ultmo;
     height: 100%;
+    margin: 0;
 }
 
 .item-para-ver {
     grid-area: para-ver;
     height: 100%;
+}
+
+.titulo {
+    width: 100%;
+    background-size: 48px;
+    background-position: 10px center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 12px;
 }
 
 .titulo:before {
@@ -341,7 +352,7 @@ nav ul li:hover>ul {
     height: 30px;
     background-size: contain;
     background-repeat: no-repeat;
-    margin-right: 2px;
+    margin-right: 4px;
 }
 
 .parlante:before {
@@ -353,46 +364,52 @@ nav ul li:hover>ul {
     margin-bottom: 10px;
 }
 
+#seccion-noticias {
+    display: block;
+}
+
 .grid-noticia {
     display: grid;
-    width: 600px;
-    height: 100px;
+    width: 650px;
+    height: 100%;
     margin: 0 auto;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    gap: 5px;
+    grid-template-rows: auto 20px auto;
+    gap: 2px;
     grid-template-areas: "foto titulo-noticia"
         "foto fecha-noticia"
         "foto desarrollo-noticia";
-    justify-items: center;
-    align-items: center;
 }
 
 .item-foto {
     grid-area: foto;
-    height: 150px;
+    height: 200px;
+    margin-left: 12px;
 }
 
 .item-titulo-noticia {
     grid-area: titulo-noticia;
     height: auto;
     float: left;
+    margin: 0;
+    text-align: justify;
 }
 
 .item-fecha-noticia {
     margin: 0;
     padding: 0;
     grid-area: fecha-noticia;
-    height: 19px;
+    height: auto;
 }
 
 .item-desarrollo-noticia {
     grid-area: desarrollo-noticia;
     height: auto;
+    margin: 0;
 }
 
 .foto-noticia {
-    width: 250px;
+    width: 300px;
     height: 100%;
     object-fit: contain;
 }
@@ -415,6 +432,10 @@ p {
     font-size: 18px;
 }
 
+.borde-noticia {
+    border-bottom: 1.5px solid #ff6b00;
+    margin-bottom: 15px;
+}
 
 
 /*
