@@ -10,6 +10,22 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Montserrat';
+    src: url('../fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'PlayfairDisplay';
+    src: url('../fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf') format('truetype');
+    font-style: normal;
+}
+
+section {
+    background: #ff6b00;
+}
+
 .ancho {
     width: 100%;
     height: 34px;
@@ -163,10 +179,6 @@ nav ul li:hover>ul {
     display: block;
 }
 
-section {
-    background: #ff6b00;
-}
-
 /*Estilos para el slider*/
 .container-slider {
     width: 1024px;
@@ -225,6 +237,27 @@ section {
 }
 
 /*Estilo para los 4 botones*/
+#menu-botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#menu-botones ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#menu-botones ul li {
+    position: relative;
+    float: left;
+    margin-right: 4.5px;
+    margin-bottom: 10px;
+    padding: 0;
+}
+
 .btn {
     background-color: #fff;
     color: #565655 !important;
@@ -232,13 +265,19 @@ section {
     background-size: 48px;
     background-position: 10px center;
     background-repeat: no-repeat;
-    font-size: 1.6em;
+    font-size: 1.25em;
     padding: 15px 15px;
-    font-family: calibri, sans-serif;
+    font-family: "montserrat";
     display: flex;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
+    text-decoration: none;
+    border-radius: 10px;
+}
+
+.btn:hover {
+    border-bottom: 10px solid #333333;
 }
 
 .btn:before {
@@ -255,6 +294,128 @@ section {
 .estudie:before {
     background-image: url('/img/lapiz.png');
 }
+
+.busque-empleo:before {
+    background-image: url('/img/empleo.png');
+}
+
+.emprendedor:before {
+    background-image: url('/img/emprendedor.png');
+}
+
+.sala-prensa:before {
+    background-image: url('/img/sala-prensa.png');
+}
+
+/*Estilos para la seccion de noticias y redes*/
+.grid-informacion {
+    display: grid;
+    width: 1024px;
+    height: 2000px;
+    max-width: 1024px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 2px;
+    grid-template-areas: "lo-ultmo para-ver";
+    justify-items: center;
+    align-items: center;
+    background: #fff;
+    border-radius: 10px;
+}
+
+.item-lo-ultmo {
+    grid-area: lo-ultmo;
+    height: 100%;
+}
+
+.item-para-ver {
+    grid-area: para-ver;
+    height: 100%;
+}
+
+.titulo:before {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: 2px;
+}
+
+.parlante:before {
+    background-image: url('/img/megaphone.png');
+}
+
+#titulo-noticias {
+    border-bottom: 3px solid #ff6b00;
+    margin-bottom: 10px;
+}
+
+.grid-noticia {
+    display: grid;
+    width: 600px;
+    height: 100px;
+    margin: 0 auto;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 5px;
+    grid-template-areas: "foto titulo-noticia"
+        "foto fecha-noticia"
+        "foto desarrollo-noticia";
+    justify-items: center;
+    align-items: center;
+}
+
+.item-foto {
+    grid-area: foto;
+    height: 150px;
+}
+
+.item-titulo-noticia {
+    grid-area: titulo-noticia;
+    height: auto;
+    float: left;
+}
+
+.item-fecha-noticia {
+    margin: 0;
+    padding: 0;
+    grid-area: fecha-noticia;
+    height: 19px;
+}
+
+.item-desarrollo-noticia {
+    grid-area: desarrollo-noticia;
+    height: auto;
+}
+
+.foto-noticia {
+    width: 250px;
+    height: 100%;
+    object-fit: contain;
+}
+
+.date {
+    margin: 0;
+    padding: 0;
+    font-size: 16.5px;
+    text-align: left;
+}
+
+h3 {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    font-family: PlayfairDisplay;
+}
+
+p {
+    font-size: 18px;
+}
+
+
 
 /*
 .grid-menu{
