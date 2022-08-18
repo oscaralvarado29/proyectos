@@ -373,7 +373,7 @@ nav ul li:hover>ul {
     width: 650px;
     height: 100%;
     margin: 0 auto;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 35% 1fr;
     grid-template-rows: auto 20px auto;
     gap: 2px;
     grid-template-areas: "foto titulo-noticia"
@@ -383,7 +383,6 @@ nav ul li:hover>ul {
 
 .item-foto {
     grid-area: foto;
-    height: 200px;
     margin-left: 12px;
 }
 
@@ -409,8 +408,7 @@ nav ul li:hover>ul {
 }
 
 .foto-noticia {
-    width: 300px;
-    height: 100%;
+    width: 200px;
     object-fit: contain;
 }
 
@@ -430,6 +428,7 @@ h3 {
 
 p {
     font-size: 18px;
+    margin: 0;
 }
 
 .borde-noticia {
