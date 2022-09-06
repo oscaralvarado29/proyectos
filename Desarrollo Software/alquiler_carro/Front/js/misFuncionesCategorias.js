@@ -1,23 +1,30 @@
 function traerInformacionCategorias() {
     console.log("test");
     $.ajax({
-        url: "http://10.0.1.5:8080/api/Category/all",
-        //url: "http://localhost:8080/api/Category/all",
+        //url: "http://10.0.1.5:8080/api/Category/all",
+        url: "http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
             console.log(respuesta);
             pintarCategoria(respuesta);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("No se consulto correctamente");
         }
     });
 }
 
 function pintarCategoria(respuesta) {
 
+    console.log("se ngresa a pintar");
     let myTable = "<table>";
-    myTable += "<td>Nombre</td>";
-    myTable += "<td>Descripcion</td>";
-    myTable += "<td>Cantidad de vehiculos</td>";
+    myTable += "<th>Nombre</th>";
+    myTable += "<th>Descripcion</th>";
+    myTable += "<th>Cantidad de vehiculos</th>";
+    myTable += "<th> </th>";
+    myTable += "<th> </th>";
+    myTable += "<th> </th>";
     "</tr>";
     for (i = 0; i < respuesta.length; i++) {
         myTable += "<tr>";
@@ -36,8 +43,8 @@ function pintarCategoria(respuesta) {
 function cargarDatosCategorias(id) {
     $.ajax({
         dataType: 'json',
-        url: "http://10.0.1.5:8080/api/Category/" + id,
-        //url: "http://localhost:8080/api/Category/" + id,
+        //url: "http://10.0.1.5:8080/api/Category/" + id,
+        url: "http://localhost:8080/api/Category/" + id,
         type: 'GET',
 
         success: function (response) {
@@ -51,8 +58,9 @@ function cargarDatosCategorias(id) {
 }
 
 function guardarInformacionCategorias() {
+    console.log("Ingresando correctamente");
 
-    if ($("#Cname").val().length == 0 || $("#Cdescription").val().length == 0) {
+    if ($("#Cdescription").val().length == 0 || $("#Cname").val().length == 0 ) {
 
         alert("Todos los campos son obligatorios");
     } else {
@@ -61,21 +69,20 @@ function guardarInformacionCategorias() {
             name: $("#Cname").val(),
             description: $("#Cdescription").val()
         };
-
+        console.log(var2);
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
             data: JSON.stringify(var2),
-            url: "http://10.0.1.5:8080/api/Category/save",
-            //url: "http://localhost:8080/api/Category/save",
+            //url: "http://10.0.1.5:8080/api/Category/save",
+            url: "http://localhost:8080/api/Category/save",
 
 
             success: function (response) {
                 console.log(response);
                 console.log("Se guardo correctamente");
                 alert("Se guardo correctamente");
-                window.location.reload()
             },
 
             error: function (jqXHR, textStatus, errorThrown) {
@@ -89,7 +96,11 @@ function guardarInformacionCategorias() {
 }
 
 function actualizarInformacionCategorias(idElemento) {
-
+    $(document).ready(function(){     
+        $('#modal2').modal('show');
+        $('#modal2').draggable({}); //arrastrable 
+       
+    });   
     if ($("#Cname").val().length === 0 || $("#Cdescription").val().length === 0) {
 
         alert("Todos los campos son obligatorios");
@@ -105,8 +116,8 @@ function actualizarInformacionCategorias(idElemento) {
         console.log(myData);
         let dataToSend = JSON.stringify(myData);
         $.ajax({
-            url: "http://10.0.1.5:8080/api/Category/update",
-            //url: "http://localhost:8080/api/Category/update",
+            //url: "http://10.0.1.5:8080/api/Category/update",
+            url: "http://localhost:8080/api/Category/update",
             type: "PUT",
             data: dataToSend,
             contentType: "application/JSON",
@@ -134,8 +145,8 @@ function borrarCategoria(idElemento) {
     let dataToSend = JSON.stringify(myData);
     console.log(dataToSend);
     $.ajax({
-        url: "http://10.0.1.5:8080/api/Category/" + idElemento,
-        //url: "http://localhost:8080/api/Category/delete" ,
+        //url: "http://10.0.1.5:8080/api/Category/" + idElemento,
+        url: "http://localhost:8080/api/Category/delete" ,
         type: "DELETE",
         data: dataToSend,
         contentType: "application/JSON",

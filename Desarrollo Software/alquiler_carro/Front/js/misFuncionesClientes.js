@@ -1,8 +1,8 @@
 function traerInformacionClientes() {
     console.log("se esta ejecutando")
     $.ajax({
-        url: "http://10.0.1.5:8080/api/Client/all",
-        //url: "http://localhost:8080/api/Client/all",
+        //url: "http://10.0.1.5:8080/api/Client/all",
+        url: "http://localhost:8080/api/Client/all",
         type: "GET",
         datatype: "JSON",
         success: function (respuesta) {
@@ -42,8 +42,8 @@ function pintarCliente(respuesta) {
 function cargarDatosClientes(id) {
     $.ajax({
         dataType: 'json',
-        url: "http://10.0.1.5:8080/api/Client/" + id,
-        //url: "http://localhost:8080/api/Client/" + id,
+        //url: "http://10.0.1.5:8080/api/Client/" + id,
+        url: "http://localhost:8080/api/Client/" + id,
         type: 'GET',
 
         success: function (response) {
@@ -73,8 +73,8 @@ function guardarInformacionCliente() {
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
             data: JSON.stringify(var2),
-            url: "http://10.0.1.5:8080/api/Client/save",
-            //url: "http://localhost:8080/api/Client/save",
+            //url: "http://10.0.1.5:8080/api/Client/save",
+            url: "http://localhost:8080/api/Client/save",
             success: function (response) {
                 console.log(response);
                 console.log("Se guardo correctamente");
@@ -102,8 +102,8 @@ function actualizarInformacionCliente(idElemento) {
         console.log(myData);
         let dataToSend = JSON.stringify(myData);
         $.ajax({
-            url: "http://10.0.1.5:8080/api/Client/update",
-            //url: "http://localhost:8080/api/Client/update",
+            //url: "http://10.0.1.5:8080/api/Client/update",
+            url: "http://localhost:8080/api/Client/update",
             type: "PUT",
             data: dataToSend,
             contentType: "application/JSON",
@@ -130,8 +130,8 @@ function borrarCliente(idElemento) {
     let dataToSend = JSON.stringify(myData);
     console.log(dataToSend);
     $.ajax({
-        url: "http://10.0.1.5:8080/api/Client/delete",
-        //url: "http://localhost:8080/api/Client/delete",
+        //url: "http://10.0.1.5:8080/api/Client/delete",
+        url: "http://localhost:8080/api/Client/delete",
         type: "DELETE",
         data: dataToSend,
         contentType: "application/JSON",
