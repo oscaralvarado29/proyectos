@@ -57,14 +57,14 @@ function cargarDatosCategorias(id) {
     });
 }
 
-function guardarInformacionCategorias() {
-    console.log("Ingresando correctamente");
-
+function agregarCategorias() {
+    
     if ($("#Cdescription").val().length == 0 || $("#Cname").val().length == 0 ) {
 
         alert("Todos los campos son obligatorios");
     } else {
 
+        console.log("name: " + $("#Cname").val().length + " description: " + $("#Cdescription").val().length);
         let var2 = {
             name: $("#Cname").val(),
             description: $("#Cdescription").val()

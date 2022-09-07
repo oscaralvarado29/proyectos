@@ -73,8 +73,8 @@ public class VehicleService {
                 if (vehicle.getModel() != null) {
                     vehicleUpdate.get().setModel(vehicle.getModel());
                 }
-                if (vehicle.getHorsepower() != null) {
-                    vehicleUpdate.get().setHorsepower(vehicle.getHorsepower());
+                if (vehicle.getHorsePower() != null) {
+                    vehicleUpdate.get().setHorsePower(vehicle.getHorsePower());
                 }
                 if (vehicle.getEngineCylinders() != null) {
                     vehicleUpdate.get().setEngineCylinders(vehicle.getEngineCylinders());
