@@ -15,10 +15,13 @@ function traerInformacionClientes() {
 function pintarCliente(respuesta) {
 
     let myTable = "<table>";
-    myTable += "<td>Nombre</td>";
-    myTable += "<td>Email</td>";
-    myTable += "<td>Edad</td>";
-    myTable += "<td>Mensajes</td>";
+    myTable += "<th>Nombre</th>";
+    myTable += "<th>Email</th>";
+    myTable += "<th>Edad</th>";
+    myTable += "<th>Mensajes</th>";
+    myTable += "<th> </th>";
+    myTable += "<th> </th>";
+    myTable += "<th> </th>";
     "</tr>";
     for (i = 0; i < respuesta.length; i++) {
         myTable += "<tr>";
@@ -30,8 +33,8 @@ function pintarCliente(respuesta) {
         } else {
             myTable += "<td>" + respuesta[i].messages.messageText + "</td>";
         }
-        myTable += "<td> <button onclick=' actualizarInformacionCliente(" + respuesta[i].idClient + ")'>Actualizar</button>";
         myTable += '<td><button  onclick="cargarDatosClientes(' + respuesta[i].idClient + ')">Lanzar</button></td>';
+        myTable += "<td> <button onclick=' actualizarInformacionCliente(" + respuesta[i].idClient + ")'>Actualizar</button>";
         myTable += "<td> <button onclick='borrarCliente(" + respuesta[i].idClient + ")'>Borrar</button>";
         myTable += "</tr>";
     }
@@ -50,34 +53,32 @@ function cargarDatosClientes(id) {
             console.log(response);
             var item = response;
 
-            $("#Clname").val(item.name);
-            $("#Clemail").val(item.email);
-            $("#Clage").val(item.age);
+            $("#name").val(item.name);
+            $("#email").val(item.email);
+            $("#age").val(item.age);
         }
     });
 }
 
-function guardarInformacionCliente() {
-    if ($("#Clemail").val().length == 0 || $("#Clname").val().length == 0 || $("#Clage").val().length == 0) {
+function agregarCliente() {
+    if ($("#email").val()=="" || $("#name").val() == "" || $("#age").val()=="") {
         alert("Todos los campos son obligatorios")
     } else{
-        let var2 = {
-            email: $("#Clemail").val(),
-            name: $("#Clname").val(),
-            age: $("#Clage").val(),
+        let datos = {
+            email: $("#email").val(),
+            name: $("#name").val(),
+            age: $("#age").val(),
         };
 
-        console.log(var2);
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
-            data: JSON.stringify(var2),
+            data: JSON.stringify(datos),
             //url: "http://10.0.1.5:8080/api/Client/save",
             url: "http://localhost:8080/api/Client/save",
             success: function (response) {
                 console.log(response);
-                console.log("Se guardo correctamente");
                 alert("Se guardo correctamente");
                 window.location.reload()
             },
@@ -90,14 +91,14 @@ function guardarInformacionCliente() {
 }
 
 function actualizarInformacionCliente(idElemento) {
-    if ($("#Clemail").val().length == 0 || $("#Clname").val().length == 0 || $("#Clage").val().length == 0) {
+    if ($("#email").val() == "" || $("#name").val() == "" || $("#Clage").val() == "") {
         alert("Todos los campos son obligatorios")
     } else{
         let myData = {
             idClient: idElemento,
-            email: $("#Clemail").val(),
-            name: $("#Clname").val(),
-            age: $("#Clage").val(),
+            email: $("#email").val(),
+            name: $("#name").val(),
+            age: $("#age").val(),
         };
         console.log(myData);
         let dataToSend = JSON.stringify(myData);
@@ -109,9 +110,9 @@ function actualizarInformacionCliente(idElemento) {
             contentType: "application/JSON",
             datatype: "JSON",
             success: function (respuesta) {
-                $("#Clemail").val(" "),
-                    $("#Clname").val(" "),
-                    $("#Clage").val(" "),
+                $("#email").val(" "),
+                    $("#name").val(" "),
+                    $("#age").val(" "),
                     alert("se ha Actualizado correctamente ")
                 traerInformacionClientes()
             },
@@ -137,11 +138,11 @@ function borrarCliente(idElemento) {
         contentType: "application/JSON",
         datatype: "JSON",
         success: function (respuesta) {
-            $("#resultado").empty();
+            $("#mostrarClientes").empty();
             alert("Se ha eliminado correctamente")
-            $("#Clemail").val(" "),
-            $("#Clname").val(" "),
-            $("#Clage").val(" "),
+            $("#email").val(" "),
+            $("#name").val(" "),
+            $("#age").val(" "),
             traerInformacionClientes();
         },
         error: function (jqXHR, textStatus, errorThrown) {

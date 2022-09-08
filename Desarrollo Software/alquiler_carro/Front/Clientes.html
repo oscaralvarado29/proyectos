@@ -1,47 +1,140 @@
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
-    <title>Alquiler de vehiculos</title>
-    <meta charset="utf-8">
-    <meta name="description" content="Este es un documento HTML5">
-    <meta name="keywords" content="HTML, CSS, JavaScript">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/misestilos.css">
-    <script type="text/javascript" src="js/misFuncionesClientes.js"></script>
-</head>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/misestilos.css">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+        </script>
+        <script type="text/javascript"
+            src="js/misFuncionesClientes.js">
+        </script>
+        <title>Alquiler de Vehiculos</title>
+    </head>
 
-<body>
-    <header id="cabeceralogo">
-        <div>
-            <h1>Clientes </h1>
-        </div>
-    </header>
-    <nav id="menuprincipal">
-        <div>
-            <ul>
-                <li><a href="index.html">Principal</a></li>
-                <li><a href="Categorias.html">Categorias</a></li>
-                <li><a href="Vehiculos.html">Vehiculos</a></li>
-                <li><a href="Clientes.html">Clientes</a></li>
-                <li><a href="Reservaciones.html">Reservaciones</a></li>
-                <li><a href="Mensajes.html">Mensajes</a></li>
-                <li><a href="Reportes.html">Reportes</a></li>
-            </ul>
-            <br>
+    <body>
+        <div class="container-fluid mb-5 sin-padding">
+            <header id="cabeceralogo" class="container-fluid d-flex flex-wrap
+                py-3 mb-3 border-bottom sin-padding" style="background-color:
+                #b813ce">
+                <div class="container text-light ">
+                    <h1>Clientes </h1>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark fs-4"
+                    style="background-color: #b813ce">
+                    <div class="container">
+                        <a class="navbar-brand" href="index.html">Inicio
+                        </a>
+                        <button class="navbar-toggler" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle
+                            navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse"
+                            id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Categorias.html">Categorias</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Vehiculos.html">Vehiculos</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Clientes.html">Clientes</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Reservaciones.html">Reservaciones</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Mensajes.html">Mensajes</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page"
+                                        href="Reportes.html">Reportes</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <div class="container position-relative w-50 float-left">
+
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="nombre">Nombre:</span>
+                    </div>
+                    <input type="text" class="form-control" id="name"
+                        aria-describedby="basic-addon3"
+                        placeholder="Nombre del cliente">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="edad">Edad:</span>
+                    </div>
+                    <input type="text" class="form-control "
+                        id="age"
+                        aria-describedby="basic-addon3"
+                        placeholder="Edad del cliente">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="correo">Email:</span>
+                    </div>
+                    <input type="text" class="form-control " id="email"
+                        aria-describedby="basic-addon3"
+                        placeholder="Email del cliente">
+                </div>
+
+                <div class="row d-flex flex-nowrap">
+                    <div class="w-auto">
+                        <button onclick="agregarCliente()">Guardar
+                            cliente</button>
+                    </div>
+                    <div>
+                        <button onclick="traerInformacionClientes()">
+                            Consultar Clientes</button>
+                    </div>
+                </div>
+            </div>
+
+            <table id="mostrarClientes" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+            </table>
+
         </div>
         <br>
-    </nav>
-    <br>
-    <div id="campos" >
-        <input type="text" id="Clname" placeholder="nombre">
-        <input type="text" id="Clemail" placeholder="email">
-        <input type="text" id="Clage" placeholder="edad">
-    </div>
-    <button onclick="guardarInformacionCliente()">Guardar Cliente</button>
-    <button onclick="traerInformacionClientes()"> Consultar Clientes</button>
-    <div id="mostrarClientes"> </div>
+        <!-- Footer -->
 
-</body>
+        <footer class="footer mt-auto py-3 bg-light d-flex
+            justify-content-end position-relative">
+            <div class="container"><span class="text-muted d-flex
+                    justify-content-center">Oscar Alvarado ©
+                    <script>document.write(new Date().getFullYear())</script>
+                </span></div>
+        </footer>
+
+        <script src="js/bootstrap.js"></script>
+
+    </body>
 
 </html>

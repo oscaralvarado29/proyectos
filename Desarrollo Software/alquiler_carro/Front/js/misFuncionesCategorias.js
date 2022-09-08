@@ -31,8 +31,8 @@ function pintarCategoria(respuesta) {
         myTable += "<td>" + respuesta[i].name + "</td>";
         myTable += "<td>" + respuesta[i].description + "</td>";
         myTable += "<td>" + respuesta[i].vehicle.length + "</td>";
-        myTable += "<td> <button onclick=' actualizarInformacionCategorias(" + respuesta[i].idCategory + ")'>Actualizar</button>";
         myTable += '<td><button  onclick="cargarDatosCategorias(' + respuesta[i].idCategory + ')">Lanzar</button></td>';
+        myTable += "<td> <button onclick=' actualizarInformacionCategorias(" + respuesta[i].idCategory + ")'>Actualizar</button>";
         myTable += "<td> <button onclick='borrarCategoria(" + respuesta[i].idCategory + ")'>Borrar</button>";
         myTable += "</tr>";
     }

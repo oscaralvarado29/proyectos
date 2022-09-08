@@ -65,9 +65,9 @@ function pintarVehiculo(response) {
         } else {
             myTable += "<td>" + response[i].messages.messageText + "</td>";
         }
-        myTable += '<td><button onclick="borrarVehiculo(' + response[i].idVehicle + ')">Borrar</button></td>';
         myTable += '<td><button onclick="cargarDatosVehiculo(' + response[i].idVehicle + ')">Lanzar</button></td>';
         myTable += '<td><button onclick="actualizarVehiculo(' + response[i].idVehicle + ')">Actualizar</button></td>';
+        myTable += '<td><button onclick="borrarVehiculo(' + response[i].idVehicle + ')">Borrar</button></td>';
         myTable += "</tr>";
     }
     myTable += "</table>";
