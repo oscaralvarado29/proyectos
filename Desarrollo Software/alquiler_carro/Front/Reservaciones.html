@@ -104,16 +104,24 @@
                         placeholder="Estado de la reserva: completed o cancelled
                         ">
                 </div>
-
-                <select id="select-client" class="mb-3"></select>
-                <script type="text/javascript">
-                    window.onload = informacionCliente();
-                </script>
-                <br>
-                <select id="select-vehicle" class="mb-3"></select>
-                <script type="text/javascript">
-                    window.onload = informacionVehiculo();
-                </script>
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-client">Cliente:</label>
+                    </div>
+                    <select name="cliente" id="select-client"></select>
+                    <script type="text/javascript">
+                        window.onload = informacionCliente();
+                    </script>
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-vehicle" class="me-2">Vehiculo:</label>
+                    </div>
+                    <select name="vehicle" id="select-vehicle"></select>
+                    <script type="text/javascript">
+                        window.onload = informacionVehiculo();
+                    </script>
+                </div>
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
                         <button onclick="agregarReservacion()">Guardar

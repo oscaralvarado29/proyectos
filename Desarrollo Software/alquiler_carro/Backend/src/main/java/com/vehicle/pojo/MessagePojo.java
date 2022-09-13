@@ -1,5 +1,6 @@
 package com.vehicle.pojo;
 
+import com.vehicle.model.Reservation;
 import com.vehicle.model.Vehicle;
 import com.vehicle.model.Client;
 import lombok.AllArgsConstructor;
@@ -14,4 +15,5 @@ public class MessagePojo {
     private double score;
     private Vehicle vehicle;
     private Client client;
+    private Reservation reservation;
 }

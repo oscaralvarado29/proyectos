@@ -51,6 +51,9 @@ public class Vehicle implements Serializable {
         this.messages = vehiclePojo.getMessages();
         this.reservations = vehiclePojo.getReservations();
     }
+    public Vehicle (int idVehicle){
+        this.idVehicle=idVehicle;
+    }
 
     @ManyToOne
     @JoinColumn(name = "idCategory")

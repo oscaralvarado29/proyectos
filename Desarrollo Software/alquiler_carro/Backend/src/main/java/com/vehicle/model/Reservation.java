@@ -4,6 +4,7 @@ import com.vehicle.pojo.ReservationPojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.*;
 
 import lombok.*;
@@ -34,6 +35,7 @@ public class Reservation implements Serializable{
         this.status = reservationPojo.getStatus();
         this.vehicle = reservationPojo.getVehicle();
         this.client = reservationPojo.getClient();
+        this.messages = reservationPojo.getMessage();
     }
 
     @ManyToOne
@@ -45,4 +47,9 @@ public class Reservation implements Serializable{
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"reservations","messages"})
     private Client client;
+
+    @Column()
+    @OneToMany(cascade = {CascadeType.PERSIST},mappedBy= "reservation")
+    @JsonIgnoreProperties({ "reservations", "client", "vehicle"})
+    private List<Message> messages;
 }

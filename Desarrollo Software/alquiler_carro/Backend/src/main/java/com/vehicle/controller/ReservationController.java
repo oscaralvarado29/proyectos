@@ -2,7 +2,10 @@ package com.vehicle.controller;
 
 import java.util.List;
 import java.util.Optional;
+
+import com.vehicle.model.Client;
 import com.vehicle.model.Reservation;
+import com.vehicle.model.Vehicle;
 import com.vehicle.pojo.ReservationDatesPojo;
 import com.vehicle.pojo.ReservationPojo;
 import com.vehicle.report.ClientCount;
@@ -91,9 +94,10 @@ public class ReservationController {
 
     /**
      * Reservations report by dates
-     * @param reservationDatesPojo pojo created with reservation dates
+     * @param dateOne
+     * @param dateTwo
      * @return the call of the getReservationPeriod method of the class ReservationService
-     */
+    */
     @GetMapping("/report-dates/{dateOne}/{dateTwo}")
     public List<Reservation> getReservationsReportDates(@PathVariable("dateOne") String dateOne, @PathVariable("dateTwo") String dateTwo){
         return reservationService.getReservationPeriod(dateOne, dateTwo);
@@ -106,5 +110,12 @@ public class ReservationController {
     @GetMapping("/report-clients")
     public List<ClientCount> getReservationsReportsClient(){
         return reservationService.getTopClients();
+    }
+
+    @GetMapping("/reservation-clients-vehicle/{idClient}/{idVehicle}")
+    public List<Reservation> getReservationsByClientAndVehicle(@PathVariable("idClient") int idClient, @PathVariable("idVehicle") int idVehicle){
+        Client client =new Client(idClient);
+        Vehicle vehicle = new Vehicle(idVehicle);
+        return reservationService.getReservationByClientAndVehicle(client, vehicle);
     }
 }

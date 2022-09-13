@@ -139,12 +139,15 @@
                         aria-describedby="basic-addon3"
                         placeholder="Cantidad de puestos del vehiculo">
                 </div>
-                <select id="select-category" class="mb-3"></select>
-                <script type="text/javascript">
-                    window.onload = autoInicioCategoria();
-                </script>
-                <br>
-
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-category">Categoria:</label>
+                    </div>
+                    <select id="select-category" class="mb-3"></select>
+                    <script type="text/javascript">
+                        window.onload = autoInicioCategoria();
+                    </script>
+                </div>
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
                         <button onclick="agregarVehiculo()">Guardar

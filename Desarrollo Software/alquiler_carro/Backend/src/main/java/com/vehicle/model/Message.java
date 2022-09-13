@@ -33,6 +33,7 @@ public class Message implements Serializable{
         this.score = messagePojo.getScore();
         this.vehicle = messagePojo.getVehicle();
         this.client = messagePojo.getClient();
+        this.reservation=messagePojo.getReservation();
     }
 
     @ManyToOne
@@ -44,4 +45,9 @@ public class Message implements Serializable{
     @JoinColumn(name="idClient")
     @JsonIgnoreProperties({"messages", "reservations", "client"})
     private Client client;
+
+    @ManyToOne
+    @JoinColumn(name="idReservation")
+    @JsonIgnoreProperties({"messages", "reservations", "client", "vehicle"})
+    private Reservation reservation;
 }

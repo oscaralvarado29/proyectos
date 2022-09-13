@@ -119,7 +119,7 @@ function agregarVehiculo() {
             },
         }
         let dataToSend = JSON.stringify(elemento);
-        console.log(elemento);
+        console.log(elemento.category.idCategory);
 
         $.ajax({
             type: "POST",
@@ -177,7 +177,7 @@ function borrarVehiculo(idElemento) {
             $("#horsePower").val("");
             $("#engineCylinders").val("");
             $("#seating").val("");
-            traerInformacionVehucilo()
+            traerInformacionVehiculo()
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert("No se Elimino Correctamente!")
