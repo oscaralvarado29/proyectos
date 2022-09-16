@@ -1,164 +1,166 @@
-function traerInformacionCategorias() {
-    console.log("test");
+function getCategory() {
+
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Category/all",
         url: "http://localhost:8080/api/Category/all",
         type: "GET",
         datatype: "JSON",
-        success: function (respuesta) {
-            console.log(respuesta);
-            pintarCategoria(respuesta);
+        success: function (category) {
+            drawCategory(category);
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("No se consulto correctamente");
+        error: function (jqXHR, exception){
+            let msgError=errorAction(jqXHR, exception)
+            alert(msgError)
         }
     });
 }
 
-function pintarCategoria(respuesta) {
+function drawCategory(category) {
 
-    console.log("se ngresa a pintar");
     let myTable = "<table>";
     myTable += "<th>Nombre</th>";
-    myTable += "<th>Descripcion</th>";
+    myTable += "<th>Descripción</th>";
     myTable += "<th>Cantidad de vehiculos</th>";
     myTable += "<th> </th>";
     myTable += "<th> </th>";
     myTable += "<th> </th>";
-    "</tr>";
-    for (i = 0; i < respuesta.length; i++) {
+    myTable += "</tr>";
+    for (const element of category) {
         myTable += "<tr>";
-        myTable += "<td>" + respuesta[i].name + "</td>";
-        myTable += "<td>" + respuesta[i].description + "</td>";
-        myTable += "<td>" + respuesta[i].vehicle.length + "</td>";
-        myTable += '<td><button  onclick="cargarDatosCategorias(' + respuesta[i].idCategory + ')">Lanzar</button></td>';
-        myTable += "<td> <button onclick=' actualizarInformacionCategorias(" + respuesta[i].idCategory + ")'>Actualizar</button>";
-        myTable += "<td> <button onclick='borrarCategoria(" + respuesta[i].idCategory + ")'>Borrar</button>";
+        myTable += "<td>" + element.name + "</td>";
+        myTable += "<td>" + element.description + "</td>";
+        myTable += "<td>" + element.vehicle.length + "</td>";
+        myTable += '<td><button  onclick="launchDataCategory(' + element.idCategory + ')">Lanzar</button></td>';
+        myTable += "<td> <button onclick=' putCategory(" + element.idCategory + ")'>Actualizar</button>";
+        myTable += "<td> <button onclick='deleteCategory(" + element.idCategory + ")'>Borrar</button>";
         myTable += "</tr>";
     }
     myTable += "</table>";
     $("#mostrarCategorias").html(myTable);
 }
 
-function cargarDatosCategorias(id) {
+function launchDataCategory(categoryId) {
     $.ajax({
         dataType: 'json',
-        //url: "http://10.0.1.5:8080/api/Category/" + id,
-        url: "http://localhost:8080/api/Category/" + id,
+        //url: "http://10.0.1.5:8080/api/Category/" + categoryId,
+        url: "http://localhost:8080/api/Category/" + categoryId,
         type: 'GET',
 
         success: function (response) {
-            console.log(response);
-            var item = response;
-
-            $("#Cname").val(item.name);
-            $("#Cdescription").val(item.description);
+            $("#name").val(response.name);
+            $("#description").val(response.description);
         },
     });
 }
 
-function agregarCategorias() {
+function postCategory() {
     
-    if ($("#Cdescription").val().length == 0 || $("#Cname").val().length == 0 ) {
+    if ($("#description").val() === "" || $("#name").val() === "" ) {
 
         alert("Todos los campos son obligatorios");
     } else {
-
-        console.log("name: " + $("#Cname").val().length + " description: " + $("#Cdescription").val().length);
-        let var2 = {
-            name: $("#Cname").val(),
-            description: $("#Cdescription").val()
+        let categoryData = {
+            name: $("#name").val(),
+            description: $("#description").val()
         };
-        console.log(var2);
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
-            data: JSON.stringify(var2),
+            data: JSON.stringify(categoryData),
             //url: "http://10.0.1.5:8080/api/Category/save",
             url: "http://localhost:8080/api/Category/save",
 
 
             success: function (response) {
-                console.log(response);
-                console.log("Se guardo correctamente");
-                alert("Se guardo correctamente");
+                $("#name").val("");
+                $("#description").val("");
+                alert("La categoria "+response.name+" se ha guardado correctamente");
             },
-
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("No se guardo correctamente");
-
-
+            error: function (jqXHR, exception){
+                let msgError=errorAction(jqXHR, exception)
+                alert(msgError)
             }
         });
     }
 
 }
 
-function actualizarInformacionCategorias(idElemento) {
-    $(document).ready(function(){     
-        $('#modal2').modal('show');
-        $('#modal2').draggable({}); //arrastrable 
-       
-    });   
-    if ($("#Cname").val().length === 0 || $("#Cdescription").val().length === 0) {
+function putCategory(idElemento) {
+
+    if ($("#name").val() === "" || $("#description").val() === "") {
 
         alert("Todos los campos son obligatorios");
     } else {
 
-
-        let myData = {
+        let categoryData = {
             idCategory: idElemento,
-            name: $("#Cname").val(),
-            description: $("#Cdescription").val()
+            name: $("#name").val(),
+            description: $("#description").val()
 
         };
-        console.log(myData);
-        let dataToSend = JSON.stringify(myData);
         $.ajax({
             //url: "http://10.0.1.5:8080/api/Category/update",
             url: "http://localhost:8080/api/Category/update",
             type: "PUT",
-            data: dataToSend,
+            data: JSON.stringify(categoryData),
             contentType: "application/JSON",
             datatype: "JSON",
             success: function (respuesta) {
-                $("#resultado").empty();
-                $("#id").val("");
-                $("#Cname").val("");
-                $("#Cdescription").val("");
-                traerInformacionCategorias();
-                alert("se ha Actualizado correctamente la categoria")
+                $("#mostrarCategorias").empty();
+                $("#name").val("");
+                $("#description").val("");
+                getCategory();
+                alert("se ha Actualizado correctamente la categoria "+respuesta.name)
             },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("No se Actualizo Correctamente!")
+            error: function (jqXHR, exception){
+                let msgError=errorAction(jqXHR, exception)
+                alert(msgError)
             }
         });
     }
 
 }
 
-function borrarCategoria(idElemento) {
-    let myData = {
+function deleteCategory(idElemento) {
+    let categoryData = {
         idCategory: idElemento
     };
-    let dataToSend = JSON.stringify(myData);
-    console.log(dataToSend);
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Category/" + idElemento,
         url: "http://localhost:8080/api/Category/delete" ,
         type: "DELETE",
-        data: dataToSend,
+        data: JSON.stringify(categoryData),
         contentType: "application/JSON",
         datatype: "JSON",
-        success: function (respuesta) {
-            $("#resultado").empty();
-            traerInformacionCategorias();
-            alert("Se ha eliminado correctamente")
+        success: function () {
+            $("#mostrarCategorias").empty();
+            getCategory();
+            alert("Se ha eliminado correctamente la categoria ")
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("No se Elimino Correctamente!")
+        error: function (jqXHR, exception){
+            let msgError=errorAction(jqXHR, exception)
+            alert(msgError)
         }
     });
 
+}
+function errorAction (jqXHR, exception) {
+    let msg = '';
+    if (jqXHR.status === 0) {
+        msg += 'Not connect.\n Verify Network.';
+    } else if (jqXHR.status === 404) {
+        msg += 'Requested page not found. [404]';
+    } else if (jqXHR.status === 500) {
+        msg += 'Internal Server Error [500].';
+    } else if (exception === 'parsererror') {
+        msg += 'Requested JSON parse failed.';
+    } else if (exception === 'timeout') {
+        msg += 'Time out error.';
+    } else if (exception === 'abort') {
+        msg += 'Ajax request aborted.';
+    } else {
+        msg += 'Uncaught Error.\n' + jqXHR.responseText;
+    }
+    return(msg);
 }

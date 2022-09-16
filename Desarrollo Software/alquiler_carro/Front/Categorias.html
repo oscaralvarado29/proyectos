@@ -76,28 +76,30 @@
 
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Nombre:</span>
+                        <span class="input-group-text" id="nombre">Nombre:</span>
                     </div>
-                    <input type="text" class="form-control w-25 " id="Cname"
-                        aria-describedby="basic-addon3"
-                        placeholder="Nombre de la categoria">
+                    <label for="name"></label>
+                    <input type="text" class="form-control w-25 " id="name"
+                           aria-describedby="nombre"
+                           placeholder="Nombre de la categoria">
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon3">Descripción:</span>
+                        <span class="input-group-text" id="descripcion">Descripción:</span>
                     </div>
+                    <label for="description"></label>
                     <input type="text" class="form-control w-25 "
-                        id="Cdescription"
-                        aria-describedby="basic-addon3"
-                        placeholder="Descripción de la categoria">
+                         id="description"
+                         aria-describedby="descripcion"
+                         placeholder="Descripción de la categoria">
                 </div>
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="agregarCategorias()">Guardar
+                        <button onclick="postCategory()">Guardar
                             Categoria</button>
                     </div>
                     <div>
-                        <button onclick="traerInformacionCategorias()">
+                        <button onclick="getCategory()">
                             Consultar Categorias</button>
                     </div>
                 </div>
@@ -106,7 +108,8 @@
 
             <table id="mostrarCategorias" class="mt-4 d-flex
                 justify-content-center align-items-center table table-striped
-                table-hover">
+                table-hover" >
+                <caption id="captionCategory">Tabla de categorias de vehiculos</caption>
             </table>
             <br>
             <!-- Footer -->
@@ -115,7 +118,7 @@
                 justify-content-end position-relative">
                 <div class="container"><span class="text-muted d-flex
                         justify-content-center">Oscar Alvarado ©
-                        <script>document.write(new Date().getFullYear())</script>
+                        <script>document.write((new Date().getFullYear()).toString())</script>
                     </span></div>
             </footer>
 
