@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/html">
 
     <head>
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -11,11 +11,13 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
+                src="js/generalFunctions.js">
+        </script>
+        <script type="text/javascript"
             src="js/reportes.js">
         </script>
         <title>Alquiler de Vehiculos</title>
     </head>
-
     <body>
         <div class="container-fluid mb-5 sin-padding">
             <header id="cabeceralogo" class="container-fluid d-flex flex-wrap
@@ -82,45 +84,70 @@
                         <span class="input-group-text" id="incioR">Fecha de
                             inicio de la consulta:</span>
                     </div>
+                    <label for="rStartDate"></label>
                     <input type="date" class="form-control" id="rStartDate"
                         aria-describedby="basic-addon3">
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="devolutionDate">Fecha
-                            final
-                            de la consulta:</span>
+                            final de la consulta:</span>
                     </div>
+                    <label for="rDevolutionDate"></label>
                     <input type="date" class="form-control "
                         id="rDevolutionDate"
                         aria-describedby="basic-addon3">
                 </div>
                 <div class="input-group mb-3 ">
-                    <button onclick="traerReporteDate()"> Generar Reporte por
+                    <button onclick="getReportDate()"> Generar Reporte por
                         fecha</button>
                 </div>
 
                 <div class="input-group mb-3 ">
-                    <button onclick="traerReporteStatus()"> Generar reporte
+                    <button onclick="getReportStatus()"> Generar reporte
                         de estado de las reservas </button>
                 </div>
                 <div class="input-group mb-3 ">
-                    <button onclick="traerReporteClientes()"> Generar reporte
+                    <button onclick="getReportClients()"> Generar reporte
                         clientes y su cantidad de reservas </button>
                 </div>
-                <table id="resultadoDate" class="mt-4 d-flex
-                    justify-content-center align-items-center table
-                    table-striped
-                    table-hover"><br></table>
-                <table id="resultadoStatus" class="mt-4 d-flex
-                    justify-content-center align-items-center table
-                    table-striped
-                    table-hover"><br></table>
-                <table id="resultadoClientes" class="mt-4 d-flex
-                    justify-content-center align-items-center table
-                    table-striped
-                    table-hover"><br></table>
+            </div>
+            <table id="resultadoDate" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionReportDates">Tabla de reservaciones por
+                    fechas de consulta</caption>
+            </table>
+            <br>
+            <table id="resultadoStatus" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionReportStatus">Tabla de reservaciones por
+                    estado de las reservas</caption>
+            </table>
+            <br>
+            <table id="resultadoClientes" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionReportClients">Tabla de reservaciones por
+                    clientes</caption>
+            </table>
+        </div>
+        <br>
+        <!-- Footer -->
 
-            </body>
+        <footer class="footer mt-auto py-3 bg-light d-flex
+            justify-content-end position-relative">
+            <div class="container"><span class="text-muted d-flex
+                    justify-content-center">Oscar Alvarado ©
+                    <script>document.write((new Date().getFullYear()).toString())</script>
+                </span></div>
+        </footer>
 
-        </html>
+        <script src="js/bootstrap.js"></script>
+
+    </body>
+</html>
