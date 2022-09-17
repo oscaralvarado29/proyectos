@@ -11,6 +11,9 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
+                src="js/generalFunctions.js">
+        </script>
+        <script type="text/javascript"
             src="js/misFuncionesMensajes.js">
         </script>
         <title>Alquiler de Vehiculos</title>
@@ -78,22 +81,24 @@
             <div class="container position-relative w-50 float-left">
 
                 <div class="input-group mb-3 ">
+                    <button onclick="getDataClientAndVehicle()">
+                        Consultar clientes y vehiculos</button>
+                </div>
+                <div class="input-group mb-3 ">
                     <div class="me-2">
                         <label for="select-client">Cliente:</label>
                     </div>
                     <select name="cliente" id="select-client"></select>
-                    <script type="text/javascript">
-                        window.onload = informacionCliente();
-                    </script>
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="me-2">
                         <label for="select-vehicle" class="me-2">Vehiculo:</label>
                     </div>
                     <select name="vehicle" id="select-vehicle"></select>
-                    <script type="text/javascript">
-                        window.onload = informacionVehiculo();
-                    </script>
+                </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getDataReservations()">
+                        Consultar Reservaciones</button>
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="me-2">
@@ -101,10 +106,6 @@
                             reservaciones:</label>
                     </div>
                     <select name="reservaciones" id="select-reservation"></select>
-                </div>
-                <div>
-                    <button onclick="informacionReservaciones()">
-                        Consultar Reservaciones</button>
                 </div>
                 <div class="form-group mb-3">
                     <label for="messagetext">Comentarios:</label>
@@ -115,6 +116,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="califcacion">Califcación:</span>
                     </div>
+                    <label for="score"></label>
                     <input type="text" class="form-control " id="score"
                         aria-describedby="basic-addon3"
                         placeholder="Calfcacion del vehculo entre 0.0 y 5.0">
@@ -122,11 +124,11 @@
 
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="agregarMensaje()">Guardar
+                        <button onclick="postMessage()">Guardar
                             mensaje</button>
                     </div>
                     <div>
-                        <button onclick="listarMensajes()">
+                        <button onclick="getMessages()">
                             Consultar mensajes</button>
                     </div>
                 </div>
@@ -136,6 +138,7 @@
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
+                <caption id="captionCategory">Tabla de mensajes de los clientes</caption>
             </table>
 
         </div>
@@ -146,7 +149,7 @@
             justify-content-end position-relative">
             <div class="container"><span class="text-muted d-flex
                     justify-content-center">Oscar Alvarado ©
-                    <script>document.write(new Date().getFullYear())</script>
+                    <script>document.write((new Date().getFullYear()).toString())</script>
                 </span></div>
         </footer>
 

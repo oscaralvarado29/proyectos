@@ -9,7 +9,7 @@ function getCategory() {
             drawCategory(category);
         },
         error: function (jqXHR, exception){
-            let msgError=errorAction(jqXHR, exception)
+            let msgError=generalFunctions(jqXHR, exception)
             alert(msgError)
         }
     });
@@ -50,6 +50,10 @@ function launchDataCategory(categoryId) {
             $("#name").val(response.name);
             $("#description").val(response.description);
         },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
+        }
     });
 }
 
@@ -78,7 +82,7 @@ function postCategory() {
                 alert("La categoria "+response.name+" se ha guardado correctamente");
             },
             error: function (jqXHR, exception){
-                let msgError=errorAction(jqXHR, exception)
+                let msgError=generalFunctions(jqXHR, exception)
                 alert(msgError)
             }
         });
@@ -114,7 +118,7 @@ function putCategory(idElemento) {
                 alert("se ha Actualizado correctamente la categoria "+respuesta.name)
             },
             error: function (jqXHR, exception){
-                let msgError=errorAction(jqXHR, exception)
+                let msgError=generalFunctions(jqXHR, exception)
                 alert(msgError)
             }
         });
@@ -139,7 +143,7 @@ function deleteCategory(idElemento) {
             alert("Se ha eliminado correctamente la categoria ")
         },
         error: function (jqXHR, exception){
-            let msgError=errorAction(jqXHR, exception)
+            let msgError=generalFunctions(jqXHR, exception)
             alert(msgError)
         }
     });

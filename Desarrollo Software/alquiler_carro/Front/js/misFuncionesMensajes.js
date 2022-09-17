@@ -1,4 +1,8 @@
-function informacionCliente() {
+function getDataClientAndVehicle() {
+    getDataClients();
+    getDataVehicle();
+}
+function  getDataClients() {
 
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Client/all",
@@ -8,16 +12,19 @@ function informacionCliente() {
         success: function (respuesta) {
 
             let $select = $("#select-client");
-            $.each(respuesta, function (id, name) {
+            $.each(respuesta, function (_id, name) {
                 $select.append('<option value=' + name.idClient + '>' + name.name + '</option>');
-                console.log(" El id del cliente es" + name.idClient);
             });
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
 
     })
 }
 
-function informacionVehiculo() {
+function getDataVehicle() {
 
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Vehicle/all",
@@ -27,20 +34,23 @@ function informacionVehiculo() {
         success: function (respuesta) {
 
             let $select = $("#select-vehicle");
-            $.each(respuesta, function (id, name) {
+            $.each(respuesta, function (_id, name) {
                 $select.append('<option value=' + name.idVehicle + '>' + name.name + '</option>');
 
             });
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
 
     })
 }
 
-function informacionReservaciones() {
+function getDataReservations() {
     let idClient = +$("#select-client").val();
     let idVehicle = +$("#select-vehicle").val();
-    console.log("los id son: " + idClient + " - " + idVehicle);
-    if (idClient.length != 0 && idVehicle .length != 0) {
+    if (idClient.length !== 0 && idVehicle .length !== 0) {
         document.getElementById("select-reservation").innerHTML= "";
         $.ajax({
             //url: "http://10.0.1.5:8080/api/Client/all",
@@ -48,12 +58,14 @@ function informacionReservaciones() {
             type: "GET",
             datatype: "JSON",
             success: function (respuesta) {
-                console.log(respuesta);
                 let $select = $("#select-reservation");
                 $.each(respuesta, function (id, reservationInfo) {
-                    $select.append('<option value=' + reservationInfo.idReservation + '>' + formatDate(new Date(reservationInfo.startDate)) +" - "+ formatDate(new Date(reservationInfo.devolutionDate)) +'</option>');
-                    console.log(reservationInfo.idReservation);
+                    $select.append('<option value=' + reservationInfo.idReservation + '>' + formatDate(new Date(reservationInfo.startDate),1) +" - "+ formatDate(new Date(reservationInfo.devolutionDate),1) +'</option>');
                 });
+            },
+            error: function (jqXHR, exception){
+                let msgError=generalFunctions(jqXHR, exception)
+                alert(msgError)
             }
 
         })
@@ -62,75 +74,75 @@ function informacionReservaciones() {
     }
 }
 
-function listarMensajes() {
-    console.log("se esta ejecutando")
+function getMessages() {
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Message/all",
         url: "http://localhost:8080/api/Message/all",
         type: "GET",
         datatype: "JSON",
-        success: function (respuesta) {
-            console.log(respuesta);
-            pintarMensajes(respuesta);
+        success: function (messages) {
+            drawMessage(messages);
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
 
     })
 
 }
 
-function pintarMensajes(respuesta) {
+function drawMessage(messages) {
 
     let myTable = "<table>";
     myTable += "<th>Mensaje</th>";
     myTable += "<th>Vehiculo</th>";
     myTable += "<th>Cliente</th>";
-    myTable += "<th>Calificacion</th>";
+    myTable += "<th>Calificación</th>";
     myTable += "<th> </th>";
     myTable += "<th> </th>";
     myTable += "<th> </th>";
-    "</tr>";
-    for (i = 0; i < respuesta.length; i++) {
+    myTable += "</tr>";
+    for (const element of messages) {
         myTable += "<tr>";
-        myTable += "<td>" + respuesta[i].messageText + "</td>";
-        myTable += "<td>" + respuesta[i].vehicle.name + "</td>";
-        myTable += "<td>" + respuesta[i].client.name + "</td>";
-        myTable += "<td>" + respuesta[i].score + "</td>";
-        myTable += "<td> <button onclick='cargarDatosMensaje(" + respuesta[i].idMessage + ")'>Lanzar</button>";
-        myTable += "<td> <button onclick=' actualizarInformacionMensaje(" + respuesta[i].idMessage + ")'>Actualizar</button>";
-        myTable += "<td> <button onclick='borrarMensaje(" + respuesta[i].idMessage + ")'>Borrar</button>";
+        myTable += "<td>" + element.messageText + "</td>";
+        myTable += "<td>" + element.vehicle.name + "</td>";
+        myTable += "<td>" + element.client.name + "</td>";
+        myTable += "<td>" + element.score + "</td>";
+        myTable += "<td> <button onclick='launchDataMessage(" + element.idMessage + ")'>Lanzar</button>";
+        myTable += "<td> <button onclick=' putMessage(" + element.idMessage + ")'>Actualizar</button>";
+        myTable += "<td> <button onclick='deleteMessage(" + element.idMessage + ")'>Borrar</button>";
         myTable += "</tr>";
     }
     myTable += "</table>";
     $("#mostrarMensajes").html(myTable);
 }
 
-function cargarDatosMensaje(id) {
+function launchDataMessage(messageId) {
     $.ajax({
         dataType: 'json',
-        //url: "http://10.0.1.5:8080/api/Message/"+id,
-        url: "http://localhost:8080/api/Message/" + id,
+        //url: "http://10.0.1.5:8080/api/Message/"+messageId,
+        url: "http://localhost:8080/api/Message/" + messageId,
         type: 'GET',
 
-        success: function (response) {
-            console.log(response);
-            var item = response;
-
-            $("#messagetext").val(item.messageText);
-            $("#score").val(item.score);
+        success: function (message) {
+            $("#messagetext").val(message.messageText);
+            $("#score").val(message.score);
 
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
     });
 }
 
-function agregarMensaje() {
-    if ($("#messagetext").val().length == 0 || $("#score").val().length == 0) {
+function postMessage() {
+    if ($("#messagetext").val() === "" || $("#score").val() === "" || $("#select-client").val() === "" || $("#select-vehicle").val() === "" || $("#select-reservation").val() === "") {
 
         alert("Todos los campos son obligatorios");
     } else {
-        let datos = {
+        let messageData = {
             messageText: $("#messagetext").val(),
             vehicle: {
                 idVehicle: +$("#select-vehicle").val()
@@ -144,110 +156,96 @@ function agregarMensaje() {
             score: parseFloat( $("#score").val())
         };
 
-        console.log(datos.reservation.idReservation);
         $.ajax({
             type: 'POST',
             contentType: "application/json; charset=utf-8",
             dataType: 'JSON',
-            data: JSON.stringify(datos),
-
+            data: JSON.stringify(messageData),
             //url: "http://10.0.1.5:8080/api/Message/save",
             url: "http://localhost:8080/api/Message/save",
 
-
-            success: function (response) {
-                console.log(response);
-                console.log("Se guardo correctamente");
-                alert("Se guardo correctamente");
-                window.location.reload()
+            success: function () {
+                $("#mostrarMensajes").empty();
+                $("#messagetext").val("");
+                $("#score").val("");
+                alert("El mensaje se guardo correctamente");
 
             },
 
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert("No se guardo correctamente");
+            error: function (jqXHR, exception){
+                let msgError=generalFunctions(jqXHR, exception)
+                alert(msgError)
             }
         });
     }
 }
 
-function actualizarInformacionMensaje(idElemento) {
-    let myData = {
-        idMessage: idElemento,
-        messageText: $("#messagetext").val(),
-        vehicle: {
-            idVehicle: +$("#select-vehicle").val()
-        },
-        client: {
-            idClient: +$("#select-client").val()
-        },
-        reservation: {
-            idReservation: +$("#select-reservation").val()
-        },
-        score: parseFloat( $("#score").val())
-        };
-    console.log(myData);
-    let dataToSend = JSON.stringify(myData);
-    $.ajax({
-        //url: "http://10.0.1.5:8080/api/Message/update",
-        url: "http://localhost:8080/api/Message/update",
-        type: "PUT",
-        data: dataToSend,
-        contentType: "application/JSON",
-        datatype: "JSON",
-        success: function (respuesta) {
-            $("#mostrarMensajes").empty();
-            $("#messagetext").val("");
-            $("#score").val("");
-            listarMensajes();
-            alert("se ha Actualizado correctamente el Mensaje")
-        }
-    });
+function putMessage(idMessage) {
+    if ($("#messagetext").val() === "" || $("#score").val() === "" || $("#select-client").val() === "" || $("#select-vehicle").val() === "" || $("#select-reservation").val() === "") {
 
+        alert("Todos los campos son obligatorios");
+    } else {
+        let messageData = {
+            idMessage: idMessage,
+            messageText: $("#messagetext").val(),
+            vehicle: {
+                idVehicle: +$("#select-vehicle").val()
+            },
+            client: {
+                idClient: +$("#select-client").val()
+            },
+            reservation: {
+                idReservation: +$("#select-reservation").val()
+            },
+            score: parseFloat($("#score").val())
+        };
+        $.ajax({
+            //url: "http://10.0.1.5:8080/api/Message/update",
+            url: "http://localhost:8080/api/Message/update",
+            type: "PUT",
+            data: JSON.stringify(messageData),
+            contentType: "application/JSON",
+            datatype: "JSON",
+            success: function () {
+                $("#mostrarMensajes").empty();
+                $("#messagetext").val("");
+                $("#score").val("");
+                getMessages();
+                alert("se ha actualizado correctamente el mensaje")
+            },
+            error: function (jqXHR, exception){
+                let msgError=generalFunctions(jqXHR, exception)
+                alert(msgError)
+            }
+        });
+    }
 }
 
-function borrarMensaje(idElemento) {
-    let myData = {
-        idMessage: idElemento
+function deleteMessage(messageId) {
+    let messageData = {
+        idMessage: messageId
     };
-    let dataToSend = JSON.stringify(myData);
-    console.log(dataToSend);
     $.ajax({
         //url: "http://10.0.1.5:8080/api/Message/delete" ,
         url: "http://localhost:8080/api/Message/delete" ,
         type: "DELETE",
-        data: dataToSend,
+        data: JSON.stringify(messageData),
         contentType: "application/JSON",
         datatype: "JSON",
-        success: function (respuesta) {
+        success: function () {
             $("#mostrarMensajes").empty();
-            listarMensajes();
-            alert("Se ha eliminado correctamente")
+            $("#messagetext").val("");
+            $("#score").val("");
+            getMessages();
+            alert("Se ha eliminado el mensaje correctamente")
         },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("No se elimino el mensaje");
+
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
 
     });
 
 }
 
-function  formatDate (date) {
-    let day = date.getDate() + 1;
-    let month = (date.getMonth() + 1);
-    let year = date.getFullYear();
-    let formatted_date;
-    let dayString;
-    let monthString;
-    if (day <10){
-        dayString = "0" + day.toString()
-    }else{
-        dayString = day.toString()
-    }
-    if (month <10){
-        monthString = "0" + month.toString()
-    }else{
-        monthString = month.toString()
-    }
-    formatted_date = dayString +"-" + monthString +"-" +year;
-    return formatted_date;
-}

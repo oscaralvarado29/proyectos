@@ -8,7 +8,7 @@ function getClient() {
             drawInfoClients(clients);
         },
         error: function (jqXHR, exception){
-            let msgError=errorAction(jqXHR, exception)
+            let msgError=generalFunctions(jqXHR, exception)
             alert(msgError)
         }
     })
@@ -55,6 +55,10 @@ function launchDataClient(clientId) {
             $("#name").val(response.name);
             $("#email").val(response.email);
             $("#age").val(response.age);
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
         }
     });
 }
@@ -85,7 +89,7 @@ function postClient() {
             },
 
             error: function (jqXHR, exception){
-                let msgError=errorAction(jqXHR, exception)
+                let msgError=generalFunctions(jqXHR, exception)
                 alert(msgError)
             }
         });
@@ -117,7 +121,7 @@ function putClient(idElemento) {
                 getClient()
             },
             error: function (jqXHR, exception){
-                let msgError=errorAction(jqXHR, exception)
+                let msgError=generalFunctions(jqXHR, exception)
                 alert(msgError)
             }
         });
@@ -144,7 +148,7 @@ function deleteClient(idElemento) {
             getClient();
         },
         error: function (jqXHR, exception){
-            let msgError=errorAction(jqXHR, exception)
+            let msgError=generalFunctions(jqXHR, exception)
             alert(msgError)
         }
     });
