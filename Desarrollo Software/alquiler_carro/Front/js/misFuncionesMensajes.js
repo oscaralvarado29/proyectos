@@ -59,7 +59,7 @@ function getDataReservations() {
             datatype: "JSON",
             success: function (respuesta) {
                 let $select = $("#select-reservation");
-                $.each(respuesta, function (id, reservationInfo) {
+                $.each(respuesta, function (_id, reservationInfo) {
                     $select.append('<option value=' + reservationInfo.idReservation + '>' + formatDate(new Date(reservationInfo.startDate),1) +" - "+ formatDate(new Date(reservationInfo.devolutionDate),1) +'</option>');
                 });
             },
