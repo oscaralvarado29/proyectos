@@ -11,6 +11,9 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
+                src="js/errorAction.js">
+        </script>
+        <script type="text/javascript"
             src="js/misFuncionesClientes.js">
         </script>
         <title>Alquiler de Vehiculos</title>
@@ -81,14 +84,16 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="nombre">Nombre:</span>
                     </div>
+                    <label for="name"></label>
                     <input type="text" class="form-control" id="name"
-                        aria-describedby="basic-addon3"
-                        placeholder="Nombre del cliente">
+                         aria-describedby="basic-addon3"
+                         placeholder="Nombre del cliente">
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="edad">Edad:</span>
                     </div>
+                    <label for="age"></label>
                     <input type="text" class="form-control "
                         id="age"
                         aria-describedby="basic-addon3"
@@ -98,6 +103,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="correo">Email:</span>
                     </div>
+                    <label for="email"></label>
                     <input type="text" class="form-control " id="email"
                         aria-describedby="basic-addon3"
                         placeholder="Email del cliente">
@@ -105,11 +111,11 @@
 
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="agregarCliente()">Guardar
+                        <button onclick="postClient()">Guardar
                             cliente</button>
                     </div>
                     <div>
-                        <button onclick="traerInformacionClientes()">
+                        <button onclick="getClient()">
                             Consultar Clientes</button>
                     </div>
                 </div>
@@ -119,6 +125,7 @@
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
+                <caption id="captionCategory">Tabla de vehiculos para alquilar</caption>
             </table>
 
         </div>
@@ -129,7 +136,7 @@
             justify-content-end position-relative">
             <div class="container"><span class="text-muted d-flex
                     justify-content-center">Oscar Alvarado ©
-                    <script>document.write(new Date().getFullYear())</script>
+                    <script>document.write((new Date().getFullYear()).toString())</script>
                 </span></div>
         </footer>
 
