@@ -36,11 +36,60 @@ function  formatDate (date,version) {
         monthString = month.toString()
     }
 
-    if (version == 1) {
+    if (    version === 1) {
         formatted_date = dayString +"-" + monthString +"-" +year;
     }    else {
         formatted_date = year +"-" + monthString +"-" + dayString;
 
     }
     return formatted_date;
+}
+
+function getDataClientAndVehicle() {
+    getDataClients();
+    getDataVehicle();
+}
+function  getDataClients() {
+
+    $.ajax({
+        //url: "http://10.0.1.5:8080/api/Client/all",
+        url: "http://localhost:8080/api/Client/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function (respuesta) {
+
+            let $select = $("#select-client");
+            $.each(respuesta, function (_id, name) {
+                $select.append('<option value=' + name.idClient + '>' + name.name + '</option>');
+            });
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
+        }
+
+    })
+}
+
+function getDataVehicle() {
+
+    $.ajax({
+        //url: "http://10.0.1.5:8080/api/Vehicle/all",
+        url: "http://localhost:8080/api/Vehicle/all",
+        type: "GET",
+        datatype: "JSON",
+        success: function (respuesta) {
+
+            let $select = $("#select-vehicle");
+            $.each(respuesta, function (_id, name) {
+                $select.append('<option value=' + name.idVehicle + '>' + name.name + '</option>');
+
+            });
+        },
+        error: function (jqXHR, exception){
+            let msgError=generalFunctions(jqXHR, exception)
+            alert(msgError)
+        }
+
+    })
 }
