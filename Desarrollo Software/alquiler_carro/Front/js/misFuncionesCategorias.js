@@ -17,26 +17,26 @@ function getCategory() {
 
 function drawCategory(category) {
 
-    let myTable = "<table>";
-    myTable += "<th>Nombre</th>";
-    myTable += "<th>Descripción</th>";
-    myTable += "<th>Cantidad de vehiculos</th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "</tr>";
+    let tableCategory = "<table>";
+    tableCategory += "<th>Nombre</th>";
+    tableCategory += "<th>Descripción</th>";
+    tableCategory += "<th>Cantidad de vehiculos</th>";
+    tableCategory += "<th> </th>";
+    tableCategory += "<th> </th>";
+    tableCategory += "<th> </th>";
+    tableCategory += "</tr>";
     for (const element of category) {
-        myTable += "<tr>";
-        myTable += "<td>" + element.name + "</td>";
-        myTable += "<td>" + element.description + "</td>";
-        myTable += "<td>" + element.vehicle.length + "</td>";
-        myTable += '<td><button  onclick="launchDataCategory(' + element.idCategory + ')">Lanzar</button></td>';
-        myTable += "<td> <button onclick=' putCategory(" + element.idCategory + ")'>Actualizar</button>";
-        myTable += "<td> <button onclick='deleteCategory(" + element.idCategory + ")'>Borrar</button>";
-        myTable += "</tr>";
+        tableCategory += "<tr>";
+        tableCategory += "<td>" + element.name + "</td>";
+        tableCategory += "<td>" + element.description + "</td>";
+        tableCategory += "<td>" + element.vehicle.length + "</td>";
+        tableCategory += '<td><button  onclick="launchDataCategory(' + element.idCategory + ')">Lanzar</button></td>';
+        tableCategory += "<td> <button onclick=' putCategory(" + element.idCategory + ")'>Actualizar</button>";
+        tableCategory += "<td> <button onclick='deleteCategory(" + element.idCategory + ")'>Borrar</button>";
+        tableCategory += "</tr>";
     }
-    myTable += "</table>";
-    $("#mostrarCategorias").html(myTable);
+    tableCategory += "</table>";
+    $("#mostrarCategorias").html(tableCategory);
 }
 
 function launchDataCategory(categoryId) {

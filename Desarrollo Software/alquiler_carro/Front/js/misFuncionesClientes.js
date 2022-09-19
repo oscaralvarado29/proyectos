@@ -16,32 +16,32 @@ function getClient() {
 
 function drawInfoClients(clients) {
 
-    let myTable = "<table>";
-    myTable += "<th>Nombre</th>";
-    myTable += "<th>Email</th>";
-    myTable += "<th>Edad</th>";
-    myTable += "<th>Mensajes</th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "</tr>";
+    let tableClients = "<table>";
+    tableClients += "<th>Nombre</th>";
+    tableClients += "<th>Email</th>";
+    tableClients += "<th>Edad</th>";
+    tableClients += "<th>Mensajes</th>";
+    tableClients += "<th> </th>";
+    tableClients += "<th> </th>";
+    tableClients += "<th> </th>";
+    tableClients += "</tr>";
     for (const element of clients) {
-        myTable += "<tr>";
-        myTable += "<td>" + element.name + "</td>";
-        myTable += "<td>" + element.email + "</td>";
-        myTable += "<td>" + element.age + "</td>";
+        tableClients += "<tr>";
+        tableClients += "<td>" + element.name + "</td>";
+        tableClients += "<td>" + element.email + "</td>";
+        tableClients += "<td>" + element.age + "</td>";
         if (typeof element.messages.messageText === 'undefined'){
-            myTable += "<td>" + "Ninguno" + "</td>";
+            tableClients += "<td>" + "Ninguno" + "</td>";
         } else {
-            myTable += "<td>" + element.messages.messageText + "</td>";
+            tableClients += "<td>" + element.messages.messageText + "</td>";
         }
-        myTable += '<td><button  onclick="launchDataClient(' + element.idClient + ')">Lanzar</button></td>';
-        myTable += "<td> <button onclick=' putClient(" + element.idClient + ")'>Actualizar</button>";
-        myTable += "<td> <button onclick='deleteClient(" + element.idClient + ")'>Borrar</button>";
-        myTable += "</tr>";
+        tableClients += '<td><button  onclick="launchDataClient(' + element.idClient + ')">Lanzar</button></td>';
+        tableClients += "<td> <button onclick=' putClient(" + element.idClient + ")'>Actualizar</button>";
+        tableClients += "<td> <button onclick='deleteClient(" + element.idClient + ")'>Borrar</button>";
+        tableClients += "</tr>";
     }
-    myTable += "</table>";
-    $("#mostrarClientes").html(myTable);
+    tableClients += "</table>";
+    $("#mostrarClientes").html(tableClients);
 }
 
 function launchDataClient(clientId) {

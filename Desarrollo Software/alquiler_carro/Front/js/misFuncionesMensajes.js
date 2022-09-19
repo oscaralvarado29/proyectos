@@ -1,52 +1,3 @@
-function getDataClientAndVehicle() {
-    getDataClients();
-    getDataVehicle();
-}
-function  getDataClients() {
-
-    $.ajax({
-        //url: "http://10.0.1.5:8080/api/Client/all",
-        url: "http://localhost:8080/api/Client/all",
-        type: "GET",
-        datatype: "JSON",
-        success: function (respuesta) {
-
-            let $select = $("#select-client");
-            $.each(respuesta, function (_id, name) {
-                $select.append('<option value=' + name.idClient + '>' + name.name + '</option>');
-            });
-        },
-        error: function (jqXHR, exception){
-            let msgError=generalFunctions(jqXHR, exception)
-            alert(msgError)
-        }
-
-    })
-}
-
-function getDataVehicle() {
-
-    $.ajax({
-        //url: "http://10.0.1.5:8080/api/Vehicle/all",
-        url: "http://localhost:8080/api/Vehicle/all",
-        type: "GET",
-        datatype: "JSON",
-        success: function (respuesta) {
-
-            let $select = $("#select-vehicle");
-            $.each(respuesta, function (_id, name) {
-                $select.append('<option value=' + name.idVehicle + '>' + name.name + '</option>');
-
-            });
-        },
-        error: function (jqXHR, exception){
-            let msgError=generalFunctions(jqXHR, exception)
-            alert(msgError)
-        }
-
-    })
-}
-
 function getDataReservations() {
     let idClient = +$("#select-client").val();
     let idVehicle = +$("#select-vehicle").val();
@@ -94,28 +45,28 @@ function getMessages() {
 
 function drawMessage(messages) {
 
-    let myTable = "<table>";
-    myTable += "<th>Mensaje</th>";
-    myTable += "<th>Vehiculo</th>";
-    myTable += "<th>Cliente</th>";
-    myTable += "<th>Calificación</th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "<th> </th>";
-    myTable += "</tr>";
+    let tableessages = "<table>";
+    tableessages += "<th>Mensaje</th>";
+    tableessages += "<th>Vehiculo</th>";
+    tableessages += "<th>Cliente</th>";
+    tableessages += "<th>Calificación</th>";
+    tableessages += "<th> </th>";
+    tableessages += "<th> </th>";
+    tableessages += "<th> </th>";
+    tableessages += "</tr>";
     for (const element of messages) {
-        myTable += "<tr>";
-        myTable += "<td>" + element.messageText + "</td>";
-        myTable += "<td>" + element.vehicle.name + "</td>";
-        myTable += "<td>" + element.client.name + "</td>";
-        myTable += "<td>" + element.score + "</td>";
-        myTable += "<td> <button onclick='launchDataMessage(" + element.idMessage + ")'>Lanzar</button>";
-        myTable += "<td> <button onclick=' putMessage(" + element.idMessage + ")'>Actualizar</button>";
-        myTable += "<td> <button onclick='deleteMessage(" + element.idMessage + ")'>Borrar</button>";
-        myTable += "</tr>";
+        tableessages += "<tr>";
+        tableessages += "<td>" + element.messageText + "</td>";
+        tableessages += "<td>" + element.vehicle.name + "</td>";
+        tableessages += "<td>" + element.client.name + "</td>";
+        tableessages += "<td>" + element.score + "</td>";
+        tableessages += "<td> <button onclick='launchDataMessage(" + element.idMessage + ")'>Lanzar</button>";
+        tableessages += "<td> <button onclick=' putMessage(" + element.idMessage + ")'>Actualizar</button>";
+        tableessages += "<td> <button onclick='deleteMessage(" + element.idMessage + ")'>Borrar</button>";
+        tableessages += "</tr>";
     }
-    myTable += "</table>";
-    $("#mostrarMensajes").html(myTable);
+    tableessages += "</table>";
+    $("#mostrarMensajes").html(tableessages);
 }
 
 function launchDataMessage(messageId) {

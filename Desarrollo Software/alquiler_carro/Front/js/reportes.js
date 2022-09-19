@@ -20,36 +20,36 @@ function getReportDate() {
 
 function drawReportDates(reportDate) {
 
-    let myTable = "<table>";
-    myTable += "<tr>";
-    myTable += "<th>Fecha Inicio</th>";
-    myTable += "<th>Fecha Devolucion</th>";
-    myTable += "<th>Estado</th>";
-    myTable += "<th>Cliente</th>";
-    myTable += "<th>Vehiculo</th>";
-    myTable += "<th>Mensaje</th>";
-    myTable += "<th>Califcación</th>";
-    myTable += "</tr>";
+    let tableReportDate = "<table>";
+    tableReportDate += "<tr>";
+    tableReportDate += "<th>Fecha Inicio</th>";
+    tableReportDate += "<th>Fecha Devolucion</th>";
+    tableReportDate += "<th>Estado</th>";
+    tableReportDate += "<th>Cliente</th>";
+    tableReportDate += "<th>Vehiculo</th>";
+    tableReportDate += "<th>Mensaje</th>";
+    tableReportDate += "<th>Califcación</th>";
+    tableReportDate += "</tr>";
 
     for (const element of reportDate) {
         
-        myTable += "<tr>";
-        myTable += "<td>" + formatDate(new Date(element.startDate),1) + "</td>";
-        myTable += "<td>" + formatDate(new Date(element.devolutionDate),1) + "</td>";
-        myTable += "<td>" + element.status + "</td>";
-        myTable += "<td>" + element.client.name + "</td>";
-        myTable += "<td>" + element.vehicle.name + "</td>";
+        tableReportDate += "<tr>";
+        tableReportDate += "<td>" + formatDate(new Date(element.startDate),1) + "</td>";
+        tableReportDate += "<td>" + formatDate(new Date(element.devolutionDate),1) + "</td>";
+        tableReportDate += "<td>" + element.status + "</td>";
+        tableReportDate += "<td>" + element.client.name + "</td>";
+        tableReportDate += "<td>" + element.vehicle.name + "</td>";
         if(element.messages.length !== 0){
-            myTable += "<td>" + element.messages[0].messageText + "</td>";
-            myTable += "<td>" + element.messages[0].score + "</td>";
+            tableReportDate += "<td>" + element.messages[0].messageText + "</td>";
+            tableReportDate += "<td>" + element.messages[0].score + "</td>";
         }else{
-            myTable += "<td>" + "No hay mensajes" + "</td>";
-            myTable += "<td>" + "No hay calificación" + "</td>";
+            tableReportDate += "<td>" + "No hay mensajes" + "</td>";
+            tableReportDate += "<td>" + "No hay calificación" + "</td>";
         }
-        myTable += "</tr>";
+        tableReportDate += "</tr>";
     }
-    myTable += "</table>";
-    $("#resultadoDate").html(myTable);
+    tableReportDate += "</table>";
+    $("#resultadoDate").html(tableReportDate);
 }
 
 function getReportStatus() {
@@ -71,15 +71,15 @@ function getReportStatus() {
 function drawReportStatus(reportStatus) {
 
 
-    let myTable = "<table>";
-    myTable += "<tr>";
-    myTable += "<th>completadas</th>";
-    myTable += "<td>" + reportStatus.completed + "</td>";
-    myTable += "<th>canceladas</th>";
-    myTable += "<td>" + reportStatus.cancelled + "</td>";
-    myTable += "</tr>";
-    myTable += "</table>";
-    $("#resultadoStatus").html(myTable);
+    let tableReportStatus = "<table>";
+    tableReportStatus += "<tr>";
+    tableReportStatus += "<th>completadas</th>";
+    tableReportStatus += "<td>" + reportStatus.completed + "</td>";
+    tableReportStatus += "<th>canceladas</th>";
+    tableReportStatus += "<td>" + reportStatus.cancelled + "</td>";
+    tableReportStatus += "</tr>";
+    tableReportStatus += "</table>";
+    $("#resultadoStatus").html(tableReportStatus);
 }
 
 
@@ -101,17 +101,17 @@ function getReportClients() {
 
 function drawReportClients(reportClients) {
 
-    let myTable = "<table>";
-    myTable += "<th>Cantdad de reservas</th>";
-    myTable += "<th>Cliente</th>";
-    myTable += "<tr>";
+    let tableReportClients = "<table>";
+    tableReportClients += "<th>Cantdad de reservas</th>";
+    tableReportClients += "<th>Cliente</th>";
+    tableReportClients += "<tr>";
 
     for (const element of reportClients) {
         
-        myTable += "<td>" + element.total + "</td>";
-        myTable += "<td>" + element.client.name + "</td>";
-        myTable += "</tr>";
+        tableReportClients += "<td>" + element.total + "</td>";
+        tableReportClients += "<td>" + element.client.name + "</td>";
+        tableReportClients += "</tr>";
     }
-    myTable += "</table>";
-    $("#resultadoClientes").html(myTable);
+    tableReportClients += "</table>";
+    $("#resultadoClientes").html(tableReportClients);
 }
