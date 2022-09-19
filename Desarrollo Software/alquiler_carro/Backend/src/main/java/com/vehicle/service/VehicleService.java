@@ -82,6 +82,9 @@ public class VehicleService {
                 if (vehicle.getSeating() != null) {
                     vehicleUpdate.get().setSeating(vehicle.getSeating());
                 }
+                if (vehicle.getCategory() != null) {
+                    vehicleUpdate.get().setCategory(vehicle.getCategory());
+                }
                 return vehicleRepository.save(vehicleUpdate.get());
             }
         }

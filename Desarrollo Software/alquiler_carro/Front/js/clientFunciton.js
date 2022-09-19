@@ -163,8 +163,8 @@ function deleteClient (idElemento) {
 }
 
 function cleanFieldsClient () {
-  $('#email').val(' ')
-  $('#name').val(' ')
-  $('#age').val(' ')
+  $('#email').val('')
+  $('#name').val('')
+  $('#age').val('')
   $('#mostrarClientes').empty()
 }

@@ -178,6 +178,7 @@ function putVehicle (vehicleId) {
         idCategory: +$('#select-category').val()
       }
     }
+    console.log(vehicleData)
     $.ajax({
       datatype: 'json',
       data: JSON.stringify(vehicleData),
