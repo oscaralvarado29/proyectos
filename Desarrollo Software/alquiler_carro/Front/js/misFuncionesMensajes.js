@@ -116,9 +116,7 @@ function postMessage() {
             url: "http://localhost:8080/api/Message/save",
 
             success: function () {
-                $("#mostrarMensajes").empty();
-                $("#messagetext").val("");
-                $("#score").val("");
+                cleanFieldsMessage();
                 alert("El mensaje se guardo correctamente");
 
             },
@@ -158,9 +156,7 @@ function putMessage(idMessage) {
             contentType: "application/JSON",
             datatype: "JSON",
             success: function () {
-                $("#mostrarMensajes").empty();
-                $("#messagetext").val("");
-                $("#score").val("");
+                cleanFieldsMessage();
                 getMessages();
                 alert("se ha actualizado correctamente el mensaje")
             },
@@ -184,9 +180,7 @@ function deleteMessage(messageId) {
         contentType: "application/JSON",
         datatype: "JSON",
         success: function () {
-            $("#mostrarMensajes").empty();
-            $("#messagetext").val("");
-            $("#score").val("");
+            cleanFieldsMessage();
             getMessages();
             alert("Se ha eliminado el mensaje correctamente")
         },
@@ -200,3 +194,8 @@ function deleteMessage(messageId) {
 
 }
 
+function cleanFieldsMessage() {
+    $("#mostrarMensajes").empty();
+    $("#messagetext").val("");
+    $("#score").val("");
+}

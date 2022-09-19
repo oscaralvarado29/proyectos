@@ -11,6 +11,9 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
+                src="js/generalFunctions.js">
+        </script>
+        <script type="text/javascript"
             src="js/misFuncionesVehiculos.js">
         </script>
         <title>Alquiler de Vehiculos</title>
@@ -81,6 +84,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="nombre">Nombre:</span>
                     </div>
+                    <label for="name"></label>
                     <input type="text" class="form-control" id="name"
                         aria-describedby="basic-addon3"
                         placeholder="Nombre del vehiculo">
@@ -89,6 +93,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="spanColor">Color:</span>
                     </div>
+                    <label for="color"></label>
                     <input type="text" class="form-control "
                         id="color"
                         aria-describedby="basic-addon3"
@@ -98,6 +103,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="marca">Marca:</span>
                     </div>
+                    <label for="brand"></label>
                     <input type="text" class="form-control " id="brand"
                         aria-describedby="basic-addon3"
                         placeholder="Marca del vehiculo">
@@ -106,6 +112,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="modelo">Modelo:</span>
                     </div>
+                    <label for="model"></label>
                     <input type="text" class="form-control " id="model"
                         aria-describedby="basic-addon3"
                         placeholder="Modelo del vehiculo">
@@ -115,6 +122,7 @@
                         <span class="input-group-text" id="caballosFuerza">Caballos
                             de fuerza:</span>
                     </div>
+                    <label for="horsePower"></label>
                     <input type="text" class="form-control "
                         id="horsePower"
                         aria-describedby="basic-addon3"
@@ -125,6 +133,7 @@
                         <span class="input-group-text" id="cilindrosMotor">Cilindros
                             del motor:</span>
                     </div>
+                    <label for="engineCylinders"></label>
                     <input type="text" class="form-control "
                         id="engineCylinders"
                         aria-describedby="basic-addon3"
@@ -135,26 +144,28 @@
                         <span class="input-group-text" id="puestos">Cantidad de
                             puestos:</span>
                     </div>
+                    <label for="seating"></label>
                     <input type="text" class="form-control " id="seating"
                         aria-describedby="basic-addon3"
                         placeholder="Cantidad de puestos del vehiculo">
+                </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getCategories()">
+                        Consultar categorias</button>
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="me-2">
                         <label for="select-category">Categoria:</label>
                     </div>
                     <select id="select-category" class="mb-3"></select>
-                    <script type="text/javascript">
-                        window.onload = autoInicioCategoria();
-                    </script>
                 </div>
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="agregarVehiculo()">Guardar
+                        <button onclick="postVehicle()">Guardar
                             vehiculo</button>
                     </div>
                     <div>
-                        <button onclick="traerInformacionVehiculo()">
+                        <button onclick="getVehicles()">
                             Consultar vehiculos</button>
                     </div>
                 </div>
@@ -164,6 +175,7 @@
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
+                <caption id="captionVehicle">Tabla de vehiculos</caption>
             </table>
 
         </div>
@@ -174,7 +186,7 @@
             justify-content-end position-relative">
             <div class="container"><span class="text-muted d-flex
                     justify-content-center">Oscar Alvarado ©
-                    <script>document.write(new Date().getFullYear())</script>
+                    <script>document.write((new Date().getFullYear()).toString())</script>
                 </span></div>
         </footer>
 

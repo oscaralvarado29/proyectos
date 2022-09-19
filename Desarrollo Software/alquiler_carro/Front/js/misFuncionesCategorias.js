@@ -77,8 +77,7 @@ function postCategory() {
 
 
             success: function (response) {
-                $("#name").val("");
-                $("#description").val("");
+                cleanFieldsCategory();
                 alert("La categoria "+response.name+" se ha guardado correctamente");
             },
             error: function (jqXHR, exception){
@@ -111,9 +110,7 @@ function putCategory(idElemento) {
             contentType: "application/JSON",
             datatype: "JSON",
             success: function (respuesta) {
-                $("#mostrarCategorias").empty();
-                $("#name").val("");
-                $("#description").val("");
+                cleanFieldsCategory();
                 getCategory();
                 alert("se ha Actualizado correctamente la categoria "+respuesta.name)
             },
@@ -138,7 +135,7 @@ function deleteCategory(idElemento) {
         contentType: "application/JSON",
         datatype: "JSON",
         success: function () {
-            $("#mostrarCategorias").empty();
+            cleanFieldsCategory();
             getCategory();
             alert("Se ha eliminado correctamente la categoria ")
         },
@@ -148,4 +145,10 @@ function deleteCategory(idElemento) {
         }
     });
 
+}
+
+function cleanFieldsCategory() {
+    $("#mostrarCategorias").empty();
+    $("#name").val("");
+    $("#description").val("");
 }

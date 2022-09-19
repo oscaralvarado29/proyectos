@@ -90,10 +90,7 @@ function postReservation() {
             datatype: "json",
 
             success: function () {
-                $("#mostrarReservas").empty();
-                $("#startDate").val("");
-                $("#devolutionDate").val("");
-                $("#status").val("");
+                cleanFieldsReservation();
                 alert("La reserva se ha guardado correctamente")
             },
             error: function (jqXHR, exception){
@@ -130,11 +127,9 @@ function putReservation(reservationId) {
             type: "PUT",
 
             success: function () {
-                $("#startDate").val("");
-                $("#devolutionDate").val("");
-                $("#status").val("");
-                alert("La reserva se ha actualizado correctamente")
+                cleanFieldsReservation();
                 getReservation();
+                alert("La reserva se ha actualizado correctamente")
             },
             error: function (jqXHR, exception){
                 let msgError=generalFunctions(jqXHR, exception)
@@ -156,9 +151,9 @@ function deleteReservation(reservationId) {
         type: 'DELETE',
         contentType: "application/JSON",
         success: function () {
-            $("#mostrarReservas").empty();
-            alert("La reserva se ha eliminado correctamente")
+            cleanFieldsReservation();
             getReservation();
+            alert("La reserva se ha eliminado correctamente")
 
         },
         error: function (jqXHR, exception){
@@ -166,4 +161,11 @@ function deleteReservation(reservationId) {
             alert(msgError)
         }
     });
+}
+
+function cleanFieldsReservation() {
+    $("#mostrarReservas").empty();
+    $("#startDate").val("");
+    $("#devolutionDate").val("");
+    $("#status").val("");
 }

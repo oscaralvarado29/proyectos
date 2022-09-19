@@ -81,9 +81,7 @@ function postClient() {
             //url: "http://10.0.1.5:8080/api/Client/save",
             url: "http://localhost:8080/api/Client/save",
             success: function (response) {
-                $("#email").val(" ");
-                $("#name").val(" ");
-                $("#age").val(" ");
+                cleanFieldsClient();
                 alert("El cliente "+response.name + " se guardo correctamente");
 
             },
@@ -114,11 +112,10 @@ function putClient(idElemento) {
             contentType: "application/JSON",
             datatype: "JSON",
             success: function (respuesta) {
-                $("#email").val(" ");
-                $("#name").val(" ");
-                $("#age").val(" ");
+                cleanFieldsClient();
+                getClient();
                 alert("Se ha actualizado correctamente el cliente "+respuesta.name)
-                getClient()
+
             },
             error: function (jqXHR, exception){
                 let msgError=generalFunctions(jqXHR, exception)
@@ -140,12 +137,10 @@ function deleteClient(idElemento) {
         contentType: "application/JSON",
         datatype: "JSON",
         success: function () {
-            $("#mostrarClientes").empty();
-            alert("El cliente se ha eliminado correctamente")
-            $("#email").val(" ");
-            $("#name").val(" ");
-            $("#age").val(" ");
+            cleanFieldsClient();
             getClient();
+            alert("El cliente se ha eliminado correctamente")
+
         },
         error: function (jqXHR, exception){
             let msgError=generalFunctions(jqXHR, exception)
@@ -153,4 +148,11 @@ function deleteClient(idElemento) {
         }
     });
 
+}
+
+function cleanFieldsClient() {
+    $("#email").val(" ");
+    $("#name").val(" ");
+    $("#age").val(" ");
+    $("#mostrarClientes").empty();
 }
