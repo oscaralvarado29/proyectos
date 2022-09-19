@@ -14,7 +14,7 @@
                 src="js/generalFunctions.js">
         </script>
         <script type="text/javascript"
-            src="js/misFuncionesVehiculos.js">
+            src="js/messageFunciton.js">
         </script>
         <title>Alquiler de Vehiculos</title>
     </head>
@@ -25,7 +25,7 @@
                 py-3 mb-3 border-bottom sin-padding" style="background-color:
                 #b813ce">
                 <div class="container text-light ">
-                    <h1>Vehiculos </h1>
+                    <h1>Mensajes </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
@@ -46,32 +46,32 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Categorias.html">Categorias</a>
+                                        href="categories.html">Categorias</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Vehiculos.html">Vehiculos</a>
+                                        href="Vehicles.html">Vehiculos</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Clientes.html">Clientes</a>
+                                        href="clients.html">Clientes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reservaciones.html">Reservaciones</a>
+                                        href="reservations.html">Reservaciones</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Mensajes.html">Mensajes</a>
+                                        href="messages.html">Mensajes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reportes.html">Reportes</a>
+                                        href="reports.html">Reportes</a>
                                 </li>
                             </ul>
                         </div>
@@ -81,101 +81,64 @@
             <div class="container position-relative w-50 float-left">
 
                 <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="nombre">Nombre:</span>
-                    </div>
-                    <label for="name"></label>
-                    <input type="text" class="form-control" id="name"
-                        aria-describedby="basic-addon3"
-                        placeholder="Nombre del vehiculo">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="spanColor">Color:</span>
-                    </div>
-                    <label for="color"></label>
-                    <input type="text" class="form-control "
-                        id="color"
-                        aria-describedby="basic-addon3"
-                        placeholder="Color del vehiiculo">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="marca">Marca:</span>
-                    </div>
-                    <label for="brand"></label>
-                    <input type="text" class="form-control " id="brand"
-                        aria-describedby="basic-addon3"
-                        placeholder="Marca del vehiculo">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="modelo">Modelo:</span>
-                    </div>
-                    <label for="model"></label>
-                    <input type="text" class="form-control " id="model"
-                        aria-describedby="basic-addon3"
-                        placeholder="Modelo del vehiculo">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="caballosFuerza">Caballos
-                            de fuerza:</span>
-                    </div>
-                    <label for="horsePower"></label>
-                    <input type="text" class="form-control "
-                        id="horsePower"
-                        aria-describedby="basic-addon3"
-                        placeholder="Caballos de fuerza del motor">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="cilindrosMotor">Cilindros
-                            del motor:</span>
-                    </div>
-                    <label for="engineCylinders"></label>
-                    <input type="text" class="form-control "
-                        id="engineCylinders"
-                        aria-describedby="basic-addon3"
-                        placeholder="Cilindros del motor">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="puestos">Cantidad de
-                            puestos:</span>
-                    </div>
-                    <label for="seating"></label>
-                    <input type="text" class="form-control " id="seating"
-                        aria-describedby="basic-addon3"
-                        placeholder="Cantidad de puestos del vehiculo">
-                </div>
-                <div class="input-group mb-3 ">
-                    <button onclick="getCategories()">
-                        Consultar categorias</button>
+                    <button onclick="getDataClientAndVehicle()">
+                        Consultar clientes y vehiculos</button>
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="me-2">
-                        <label for="select-category">Categoria:</label>
+                        <label for="select-client">Cliente:</label>
                     </div>
-                    <select id="select-category" class="mb-3"></select>
+                    <select name="cliente" id="select-client"></select>
                 </div>
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-vehicle" class="me-2">Vehiculo:</label>
+                    </div>
+                    <select name="vehicle" id="select-vehicle"></select>
+                </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getDataReservations()">
+                        Consultar Reservaciones</button>
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-reservation">Fechas de
+                            reservaciones:</label>
+                    </div>
+                    <select name="reservaciones" id="select-reservation"></select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="messagetext">Comentarios:</label>
+                    <textarea class="form-control" id="messagetext" rows="3"></textarea>
+                </div>
+
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="califcacion">Califcación:</span>
+                    </div>
+                    <label for="score"></label>
+                    <input type="text" class="form-control " id="score"
+                        aria-describedby="basic-addon3"
+                        placeholder="Calfcacion del vehculo entre 0.0 y 5.0">
+                </div>
+
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="postVehicle()">Guardar
-                            vehiculo</button>
+                        <button onclick="postMessage()">Guardar
+                            mensaje</button>
                     </div>
                     <div>
-                        <button onclick="getVehicles()">
-                            Consultar vehiculos</button>
+                        <button onclick="getMessages()">
+                            Consultar mensajes</button>
                     </div>
                 </div>
             </div>
 
-            <table id="mostrarVehiculos" class="mt-4 d-flex
+            <table id="mostrarMensajes" class="mt-4 d-flex
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
-                <caption id="captionVehicle">Tabla de vehiculos</caption>
+                <caption id="captionMessage">Tabla de mensajes de los clientes</caption>
             </table>
 
         </div>

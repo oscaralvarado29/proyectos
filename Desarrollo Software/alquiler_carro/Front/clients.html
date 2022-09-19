@@ -8,9 +8,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="js/generalFunctions.js"></script>
-        <script type="text/javascript" src="js/misFuncionesCategorias.js"></script>
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+        </script>
+        <script type="text/javascript"
+                src="js/generalFunctions.js">
+        </script>
+        <script type="text/javascript"
+            src="js/clientFunciton.js">
+        </script>
         <title>Alquiler de Vehiculos</title>
     </head>
 
@@ -20,7 +25,7 @@
                 py-3 mb-3 border-bottom sin-padding" style="background-color:
                 #b813ce">
                 <div class="container text-light ">
-                    <h1>Categorias </h1>
+                    <h1>Clientes </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
@@ -41,32 +46,32 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Categorias.html">Categorias</a>
+                                        href="categories.html">Categorias</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Vehiculos.html">Vehiculos</a>
+                                        href="Vehicles.html">Vehiculos</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Clientes.html">Clientes</a>
+                                        href="clients.html">Clientes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reservaciones.html">Reservaciones</a>
+                                        href="reservations.html">Reservaciones</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Mensajes.html">Mensajes</a>
+                                        href="messages.html">Mensajes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reportes.html">Reportes</a>
+                                        href="reports.html">Reportes</a>
                                 </li>
                             </ul>
                         </div>
@@ -80,51 +85,62 @@
                         <span class="input-group-text" id="nombre">Nombre:</span>
                     </div>
                     <label for="name"></label>
-                    <input type="text" class="form-control w-25 " id="name"
-                           aria-describedby="nombre"
-                           placeholder="Nombre de la categoria">
+                    <input type="text" class="form-control" id="name"
+                         aria-describedby="basic-addon3"
+                         placeholder="Nombre del cliente">
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="descripcion">Descripción:</span>
+                        <span class="input-group-text" id="edad">Edad:</span>
                     </div>
-                    <label for="description"></label>
-                    <input type="text" class="form-control w-25 "
-                         id="description"
-                         aria-describedby="descripcion"
-                         placeholder="Descripción de la categoria">
+                    <label for="age"></label>
+                    <input type="text" class="form-control "
+                        id="age"
+                        aria-describedby="basic-addon3"
+                        placeholder="Edad del cliente">
                 </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="correo">Email:</span>
+                    </div>
+                    <label for="email"></label>
+                    <input type="text" class="form-control " id="email"
+                        aria-describedby="basic-addon3"
+                        placeholder="Email del cliente">
+                </div>
+
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="postCategory()">Guardar
-                            Categoria</button>
+                        <button onclick="postClient()">Guardar
+                            cliente</button>
                     </div>
                     <div>
-                        <button onclick="getCategory()">
-                            Consultar Categorias</button>
+                        <button onclick="getClient()">
+                            Consultar Clientes</button>
                     </div>
                 </div>
-
             </div>
 
-            <table id="mostrarCategorias" class="mt-4 d-flex
-                justify-content-center align-items-center table table-striped
-                table-hover" >
-                <caption id="captionCategory">Tabla de categorias de vehiculos</caption>
+            <table id="mostrarClientes" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionCategory">Tabla de vehiculos para alquilar</caption>
             </table>
-            <br>
-            <!-- Footer -->
 
-            <footer class="footer mt-auto py-3 bg-light d-flex
-                justify-content-end position-relative">
-                <div class="container"><span class="text-muted d-flex
-                        justify-content-center">Oscar Alvarado ©
-                        <script>document.write((new Date().getFullYear()).toString())</script>
-                    </span></div>
-            </footer>
-
-            <script src="js/bootstrap.js"></script>
         </div>
+        <br>
+        <!-- Footer -->
+
+        <footer class="footer mt-auto py-3 bg-light d-flex
+            justify-content-end position-relative">
+            <div class="container"><span class="text-muted d-flex
+                    justify-content-center">Oscar Alvarado ©
+                    <script>document.write((new Date().getFullYear()).toString())</script>
+                </span></div>
+        </footer>
+
+        <script src="js/bootstrap.js"></script>
 
     </body>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns="http://www.w3.org/1999/html">
 
     <head>
         <link rel="stylesheet" href="css/bootstrap.css">
@@ -14,18 +14,17 @@
                 src="js/generalFunctions.js">
         </script>
         <script type="text/javascript"
-            src="js/misFuncionesClientes.js">
+            src="js/reportFunciton.js">
         </script>
         <title>Alquiler de Vehiculos</title>
     </head>
-
     <body>
         <div class="container-fluid mb-5 sin-padding">
             <header id="cabeceralogo" class="container-fluid d-flex flex-wrap
                 py-3 mb-3 border-bottom sin-padding" style="background-color:
                 #b813ce">
                 <div class="container text-light ">
-                    <h1>Clientes </h1>
+                    <h1>Reportes </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
@@ -46,32 +45,32 @@
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Categorias.html">Categorias</a>
+                                        href="categories.html">Categorias</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Vehiculos.html">Vehiculos</a>
+                                        href="Vehicles.html">Vehiculos</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Clientes.html">Clientes</a>
+                                        href="clients.html">Clientes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reservaciones.html">Reservaciones</a>
+                                        href="reservations.html">Reservaciones</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Mensajes.html">Mensajes</a>
+                                        href="messages.html">Mensajes</a>
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page"
-                                        href="Reportes.html">Reportes</a>
+                                        href="reports.html">Reportes</a>
                                 </li>
                             </ul>
                         </div>
@@ -82,52 +81,60 @@
 
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="nombre">Nombre:</span>
+                        <span class="input-group-text" id="incioR">Fecha de
+                            inicio de la consulta:</span>
                     </div>
-                    <label for="name"></label>
-                    <input type="text" class="form-control" id="name"
-                         aria-describedby="basic-addon3"
-                         placeholder="Nombre del cliente">
+                    <label for="rStartDate"></label>
+                    <input type="date" class="form-control" id="rStartDate"
+                        aria-describedby="basic-addon3">
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="edad">Edad:</span>
+                        <span class="input-group-text" id="devolutionDate">Fecha
+                            final de la consulta:</span>
                     </div>
-                    <label for="age"></label>
-                    <input type="text" class="form-control "
-                        id="age"
-                        aria-describedby="basic-addon3"
-                        placeholder="Edad del cliente">
+                    <label for="rDevolutionDate"></label>
+                    <input type="date" class="form-control "
+                        id="rDevolutionDate"
+                        aria-describedby="basic-addon3">
                 </div>
                 <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="correo">Email:</span>
-                    </div>
-                    <label for="email"></label>
-                    <input type="text" class="form-control " id="email"
-                        aria-describedby="basic-addon3"
-                        placeholder="Email del cliente">
+                    <button onclick="getReportDate()"> Generar Reporte por
+                        fecha</button>
                 </div>
 
-                <div class="row d-flex flex-nowrap">
-                    <div class="w-auto">
-                        <button onclick="postClient()">Guardar
-                            cliente</button>
-                    </div>
-                    <div>
-                        <button onclick="getClient()">
-                            Consultar Clientes</button>
-                    </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getReportStatus()"> Generar reporte
+                        de estado de las reservas </button>
+                </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getReportClients()"> Generar reporte
+                        clientes y su cantidad de reservas </button>
                 </div>
             </div>
-
-            <table id="mostrarClientes" class="mt-4 d-flex
+            <table id="resultadoDate" class="mt-4 d-flex
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
-                <caption id="captionCategory">Tabla de vehiculos para alquilar</caption>
+                <caption id="captionReportDates">Tabla de reservaciones por
+                    fechas de consulta</caption>
             </table>
-
+            <br>
+            <table id="resultadoStatus" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionReportStatus">Tabla de reservaciones por
+                    estado de las reservas</caption>
+            </table>
+            <br>
+            <table id="resultadoClientes" class="mt-4 d-flex
+                justify-content-center align-items-center table
+                table-striped
+                table-hover">
+                <caption id="captionReportClients">Tabla de reservaciones por
+                    clientes</caption>
+            </table>
         </div>
         <br>
         <!-- Footer -->
@@ -143,5 +150,4 @@
         <script src="js/bootstrap.js"></script>
 
     </body>
-
 </html>
