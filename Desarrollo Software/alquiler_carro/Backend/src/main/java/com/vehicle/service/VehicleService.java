@@ -73,14 +73,17 @@ public class VehicleService {
                 if (vehicle.getModel() != null) {
                     vehicleUpdate.get().setModel(vehicle.getModel());
                 }
-                if (vehicle.getHorsepower() != null) {
-                    vehicleUpdate.get().setHorsepower(vehicle.getHorsepower());
+                if (vehicle.getHorsePower() != null) {
+                    vehicleUpdate.get().setHorsePower(vehicle.getHorsePower());
                 }
                 if (vehicle.getEngineCylinders() != null) {
                     vehicleUpdate.get().setEngineCylinders(vehicle.getEngineCylinders());
                 }
                 if (vehicle.getSeating() != null) {
                     vehicleUpdate.get().setSeating(vehicle.getSeating());
+                }
+                if (vehicle.getCategory() != null) {
+                    vehicleUpdate.get().setCategory(vehicle.getCategory());
                 }
                 return vehicleRepository.save(vehicleUpdate.get());
             }

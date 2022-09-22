@@ -16,7 +16,7 @@ public class VehiclePojo {
     private String color;
     private String brand;
     private String model;
-    private Integer horsepower;
+    private Integer horsePower;
     private Integer engineCylinders;
     private Integer seating;
     private Category category;

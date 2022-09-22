@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="es">
+
     <head>
         <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/misestilos.css">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/generalFunctions.js"></script>
+        <script type="text/javascript" src="js/categoryFunction.js"></script>
         <title>Alquiler de Vehiculos</title>
     </head>
-    <body>
-        <div class="container mb-5">
-            <!-- Header -->
-            <header class="d-flex flex-wrap py-3 mb-5 border-bottom">
 
-                <nav class="navbar navbar-expand-lg navbar-dark fixed-top fs-4"
+    <body>
+        <div class="container-fluid mb-5 sin-padding">
+            <header id="cabeceralogo" class="container-fluid d-flex flex-wrap
+                py-3 mb-3 border-bottom sin-padding" style="background-color:
+                #b813ce">
+                <div class="container text-light ">
+                    <h1>Categorias </h1>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
                     <div class="container">
-                        <a class="navbar-brand" href="index.html">Alquiler de
-                            Vehiculos </a>
+                        <a class="navbar-brand" href="index.html">Inicio
+                        </a>
                         <button class="navbar-toggler" type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#navbarSupportedContent"
@@ -62,15 +72,46 @@
                         </div>
                     </div>
                 </nav>
-
             </header>
-            <!-- imagen centro-->
-            <section class="container d-flex justify-content-center">
-                <figure class="w-50 center">
-                    <img src="img/carro.jpg" alt="imagen ilustrativa de un
-                        carro" class="d-flex justify-content-center">
-                </figure>
-            </section>
+            <div class="container position-relative w-50 float-left">
+
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="nombre">Nombre:</span>
+                    </div>
+                    <label for="name"></label>
+                    <input type="text" class="form-control w-25 " id="name"
+                        aria-describedby="nombre"
+                        placeholder="Nombre de la categoria">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="descripcion">Descripción:</span>
+                    </div>
+                    <label for="description"></label>
+                    <input type="text" class="form-control w-25 "
+                        id="description"
+                        aria-describedby="descripcion"
+                        placeholder="Descripción de la categoria">
+                </div>
+                <div class="row d-flex flex-nowrap">
+                    <div class="w-auto">
+                        <button onclick="postCategory()">Guardar
+                            Categoria</button>
+                    </div>
+                    <div>
+                        <button onclick="getCategory()">
+                            Consultar Categorias</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <table id="mostrarCategorias" class="mt-4 d-flex
+                justify-content-center align-items-center table table-striped
+                table-hover">
+                <caption id="captionCategory">Tabla de categorias de vehiculos</caption>
+            </table>
             <br>
             <!-- Footer -->
 
@@ -84,5 +125,7 @@
 
             <script src="js/bootstrap.js"></script>
         </div>
+
     </body>
+
 </html>

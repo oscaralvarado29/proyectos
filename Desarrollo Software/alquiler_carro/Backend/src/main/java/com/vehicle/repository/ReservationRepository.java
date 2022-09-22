@@ -8,6 +8,7 @@ import java.util.Optional;
 import com.vehicle.intrface.ReservationInterface;
 import com.vehicle.model.Client;
 import com.vehicle.model.Reservation;
+import com.vehicle.model.Vehicle;
 import com.vehicle.report.ClientCount;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -85,5 +86,8 @@ public class ReservationRepository {
             reservationByClient.add(new ClientCount((Long) objects[1], (Client) objects[0]));
         }
         return reservationByClient;
+    }
+    public  List<Reservation> getReservationByClientAndVehicle (Client idClient, Vehicle idVehicle){
+        return reservationInterface.findAllByClientAndVehicle(idClient, idVehicle);
     }
 }

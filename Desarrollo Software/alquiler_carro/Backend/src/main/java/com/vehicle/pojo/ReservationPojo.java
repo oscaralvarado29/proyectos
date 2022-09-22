@@ -1,7 +1,9 @@
 package com.vehicle.pojo;
 
 import java.util.Date;
+import java.util.List;
 
+import com.vehicle.model.Message;
 import com.vehicle.model.Vehicle;
 import com.vehicle.model.Client;
 import lombok.AllArgsConstructor;
@@ -17,4 +19,5 @@ public class ReservationPojo {
     private String status;
     private Vehicle vehicle;
     private Client client;
+    private List<Message> message;
 }

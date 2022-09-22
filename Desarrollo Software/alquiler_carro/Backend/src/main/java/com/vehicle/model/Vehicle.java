@@ -32,7 +32,7 @@ public class Vehicle implements Serializable {
     @Column(length = 45)
     private String model;
     @Column(length = 4)
-    private Integer horsepower;
+    private Integer horsePower;
     @Column(length = 3)
     private Integer engineCylinders;
     @Column(length = 3)
@@ -44,12 +44,15 @@ public class Vehicle implements Serializable {
         this.color = vehiclePojo.getColor();
         this.brand = vehiclePojo.getBrand();
         this.model = vehiclePojo.getModel();
-        this.horsepower = vehiclePojo.getHorsepower();
+        this.horsePower = vehiclePojo.getHorsePower();
         this.engineCylinders = vehiclePojo.getEngineCylinders();
         this.seating = vehiclePojo.getSeating();
         this.category = vehiclePojo.getCategory();
         this.messages = vehiclePojo.getMessages();
         this.reservations = vehiclePojo.getReservations();
+    }
+    public Vehicle (int idVehicle){
+        this.idVehicle=idVehicle;
     }
 
     @ManyToOne

@@ -39,11 +39,15 @@ public class Client implements Serializable {
         this.reservations = clientPojo.getReservations();
     }
 
+    public Client(int idClient){
+        this.idClient=idClient;
+    }
+
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
-    @JsonIgnoreProperties("client")
+    @JsonIgnoreProperties({"reservations","client"})
     private List<Message>messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
-    @JsonIgnoreProperties("client")
+    @JsonIgnoreProperties({"client","messages"})
     private List<Reservation>reservations;
 }

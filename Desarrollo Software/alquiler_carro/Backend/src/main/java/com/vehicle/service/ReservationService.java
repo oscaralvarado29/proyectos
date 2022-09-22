@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import com.vehicle.model.Client;
 import com.vehicle.model.Reservation;
+import com.vehicle.model.Vehicle;
 import com.vehicle.report.ClientCount;
 import com.vehicle.report.ReservationStatus;
 import com.vehicle.repository.ReservationRepository;
@@ -139,5 +142,9 @@ public class ReservationService {
      */
     public List<ClientCount> getTopClients(){
         return resRepository.getTopClients();
+    }
+
+    public List<Reservation> getReservationByClientAndVehicle(Client idClient, Vehicle idVehicle){
+        return resRepository.getReservationByClientAndVehicle(idClient, idVehicle);
     }
 }
