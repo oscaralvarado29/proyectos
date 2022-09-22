@@ -1,15 +1,13 @@
-function getDataReservations () {
+function getDataReservationsByClientAndVehicle () {
   let idClient = +$('#select-client').val()
   let idVehicle = +$('#select-vehicle').val()
   if (idClient.length !== 0 && idVehicle.length !== 0) {
     document.getElementById('select-reservation').innerHTML = ''
     $.ajax({
-      //url: "http://10.0.1.5:8080/api/Client/all",
       url:
-        'http://localhost:8080/api/Reservation/reservation-clients-vehicle/' +
-        idClient +
-        '/' +
-        idVehicle,
+        "http://10.0.0.4:8080/api/Reservation/reservation-clients-vehicle/' + idClient + '/' + idVehicle,",
+      // url:
+      //  'http://localhost:8080/api/Reservation/reservation-clients-vehicle/' + idClient +  '/' + idVehicle,
       type: 'GET',
       datatype: 'JSON',
       success: function (respuesta) {
@@ -38,8 +36,8 @@ function getDataReservations () {
 
 function getMessages () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Message/all",
-    url: 'http://localhost:8080/api/Message/all',
+    url: 'http://10.0.0.4:8080/api/Message/all',
+    // url: 'http://localhost:8080/api/Message/all',
     type: 'GET',
     datatype: 'JSON',
     success: function (messages) {
@@ -89,8 +87,8 @@ function drawMessage (messages) {
 function launchDataMessage (messageId) {
   $.ajax({
     dataType: 'json',
-    //url: "http://10.0.1.5:8080/api/Message/"+messageId,
-    url: 'http://localhost:8080/api/Message/' + messageId,
+    url: 'http://10.0.0.4:8080/api/Message/' + messageId,
+    // url: 'http://localhost:8080/api/Message/' + messageId,
     type: 'GET',
 
     success: function (message) {
@@ -133,8 +131,8 @@ function postMessage () {
       contentType: 'application/json; charset=utf-8',
       dataType: 'JSON',
       data: JSON.stringify(messageData),
-      //url: "http://10.0.1.5:8080/api/Message/save",
-      url: 'http://localhost:8080/api/Message/save',
+      url: 'http://10.0.0.4:8080/api/Message/save',
+      // url: 'http://localhost:8080/api/Message/save',
 
       success: function () {
         cleanFieldsMessage()
@@ -174,8 +172,8 @@ function putMessage (idMessage) {
       score: parseFloat($('#score').val())
     }
     $.ajax({
-      //url: "http://10.0.1.5:8080/api/Message/update",
-      url: 'http://localhost:8080/api/Message/update',
+      url: 'http://10.0.0.4:8080/api/Message/update',
+      // url: 'http://localhost:8080/api/Message/update',
       type: 'PUT',
       data: JSON.stringify(messageData),
       contentType: 'application/JSON',
@@ -198,8 +196,8 @@ function deleteMessage (messageId) {
     idMessage: messageId
   }
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Message/delete" ,
-    url: 'http://localhost:8080/api/Message/delete',
+    url: 'http://10.0.0.4:8080/api/Message/delete',
+    // url: 'http://localhost:8080/api/Message/delete',
     type: 'DELETE',
     data: JSON.stringify(messageData),
     contentType: 'application/JSON',

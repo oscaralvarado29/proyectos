@@ -1,7 +1,7 @@
 function getClient () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Client/all",
-    url: 'http://localhost:8080/api/Client/all',
+    url: 'http://10.0.0.4:8080/api/Client/all',
+    // url: 'http://localhost:8080/api/Client/all',
     type: 'GET',
     datatype: 'JSON',
     success: function (clients) {
@@ -55,8 +55,8 @@ function drawInfoClients (clients) {
 function launchDataClient (clientId) {
   $.ajax({
     dataType: 'json',
-    //url: "http://10.0.1.5:8080/api/Client/" + clientId,
-    url: 'http://localhost:8080/api/Client/' + clientId,
+    url: 'http://10.0.0.4:8080/api/Client/' + clientId,
+    // url: 'http://localhost:8080/api/Client/' + clientId,
     type: 'GET',
 
     success: function (response) {
@@ -90,8 +90,8 @@ function postClient () {
       contentType: 'application/json; charset=utf-8',
       dataType: 'JSON',
       data: JSON.stringify(dataClient),
-      //url: "http://10.0.1.5:8080/api/Client/save",
-      url: 'http://localhost:8080/api/Client/save',
+      url: 'http://10.0.0.4:8080/api/Client/save',
+      // url: 'http://localhost:8080/api/Client/save',
       success: function (response) {
         cleanFieldsClient()
         alert('El cliente ' + response.name + ' se guardo correctamente')
@@ -120,8 +120,8 @@ function putClient (idElemento) {
       age: $('#age').val()
     }
     $.ajax({
-      //url: "http://10.0.1.5:8080/api/Client/update",
-      url: 'http://localhost:8080/api/Client/update',
+      url: 'http://10.0.0.4:8080/api/Client/update',
+      // url: 'http://localhost:8080/api/Client/update',
       type: 'PUT',
       data: JSON.stringify(clientData),
       contentType: 'application/JSON',
@@ -144,8 +144,8 @@ function deleteClient (idElemento) {
     idClient: idElemento
   }
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Client/delete",
-    url: 'http://localhost:8080/api/Client/delete',
+    url: 'http://10.0.0.4:8080/api/Client/delete',
+    // url: 'http://localhost:8080/api/Client/delete',
     type: 'DELETE',
     data: JSON.stringify(dataClient),
     contentType: 'application/JSON',

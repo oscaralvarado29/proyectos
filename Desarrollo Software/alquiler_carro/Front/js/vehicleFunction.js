@@ -1,7 +1,7 @@
 function getCategories () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Category/all",
-    url: 'http://localhost:8080/api/Category/all',
+    url: 'http://10.0.0.4:8080/api/Category/all',
+    // url: 'http://localhost:8080/api/Category/all',
     type: 'GET',
     datatype: 'JSON',
     success: function (response) {
@@ -21,8 +21,8 @@ function getCategories () {
 
 function getVehicles () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Vehicle/all",
-    url: 'http://localhost:8080/api/Vehicle/all',
+    url: 'http://10.0.0.4:8080/api/Vehicle/all',
+    // url: 'http://localhost:8080/api/Vehicle/all',
     type: 'GET',
     datatype: 'JSON',
     success: function (vehicle) {
@@ -88,8 +88,8 @@ function drawVehicle (vehicle) {
 function launchDataVehicle (vehicleId) {
   $.ajax({
     dataType: 'json',
-    //url: "http://10.0.1.5:8080/api/Vehicle/" + vehicleId,
-    url: 'http://localhost:8080/api/Vehicle/' + vehicleId,
+    url: 'http://10.0.0.4:8080/api/Vehicle/' + vehicleId,
+    // url: 'http://localhost:8080/api/Vehicle/' + vehicleId,
     type: 'GET',
 
     success: function (response) {
@@ -136,8 +136,8 @@ function postVehicle () {
     $.ajax({
       type: 'POST',
       contentType: 'application/json',
-      //url: "http://10.0.1.5:8080/api/Vehicle/save",
-      url: 'http://localhost:8080/api/Vehicle/save',
+      url: 'http://10.0.0.4:8080/api/Vehicle/save',
+      // url: 'http://localhost:8080/api/Vehicle/save',
       data: JSON.stringify(vehicleData),
       datatype: 'json',
       success: function (response) {
@@ -183,8 +183,8 @@ function putVehicle (vehicleId) {
       datatype: 'json',
       data: JSON.stringify(vehicleData),
       contentType: 'application/JSON',
-      //url: "http://10.0.1.5:8080/api/Vehicle/update",
-      url: 'http://localhost:8080/api/Vehicle/update',
+      url: 'http://10.0.0.4:8080/api/Vehicle/update',
+      // url: 'http://localhost:8080/api/Vehicle/update',
       type: 'PUT',
 
       success: function (response) {
@@ -209,8 +209,8 @@ function deleteVehicle (vehicleId) {
   $.ajax({
     dataType: 'json',
     data: JSON.stringify(vehicleData),
-    //url: "http://10.0.1.5:8080/api/Vehicle/delete" ,
-    url: 'http://localhost:8080/api/Vehicle/delete',
+    url: 'http://10.0.0.4:8080/api/Vehicle/delete',
+    // url: 'http://localhost:8080/api/Vehicle/delete',
     type: 'DELETE',
     contentType: 'application/JSON',
     success: function () {

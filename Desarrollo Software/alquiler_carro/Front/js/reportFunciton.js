@@ -3,12 +3,13 @@ function getReportDate () {
   let fechaCierre = $('#rDevolutionDate').val()
 
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Reservation/report-dates/" + fechaInicio + "/" + fechaCierre,
     url:
-      'http://localhost:8080/api/Reservation/report-dates/' +
+      'http://10.0.0.4:8080/api/Reservation/report-dates/' +
       fechaInicio +
       '/' +
       fechaCierre,
+    //url:
+    //  'http://localhost:8080/api/Reservation/report-dates/' + fechaInicio + '/' + fechaCierre,
     type: 'GET',
     datatype: 'JSON',
     success: function (reportDate) {
@@ -57,8 +58,8 @@ function drawReportDates (reportDate) {
 
 function getReportStatus () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Reservation/report-status",
-    url: 'http://localhost:8080/api/Reservation/report-status',
+    url: 'http://10.0.0.4:8080/api/Reservation/report-status',
+    // url: 'http://localhost:8080/api/Reservation/report-status',
     type: 'GET',
     datatype: 'JSON',
     success: function (reportStatus) {
@@ -85,8 +86,8 @@ function drawReportStatus (reportStatus) {
 
 function getReportClients () {
   $.ajax({
-    //url: "http://10.0.1.5:8080/api/Reservation/report-clients",
-    url: 'http://localhost:8080/api/Reservation/report-clients',
+    url: 'http://10.0.0.4:8080/api/Reservation/report-clients',
+    // url: 'http://localhost:8080/api/Reservation/report-clients',
     type: 'GET',
     datatype: 'JSON',
     success: function (reportClients) {
