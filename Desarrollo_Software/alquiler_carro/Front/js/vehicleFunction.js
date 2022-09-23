@@ -1,6 +1,6 @@
 function getCategories () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Category/all',
+    url: 'http://191.234.206.72:8080/api/Category/all',
     // url: 'http://localhost:8080/api/Category/all',
     type: 'GET',
     datatype: 'JSON',
@@ -21,7 +21,7 @@ function getCategories () {
 
 function getVehicles () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Vehicle/all',
+    url: 'http://191.234.206.72:8080/api/Vehicle/all',
     // url: 'http://localhost:8080/api/Vehicle/all',
     type: 'GET',
     datatype: 'JSON',
@@ -88,7 +88,7 @@ function drawVehicle (vehicle) {
 function launchDataVehicle (vehicleId) {
   $.ajax({
     dataType: 'json',
-    url: 'http://10.0.0.4:8080/api/Vehicle/' + vehicleId,
+    url: 'http://191.234.206.72:8080/api/Vehicle/' + vehicleId,
     // url: 'http://localhost:8080/api/Vehicle/' + vehicleId,
     type: 'GET',
 
@@ -136,7 +136,7 @@ function postVehicle () {
     $.ajax({
       type: 'POST',
       contentType: 'application/json',
-      url: 'http://10.0.0.4:8080/api/Vehicle/save',
+      url: 'http://191.234.206.72:8080/api/Vehicle/save',
       // url: 'http://localhost:8080/api/Vehicle/save',
       data: JSON.stringify(vehicleData),
       datatype: 'json',
@@ -183,7 +183,7 @@ function putVehicle (vehicleId) {
       datatype: 'json',
       data: JSON.stringify(vehicleData),
       contentType: 'application/JSON',
-      url: 'http://10.0.0.4:8080/api/Vehicle/update',
+      url: 'http://191.234.206.72:8080/api/Vehicle/update',
       // url: 'http://localhost:8080/api/Vehicle/update',
       type: 'PUT',
 
@@ -209,7 +209,7 @@ function deleteVehicle (vehicleId) {
   $.ajax({
     dataType: 'json',
     data: JSON.stringify(vehicleData),
-    url: 'http://10.0.0.4:8080/api/Vehicle/delete',
+    url: 'http://191.234.206.72:8080/api/Vehicle/delete',
     // url: 'http://localhost:8080/api/Vehicle/delete',
     type: 'DELETE',
     contentType: 'application/JSON',

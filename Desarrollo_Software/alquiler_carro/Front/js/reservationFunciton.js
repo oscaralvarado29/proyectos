@@ -1,6 +1,6 @@
 function getReservation () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Reservation/all',
+    url: 'http://191.234.206.72:8080/api/Reservation/all',
     // url: 'http://localhost:8080/api/Reservation/all',
     type: 'GET',
     datatype: 'JSON',
@@ -56,7 +56,7 @@ function drawReservations (reservations) {
 function launchDataReservation (idReservaton) {
   $.ajax({
     dataType: 'json',
-    url: 'http://10.0.0.4:8080/api/Reservation/' + idReservaton,
+    url: 'http://191.234.206.72:8080/api/Reservation/' + idReservaton,
     // url: 'http://localhost:8080/api/Reservation/' + idReservaton,
     type: 'GET',
 
@@ -99,7 +99,7 @@ function postReservation () {
     $.ajax({
       type: 'POST',
       contentType: 'application/json',
-      url: 'http://10.0.0.4:8080/api/Reservation/save',
+      url: 'http://191.234.206.72:8080/api/Reservation/save',
       // url: 'http://localhost:8080/api/Reservation/save',
       data: JSON.stringify(reservationData),
       datatype: 'json',
@@ -142,7 +142,7 @@ function putReservation (reservationId) {
       datatype: 'json',
       data: JSON.stringify(reservatonData),
       contentType: 'application/JSON',
-      url: 'http://10.0.0.4:8080/api/Reservation/update',
+      url: 'http://191.234.206.72:8080/api/Reservation/update',
       // url: 'http://localhost:8080/api/Reservation/update',
       type: 'PUT',
 
@@ -166,7 +166,7 @@ function deleteReservation (reservationId) {
   $.ajax({
     dataType: 'json',
     data: JSON.stringify(reservationData),
-    url: 'http://10.0.0.4:8080/api/Reservation/delete',
+    url: 'http://191.234.206.72:8080/api/Reservation/delete',
     // url: 'http://localhost:8080/api/Reservation/delete',
     type: 'DELETE',
     contentType: 'application/JSON',

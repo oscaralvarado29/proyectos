@@ -5,7 +5,7 @@ function getDataReservationsByClientAndVehicle () {
     document.getElementById('select-reservation').innerHTML = ''
     $.ajax({
       url:
-        "http://10.0.0.4:8080/api/Reservation/reservation-clients-vehicle/' + idClient + '/' + idVehicle,",
+        "http://191.234.206.72:8080/api/Reservation/reservation-clients-vehicle/' + idClient + '/' + idVehicle,",
       // url:
       //  'http://localhost:8080/api/Reservation/reservation-clients-vehicle/' + idClient +  '/' + idVehicle,
       type: 'GET',
@@ -36,7 +36,7 @@ function getDataReservationsByClientAndVehicle () {
 
 function getMessages () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Message/all',
+    url: 'http://191.234.206.72:8080/api/Message/all',
     // url: 'http://localhost:8080/api/Message/all',
     type: 'GET',
     datatype: 'JSON',
@@ -87,7 +87,7 @@ function drawMessage (messages) {
 function launchDataMessage (messageId) {
   $.ajax({
     dataType: 'json',
-    url: 'http://10.0.0.4:8080/api/Message/' + messageId,
+    url: 'http://191.234.206.72:8080/api/Message/' + messageId,
     // url: 'http://localhost:8080/api/Message/' + messageId,
     type: 'GET',
 
@@ -131,7 +131,7 @@ function postMessage () {
       contentType: 'application/json; charset=utf-8',
       dataType: 'JSON',
       data: JSON.stringify(messageData),
-      url: 'http://10.0.0.4:8080/api/Message/save',
+      url: 'http://191.234.206.72:8080/api/Message/save',
       // url: 'http://localhost:8080/api/Message/save',
 
       success: function () {
@@ -172,7 +172,7 @@ function putMessage (idMessage) {
       score: parseFloat($('#score').val())
     }
     $.ajax({
-      url: 'http://10.0.0.4:8080/api/Message/update',
+      url: 'http://191.234.206.72:8080/api/Message/update',
       // url: 'http://localhost:8080/api/Message/update',
       type: 'PUT',
       data: JSON.stringify(messageData),
@@ -196,7 +196,7 @@ function deleteMessage (messageId) {
     idMessage: messageId
   }
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Message/delete',
+    url: 'http://191.234.206.72:8080/api/Message/delete',
     // url: 'http://localhost:8080/api/Message/delete',
     type: 'DELETE',
     data: JSON.stringify(messageData),

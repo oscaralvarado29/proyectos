@@ -4,7 +4,7 @@ function getReportDate () {
 
   $.ajax({
     url:
-      'http://10.0.0.4:8080/api/Reservation/report-dates/' +
+      'http://191.234.206.72:8080/api/Reservation/report-dates/' +
       fechaInicio +
       '/' +
       fechaCierre,
@@ -58,7 +58,7 @@ function drawReportDates (reportDate) {
 
 function getReportStatus () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Reservation/report-status',
+    url: 'http://191.234.206.72:8080/api/Reservation/report-status',
     // url: 'http://localhost:8080/api/Reservation/report-status',
     type: 'GET',
     datatype: 'JSON',
@@ -86,7 +86,7 @@ function drawReportStatus (reportStatus) {
 
 function getReportClients () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Reservation/report-clients',
+    url: 'http://191.234.206.72:8080/api/Reservation/report-clients',
     // url: 'http://localhost:8080/api/Reservation/report-clients',
     type: 'GET',
     datatype: 'JSON',

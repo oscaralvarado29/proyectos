@@ -1,6 +1,6 @@
 function getCategory () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Category/all',
+    url: 'http://191.234.206.72:8080/api/Category/all',
     // url: 'http://localhost:8080/api/Category/all',
     type: 'GET',
     datatype: 'JSON',
@@ -49,7 +49,7 @@ function drawCategory (category) {
 function launchDataCategory (categoryId) {
   $.ajax({
     dataType: 'json',
-    url: 'http://10.0.0.4:8080/api/Category/' + categoryId,
+    url: 'http://191.234.206.72:8080/api/Category/' + categoryId,
     // url: 'http://localhost:8080/api/Category/' + categoryId,
     type: 'GET',
 
@@ -77,7 +77,7 @@ function postCategory () {
       contentType: 'application/json; charset=utf-8',
       dataType: 'JSON',
       data: JSON.stringify(categoryData),
-      url: 'http://10.0.0.4:8080/api/Category/save',
+      url: 'http://191.234.206.72:8080/api/Category/save',
       // url: 'http://localhost:8080/api/Category/save',
 
       success: function (response) {
@@ -102,7 +102,7 @@ function putCategory (idElemento) {
       description: $('#description').val()
     }
     $.ajax({
-      url: 'http://10.0.0.4:8080/api/Category/update',
+      url: 'http://191.234.206.72:8080/api/Category/update',
       // url: 'http://localhost:8080/api/Category/update',
       type: 'PUT',
       data: JSON.stringify(categoryData),
@@ -126,7 +126,7 @@ function deleteCategory (idElemento) {
     idCategory: idElemento
   }
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Category/' + idElemento,
+    url: 'http://191.234.206.72:8080/api/Category/' + idElemento,
     // url: 'http://localhost:8080/api/Category/delete',
     type: 'DELETE',
     data: JSON.stringify(categoryData),

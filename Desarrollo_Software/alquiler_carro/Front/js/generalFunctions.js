@@ -50,7 +50,7 @@ function getDataClientAndVehicle () {
 }
 function getDataClients () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Client/all',
+    url: 'http://191.234.206.72:8080/api/Client/all',
     // url: 'http://localhost:8080/api/Client/all',
     type: 'GET',
     datatype: 'JSON',
@@ -71,7 +71,7 @@ function getDataClients () {
 
 function getDataVehicle () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Vehicle/all',
+    url: 'http://191.234.206.72:8080/api/Vehicle/all',
     // url: 'http://localhost:8080/api/Vehicle/all',
     type: 'GET',
     datatype: 'JSON',

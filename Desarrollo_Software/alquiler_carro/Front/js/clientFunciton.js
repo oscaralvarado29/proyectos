@@ -1,6 +1,6 @@
 function getClient () {
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Client/all',
+    url: 'http://191.234.206.72:8080/api/Client/all',
     // url: 'http://localhost:8080/api/Client/all',
     type: 'GET',
     datatype: 'JSON',
@@ -55,7 +55,7 @@ function drawInfoClients (clients) {
 function launchDataClient (clientId) {
   $.ajax({
     dataType: 'json',
-    url: 'http://10.0.0.4:8080/api/Client/' + clientId,
+    url: 'http://191.234.206.72:8080/api/Client/' + clientId,
     // url: 'http://localhost:8080/api/Client/' + clientId,
     type: 'GET',
 
@@ -90,7 +90,7 @@ function postClient () {
       contentType: 'application/json; charset=utf-8',
       dataType: 'JSON',
       data: JSON.stringify(dataClient),
-      url: 'http://10.0.0.4:8080/api/Client/save',
+      url: 'http://191.234.206.72:8080/api/Client/save',
       // url: 'http://localhost:8080/api/Client/save',
       success: function (response) {
         cleanFieldsClient()
@@ -120,7 +120,7 @@ function putClient (idElemento) {
       age: $('#age').val()
     }
     $.ajax({
-      url: 'http://10.0.0.4:8080/api/Client/update',
+      url: 'http://191.234.206.72:8080/api/Client/update',
       // url: 'http://localhost:8080/api/Client/update',
       type: 'PUT',
       data: JSON.stringify(clientData),
@@ -144,7 +144,7 @@ function deleteClient (idElemento) {
     idClient: idElemento
   }
   $.ajax({
-    url: 'http://10.0.0.4:8080/api/Client/delete',
+    url: 'http://191.234.206.72:8080/api/Client/delete',
     // url: 'http://localhost:8080/api/Client/delete',
     type: 'DELETE',
     data: JSON.stringify(dataClient),
