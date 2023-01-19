@@ -1,24 +1,20 @@
 package com.vehicle.controller;
 
 import java.util.List;
-import java.util.Optional;
-
-import com.vehicle.model.Message;
-import com.vehicle.pojo.MessagePojo;
-import com.vehicle.service.MessageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vehicle.dto.MessageRequest;
+import com.vehicle.dto.MessageResponse;
+import com.vehicle.dto.MessageUpdate;
+import com.vehicle.service.IMessageService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 /**
  *
@@ -27,62 +23,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/Message")
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST,RequestMethod.PUT,RequestMethod.DELETE})
+@RequiredArgsConstructor
 public class MessageController {
-    @Autowired
-    private MessageService messageService;
+    private final IMessageService messageService;
 
-    /**
-     * GET
-     * @return the call of the getMessages method of the class messageService
-     */
+    @Operation(summary = "Get all the messages")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "All messages returned",
+                    content = @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = MessageResponse.class)))),
+    })
     @GetMapping("/all")
-    public List<Message> getMessages(){
-        return messageService.getAll();
+    public ResponseEntity<List<MessageResponse>> getAllMessages(){
+        return ResponseEntity.ok(messageService.getAllMessages());
     }
 
-    /**
-     * GET for specif id
-     * @param messagePojo message id to get
-     * @return the call of the getMessages method of the class messageService
-     */
+    @Operation(summary = "Get a message by his id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Message found",
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MessageResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Message not found", content = @Content)
+    })
     @GetMapping("/{id}")
-    public Optional<Message> getMessage(@PathVariable("id") int messageId) {
-        return messageService.getMessage(messageId);
+    public ResponseEntity<MessageResponse> getMessage(@PathVariable("id") int messageId) {
+        return ResponseEntity.ok(messageService.getMessage(messageId));
     }
 
-    /**
-     * POST
-     * @param messagePojo pojo created with message data
-     * @return the call of the save method of the class messageService
-     */
+    @Operation(summary = "Add a new message")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Message created", content = @Content),
+            @ApiResponse(responseCode = "409", description = "Message already exists", content = @Content)
+    })
     @PostMapping("/save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody MessagePojo messagePojo) {
-        Message message = new Message(messagePojo);
-        return messageService.save(message);
+    public ResponseEntity<Void> save(@RequestBody MessageRequest messageRequest) {
+        messageService.saveMessage(messageRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    /**
-     * PUT
-     * @param messagePojo pojo created with message data
-     * @return the call of the update method of the class messageService
-     */
+    @Operation(summary = "Update an existing message")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Message updated", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Message not found", content = @Content)
+    })
     @PutMapping("/update")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Message update(@RequestBody MessagePojo messagePojo) {
-        Message message = new Message(messagePojo);
-        return messageService.update(message);
+    public ResponseEntity<Void> update(@RequestBody MessageUpdate messageUpdate) {
+        messageService.updateMessage(messageUpdate);
+        return ResponseEntity.ok().build();
     }
 
-    /**
-     * DELETE
-     * @param messagePojo message id to delete
-     * @return the call of the delete method of the class messageService
-     */
-    @DeleteMapping("/delete")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public boolean delete(@RequestBody MessagePojo messagePojo) {
-        Message message = new Message(messagePojo);
-        return messageService.deleteMessage(message.getIdMessage());
+        @Operation(summary = "Delete an existing category")
+        @ApiResponses(value = {
+                @ApiResponse(responseCode = "200", description = "Category deleted", content = @Content),
+                @ApiResponse(responseCode = "404", description = "Category not found", content = @Content)
+        })
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> delete(@PathVariable("id") int messageId) {
+        messageService.deleteMessage(messageId);
+        return ResponseEntity.noContent().build();
     }
 }

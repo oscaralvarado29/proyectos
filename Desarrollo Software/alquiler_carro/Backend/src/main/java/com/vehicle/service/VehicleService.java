@@ -1,9 +1,17 @@
 package com.vehicle.service;
 
+import com.vehicle.dto.VehicleRequest;
+import com.vehicle.dto.VehicleResponse;
+import com.vehicle.dto.VehicleUpdate;
+import com.vehicle.exception.MessageAlreadyExistsException;
+import com.vehicle.exception.VehicleAlreadyExistsException;
+import com.vehicle.exception.VehicleNotFoundException;
+import com.vehicle.mapper.VehicleMapper;
 import com.vehicle.model.Vehicle;
 import com.vehicle.repository.VehicleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,94 +20,80 @@ import java.util.Optional;
  *
  * @author Oscar Alvarado
  */
+@RequiredArgsConstructor
 @Service
-public class VehicleService {
-    @Autowired
-    private VehicleRepository vehicleRepository;
+@Transactional
+public class VehicleService implements IVehicleService {
+    private final VehicleRepository vehicleRepository;
+    private final VehicleMapper vehicleMapper;
 
     /**
-     * GET ALL
-     * @return  the call of the getAll method of the class VehicleRepository
+     * @return all vehicles from database
      */
-    public List<Vehicle> getAll() {
-        return vehicleRepository.getAll();
+    @Override
+    public List<VehicleResponse> getAllVehicles() {
+        return vehicleMapper.toVehicleResponseList(vehicleRepository.findAll());
     }
 
     /**
-     * GET by specific id
-     * @param vehicleId vehicle id to get
-     * @return the call of the getCategory method of the class VehicleRepository
+     * @param vehicleId id of vehicle to search
+     * @return vehicle with id equals to vehicleId
      */
-    public Optional<Vehicle> getVehicle (int vehicleId){
-        return vehicleRepository.getVehicle(vehicleId);
+    @Override
+    public VehicleResponse getVehicle(int vehicleId) {
+        return vehicleMapper.toVehicleResponse(vehicleRepository.findById(vehicleId).orElseThrow(VehicleNotFoundException::new));
     }
 
     /**
-     * POST
-     * @param vehicle object with vehicle data
-     * @return the call of the save method of the class VehicleRepository if the vehicle id don´t exist or is empty else return to vehicle
+     * @param vehicleRequest vehicle to save
      */
-    public Vehicle save(Vehicle vehicle){
-        if (vehicle.getIdVehicle() == null) {
-            return vehicleRepository.save(vehicle);
-        }else {
-        Optional<Vehicle> vehicleSave = vehicleRepository.getVehicle(vehicle.getIdVehicle());
-        if (vehicleSave.isEmpty()){
-            return vehicleRepository.save(vehicle);
-        }else {
-            return vehicle;
+    @Override
+    public void saveVehicle(VehicleRequest vehicleRequest) {
+        Optional<Vehicle> vehicle = vehicleRepository.findVehicleByNameAndAndBrandAndCategory(vehicleRequest.getName(), vehicleRequest.getBrand(), vehicleRequest.getCategory());
+        if (vehicle.isPresent()) {
+            throw new VehicleAlreadyExistsException();
         }
-        }
+        vehicleRepository.save(vehicleMapper.toVehicle(vehicleRequest));
     }
 
     /**
-     * UPDATE
-     * @param vehicle object with vehicle data
-     * @return the call of the update method of the class VehicleRepository if the category exist else return to vehicle
+     * @param vehicleId id of vehicle to delete
      */
-    public Vehicle update (Vehicle vehicle) {
-        if (vehicle.getIdVehicle() != null){
-            Optional<Vehicle> vehicleUpdate = vehicleRepository.getVehicle(vehicle.getIdVehicle());
-            if (vehicleUpdate.isPresent()){
-                if (vehicle.getName() != null) {
-                    vehicleUpdate.get().setName(vehicle.getName());
-                }
-                if (vehicle.getColor() != null) {
-                    vehicleUpdate.get().setColor(vehicle.getColor());
-                }
-                if (vehicle.getBrand() != null) {
-                    vehicleUpdate.get().setBrand(vehicle.getBrand());
-                }
-                if (vehicle.getModel() != null) {
-                    vehicleUpdate.get().setModel(vehicle.getModel());
-                }
-                if (vehicle.getHorsePower() != null) {
-                    vehicleUpdate.get().setHorsePower(vehicle.getHorsePower());
-                }
-                if (vehicle.getEngineCylinders() != null) {
-                    vehicleUpdate.get().setEngineCylinders(vehicle.getEngineCylinders());
-                }
-                if (vehicle.getSeating() != null) {
-                    vehicleUpdate.get().setSeating(vehicle.getSeating());
-                }
-                if (vehicle.getCategory() != null) {
-                    vehicleUpdate.get().setCategory(vehicle.getCategory());
-                }
-                return vehicleRepository.save(vehicleUpdate.get());
-            }
+    @Override
+    public void deleteVehicle(int vehicleId) {
+        if (!vehicleRepository.existsById(vehicleId)) {
+            throw new VehicleNotFoundException();
         }
-        return vehicle;
+        vehicleRepository.deleteById(vehicleId);
     }
 
     /**
-     * DELETE
-     * @param vehicleId vehicle id to delete
-     * @return true if the vehicle is deleted else return false
+     * @param vehicleUpdate vehicle to update
      */
-    public boolean deleteVehicle(Integer vehicleId){
-        return getVehicle(vehicleId).map(vehicle -> {
-            vehicleRepository.delete(vehicle);
-            return true;
-        }).orElse(false);
+    @Override
+    public void updateVehicle(VehicleUpdate vehicleUpdate) {
+        Vehicle vehicle = vehicleRepository.findById(vehicleUpdate.getIdVehicle()).orElseThrow(VehicleNotFoundException::new);
+        if (vehicleUpdate.getName() != null) {
+            vehicle.setName(vehicleUpdate.getName());
+        }
+        if (vehicleUpdate.getColor() != null) {
+            vehicle.setColor(vehicleUpdate.getColor());
+        }
+        if (vehicleUpdate.getBrand() != null) {
+            vehicle.setBrand(vehicleUpdate.getBrand());
+        }
+        if (vehicleUpdate.getModel() != null) {
+            vehicle.setModel(vehicleUpdate.getModel());
+        }
+        if (vehicleUpdate.getHorsePower() != null) {
+            vehicle.setHorsePower(vehicleUpdate.getHorsePower());
+        }
+        if (vehicleUpdate.getEngineCylinders() != null) {
+            vehicle.setEngineCylinders(vehicleUpdate.getEngineCylinders());
+        }
+        if (vehicleUpdate.getSeating() != null) {
+            vehicle.setSeating(vehicleUpdate.getSeating());
+        }
+        vehicleRepository.save(vehicle);
     }
 }

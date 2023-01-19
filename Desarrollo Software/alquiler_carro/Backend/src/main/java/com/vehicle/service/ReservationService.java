@@ -7,144 +7,141 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import com.vehicle.dto.ReservationRequest;
+import com.vehicle.dto.ReservationResponse;
+import com.vehicle.dto.ReservationUpdate;
+import com.vehicle.exception.DatesNotValidException;
+import com.vehicle.exception.ReservationNotFoundException;
+import com.vehicle.exception.VehicleIsReservedException;
+import com.vehicle.mapper.ReservationMapper;
 import com.vehicle.model.Client;
 import com.vehicle.model.Reservation;
 import com.vehicle.model.Vehicle;
 import com.vehicle.report.ClientCount;
 import com.vehicle.report.ReservationStatus;
 import com.vehicle.repository.ReservationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Oscar Alvarado
  */
+@RequiredArgsConstructor
 @Service
-public class ReservationService {
-    @Autowired
-    private ReservationRepository resRepository;
+@Transactional
+public class ReservationService implements IReservationService {
+    private final ReservationRepository reservationRepository;
+    private final ReservationMapper reservationMapper;
 
     /**
-     * GET ALL
-     * @return  the call of the getAll method of the class ReservationRepository
+     * @return all reservations from database
      */
-    public List<Reservation> getAll(){
-        return resRepository.getAll();
+    @Override
+    public List<ReservationResponse> getAllReservation() {
+        return reservationMapper.toReservationResponseList(reservationRepository.findAll());
     }
 
     /**
-     * GET by specific id
-     * @param reservationId reservation id to get
-     * @return the call of the getReservation method of the class ReservationRepository
+     * @param reservationId id of reservation to search
+     * @return reservation with id equals to reservationId
      */
-    public Optional<Reservation> getReservation(int reservationId) {
-        return resRepository.getReservation(reservationId);
+    @Override
+    public ReservationResponse getReservation(int reservationId) {
+        Reservation reservation = reservationRepository.findById(reservationId).orElseThrow(ReservationNotFoundException::new);
+        return reservationMapper.toReservationResponse(reservation);
     }
 
     /**
-     * POST
-     * @param reservation object with reservation data
-     * @return the call of the save method of the class ReservationRepository if the reservation id don´t exist or is empty else return to reservation
+     * @param reservationRequest reservation to save
      */
-    public Reservation save(Reservation reservation){
-        if(reservation.getIdReservation()==null){
-            return resRepository.save(reservation);
-        }else{
-            Optional<Reservation> reservation1= resRepository.getReservation(reservation.getIdReservation());
-            if(reservation1.isEmpty()){
-                return resRepository.save(reservation);
-            }else{
-                return reservation;
+    @Override
+    public void saveReservation(ReservationRequest reservationRequest) {
+        Optional<Reservation> reservationInDB = reservationRepository.findByStartDateAndDevolutionDateAndVehicle(reservationRequest.getStartDate(), reservationRequest.getDevolutionDate(), reservationRequest.getVehicle());
+        while (reservationInDB.isPresent()) {
+            if ((reservationRequest.getStartDate().compareTo(reservationInDB.get().getStartDate()) >= 0 && reservationRequest.getStartDate().compareTo(reservationInDB.get().getDevolutionDate()) <= 0) || (reservationRequest.getDevolutionDate().compareTo(reservationInDB.get().getStartDate()) >= 0 && reservationRequest.getDevolutionDate().compareTo(reservationInDB.get().getDevolutionDate()) <= 0)) {
+                throw new VehicleIsReservedException();
             }
         }
+        reservationRepository.save(reservationMapper.toReservation(reservationRequest));
     }
 
     /**
-     * UPDATE
-     * @param reservation object with reservation data
-     * @return the call of the update method of the class ReservationRepository if the reservation exist else return to reservation
+     * @param reservationId id of reservation to delete
      */
-    public Reservation update(Reservation reservation){
-        if(reservation.getIdReservation()!=null){
-            Optional<Reservation> reservationUpdate = resRepository.getReservation(reservation.getIdReservation());
-            if(reservationUpdate.isPresent()){
-
-                if(reservation.getStartDate()!=null){
-                    reservationUpdate.get().setStartDate(reservation.getStartDate());
-                }
-                if(reservation.getDevolutionDate()!=null){
-                    reservationUpdate.get().setDevolutionDate(reservation.getDevolutionDate());
-                }
-                if(reservation.getStatus()!=null){
-                    reservationUpdate.get().setStatus(reservation.getStatus());
-                }
-                resRepository.save(reservationUpdate.get());
-                return reservationUpdate.get();
-            }else{
-                return reservation;
-            }
-        }else{
-            return reservation;
+    @Override
+    public void deleteReservation(int reservationId) {
+        if (!reservationRepository.existsById(reservationId)) {
+            throw new ReservationNotFoundException();
         }
+        reservationRepository.deleteById(reservationId);
     }
 
     /**
-     * DELETE
-     * @param reservationId reservationId
-     * @return true if the category is deleted else return false
+     * @param reservationUpdate reservation to update
      */
-    public boolean deleteReservation(Integer reservationId) {
-        return getReservation(reservationId).map(reservation -> {
-            resRepository.delete(reservation);
-            return true;
-        }).orElse(false);
+    @Override
+    public void updateReservation(ReservationUpdate reservationUpdate) {
+        Reservation reservationInDB = reservationRepository.findById(reservationUpdate.getIdReservation()).orElseThrow(ReservationNotFoundException::new);
+        if (reservationUpdate.getStartDate() != null) {
+            reservationInDB.setStartDate(reservationUpdate.getStartDate());
+        }
+        if (reservationUpdate.getDevolutionDate() != null) {
+            reservationInDB.setDevolutionDate(reservationUpdate.getDevolutionDate());
+        }
+        if (reservationUpdate.getStatus() != null) {
+            reservationInDB.setStatus(reservationUpdate.getStatus());
+        }
+        reservationRepository.save(reservationInDB);
     }
 
     /**
-     * GET select reservation for status
-     * @return ReservationStatus objet with the number of completed and canceled reservations
+     * @return report of reservations status
      */
-    public ReservationStatus getReservationsStatusReport(){
-        List<Reservation>completed= resRepository.getReservationByStatus("completed");
-        List<Reservation>cancelled= resRepository.getReservationByStatus("cancelled");
+    @Override
+    public ReservationStatus getReservationsStatusReport() {
+        List<Reservation>completed= reservationRepository.findAllByStatus("completed");
+        List<Reservation>cancelled= reservationRepository.findAllByStatus("cancelled");
         return new ReservationStatus(completed.size(), cancelled.size());
     }
 
     /**
-     * GET select reservations for a specific period of time
-     * @param dateA dateA
-     * @param dateB dateB
-     * @return the call of getReservationPeriod method of the class ReservationRepository if dateA is before to dateB else return an empty arraylist
+     * @param dateOne date to start reservation period report
+     * @param dateTwo date to end reservation period report
+     * @return report of reservations in period
      */
-    public List<Reservation> getReservationPeriod(String dateA, String dateB){
+    @Override
+    public List<ReservationResponse> getReservationPeriod(String dateOne, String dateTwo) throws ParseException {
         SimpleDateFormat parser=new SimpleDateFormat("yyyy-MM-dd");
-        Date aDate= new Date();
-        Date bDate= new Date();
-
-        try {
-            aDate = parser.parse(dateA);
-            bDate = parser.parse(dateB);
-        }catch(ParseException evt){
-            evt.printStackTrace();
+        Date aDate = parser.parse(dateOne);
+        Date bDate = parser.parse(dateTwo);
+        if(aDate.after(bDate)){
+            throw new DatesNotValidException();
         }
-        if(aDate.before(bDate)){
-            return resRepository.getReservationPeriod(aDate, bDate);
-        }else{
-            return new ArrayList<>();
-        }
-
+        return reservationMapper.toReservationResponseList(reservationRepository.findAllByStartDateAfterAndStartDateBefore(aDate, bDate));
     }
 
     /**
-     * GET select clients by classification
-     * @return the call of getTopClients method of the class ReservationRepository
+     * @return report of clients with yours reservations
      */
-    public List<ClientCount> getTopClients(){
-        return resRepository.getTopClients();
+    @Override
+    public List<ClientCount> getTopClients() {
+        List<ClientCount> clientCounts= new ArrayList<>();
+        List<Object[]> report = reservationRepository.countTotalReservationByClient();
+        for (Object[] objects : report) {
+            clientCounts.add(new ClientCount((Long) objects[1], (Client) objects[0]));
+        }
+        return clientCounts;
     }
 
-    public List<Reservation> getReservationByClientAndVehicle(Client idClient, Vehicle idVehicle){
-        return resRepository.getReservationByClientAndVehicle(idClient, idVehicle);
+    /**
+     * @param client client to search
+     * @param vehicle vehicle to search
+     * @return report of reservations by client and vehicle
+     */
+    @Override
+    public List<ReservationResponse> getReservationByClientAndVehicle(Client client, Vehicle vehicle) {
+        return reservationMapper.toReservationResponseList(reservationRepository.findAllByClientAndVehicle(client, vehicle));
     }
 }

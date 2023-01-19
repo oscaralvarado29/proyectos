@@ -3,20 +3,29 @@ package com.vehicle.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.vehicle.pojo.ClientPojo;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  *
  * @author Oscar Alvarado
  */
 
-@AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
+@AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@Setter                              // Le dice a LOMBO que cree un constructor sin argumentos
+@Setter
 @Entity
 @Table(name = "client")
 public class Client implements Serializable {
@@ -30,24 +39,15 @@ public class Client implements Serializable {
     @Column(length=2)
     private Integer age;
 
-    public Client(ClientPojo clientPojo) {
-        this.idClient = clientPojo.getIdClient();
-        this.email = clientPojo.getEmail();
-        this.name = clientPojo.getName();
-        this.age = clientPojo.getAge();
-        this.messages = clientPojo.getMessages();
-        this.reservations = clientPojo.getReservations();
-    }
-
-    public Client(int idClient){
-        this.idClient=idClient;
-    }
-
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
-    @JsonIgnoreProperties({"reservations","client"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private List<Message>messages;
 
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="client")
-    @JsonIgnoreProperties({"client","messages"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private List<Reservation>reservations;
+
+    public Client(Integer idClient) {
+        this.idClient = idClient;
+    }
 }

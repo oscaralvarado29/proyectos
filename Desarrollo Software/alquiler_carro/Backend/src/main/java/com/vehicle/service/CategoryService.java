@@ -1,88 +1,84 @@
 package com.vehicle.service;
 
+import com.vehicle.dto.CategoryRequest;
+import com.vehicle.dto.CategoryResponse;
+import com.vehicle.dto.CategoryUpdate;
+import com.vehicle.exception.CategoryNotFoundException;
+import com.vehicle.exception.CategoryAlreadyExistsException;
+import com.vehicle.mapper.CategoryMapper;
 import com.vehicle.model.Category;
 import com.vehicle.repository.CategoryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
  * @author Oscar Alvarado
  */
+@RequiredArgsConstructor
 @Service
-public class CategoryService {
-    @Autowired
-    private CategoryRepository categoryRepository;
+@Transactional
+public class CategoryService implements ICategoryService {
+
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     /**
-     * GET ALL
-     * @return  the call of the getAll method of the class CategoryRepository
+     * @return all categories from database
      */
-    public List<Category> getAll() {
-        return categoryRepository.getAll();
+    @Override
+    public List<CategoryResponse> getAllCategories() {
+        return categoryMapper.toCategoryResponseList(categoryRepository.findAll());
     }
 
     /**
-     * GET by specific id
-     * @param categoryId category id to get
-     * @return the call of the getCategory method of the class CategoryRepository
+     * @param categoryId id of category to search
+     * @return category with id equals to categoryId
      */
-    public Optional<Category> getCategory (int categoryId) {
-        return categoryRepository.getCategory(categoryId);
+    @Override
+    public CategoryResponse getCategory(int categoryId) {
+        Category category = categoryRepository.findById(categoryId).orElseThrow(CategoryNotFoundException::new);
+        return categoryMapper.toCategoryResponse(category);
     }
 
     /**
-     * POST
-     * @param category object with category data
-     * @return the call of the save method of the class CategoryRepository if the category id don´t exist or is empty else return to category
+     * @param categoryRequest category to save
      */
-    public Category save(Category category) {
-        if (category.getIdCategory() == null) {
-            return categoryRepository.save(category);
-        } else {
-            Optional<Category> categorySave = categoryRepository.getCategory(category.getIdCategory());
-            if (categorySave.isEmpty()) {
-                return categoryRepository.save(category);
-            } else {
-                return category;
-            }
+
+    @Override
+    public void saveCategory(CategoryRequest categoryRequest) {
+        if (categoryRepository.existsByCategoryName(categoryRequest.getCategoryName())) {
+            throw new CategoryAlreadyExistsException();
         }
+        categoryRepository.save(categoryMapper.toCategory(categoryRequest));
     }
 
     /**
-     * UPDATE
-     * @param category object with category data
-     * @return the call of the update method of the class CategoryRepository if the category exist else return to category
+     * @param categoryId id of category to delete
      */
-    public Category update (Category category){
-        if (category.getIdCategory() != null) {
-            Optional<Category> categoryUpdate = categoryRepository.getCategory(category.getIdCategory());
-            if (categoryUpdate.isPresent()) {
-                if (category.getName() != null) {
-                    categoryUpdate.get().setName(category.getName());
-                }
-                if (category.getDescription() != null) {
-                    categoryUpdate.get().setDescription(category.getDescription());
-                }
-                return categoryRepository.save(categoryUpdate.get());
-            }
+    @Override
+    public void deleteCategory(int categoryId) {
+        if (!categoryRepository.existsById(categoryId)) {
+            throw new CategoryNotFoundException();
         }
-        return category;
+        categoryRepository.deleteById(categoryId);
     }
 
     /**
-     * DELETE
-     * @param categoryId category id to delete
-     * @return true if the category is deleted else return false
+     * @param categoryUpdate category to update
      */
-    public boolean deleteCategory(Integer categoryId){
-        return getCategory(categoryId).map(category -> {
-            categoryRepository.delete(category);
-            return true;
-        }).orElse(false);
+    @Override
+    public void updateCategory(CategoryUpdate categoryUpdate) {
+        Category categoryInDB = categoryRepository.findById(categoryUpdate.getIdCategory()).orElseThrow(CategoryNotFoundException::new);
+        if (categoryUpdate.getName() != null) {
+            categoryInDB.setCategoryName(categoryUpdate.getName());
+        }
+        if (categoryUpdate.getDescription() != null) {
+            categoryInDB.setCategoryDescription(categoryUpdate.getDescription());
+        }
+        categoryRepository.save(categoryInDB);
     }
 }
 

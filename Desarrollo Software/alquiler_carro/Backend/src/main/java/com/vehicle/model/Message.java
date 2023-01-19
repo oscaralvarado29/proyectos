@@ -1,17 +1,27 @@
 package com.vehicle.model;
 
-import com.vehicle.pojo.MessagePojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Oscar Alvarado
  */
 
+@SuppressWarnings("ALL")
 @AllArgsConstructor                  // constructor con todos los argumentos
 @NoArgsConstructor                   // constructor con todos los argumentos
 @Getter
@@ -27,27 +37,18 @@ public class Message implements Serializable{
     @Column(length=4)
     private double score = -1.0;
 
-    public Message(MessagePojo messagePojo) {
-        this.idMessage = messagePojo.getIdMessage();
-        this.messageText = messagePojo.getMessageText();
-        this.score = messagePojo.getScore();
-        this.vehicle = messagePojo.getVehicle();
-        this.client = messagePojo.getClient();
-        this.reservation=messagePojo.getReservation();
-    }
-
     @ManyToOne
     @JoinColumn(name="idVehicle")
-    @JsonIgnoreProperties({"messages", "client", "reservations" })
+    @JsonIgnoreProperties({"messages", "client", "reservations", "category", "vehicle"})
     private Vehicle vehicle;
 
     @ManyToOne
     @JoinColumn(name="idClient")
-    @JsonIgnoreProperties({"messages", "reservations", "client"})
+    @JsonIgnoreProperties({"messages", "reservations", "client", "category", "vehicle"})
     private Client client;
 
     @ManyToOne
     @JoinColumn(name="idReservation")
-    @JsonIgnoreProperties({"messages", "reservations", "client", "vehicle"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private Reservation reservation;
 }

@@ -3,89 +3,83 @@ package com.vehicle.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.vehicle.dto.MessageRequest;
+import com.vehicle.dto.MessageResponse;
+import com.vehicle.dto.MessageUpdate;
+import com.vehicle.exception.MessageAlreadyExistsException;
+import com.vehicle.exception.MessageNotFoundException;
+import com.vehicle.mapper.MessageMapper;
 import com.vehicle.model.Message;
 import com.vehicle.repository.MessageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Oscar Alvarado
  */
+@RequiredArgsConstructor
 @Service
-public class MessageService {
-    @Autowired
-    private MessageRepository messageRepository;
+@Transactional
+public class MessageService implements IMessageService {
+
+    private final MessageRepository messageRepository;
+    private final MessageMapper messageMapper;
 
     /**
-     * GET ALL
-     * @return  the call of the getAll method of the class MessageRepository
+     * @return  all messages from database
      */
-    public List<Message> getAll(){
-        return messageRepository.getAll();
+    @Override
+    public List<MessageResponse> getAllMessages() {
+        return messageMapper.toMessageResponseList(messageRepository.findAll());
     }
 
     /**
-     * GET by specific id
-     * @param messageId message id to get
-     * @return the call of the getMessage method of the class MessageRepository
+     * @param messageId id of message to search
+     * @return message with id equals to messageId
      */
-    public Optional<Message> getMessage(int messageId) {
-        return messageRepository.getMessage(messageId);
+    @Override
+    public MessageResponse getMessage(int messageId) {
+        Message message = messageRepository.findById(messageId).orElseThrow(MessageNotFoundException::new);
+        return messageMapper.toMessageResponse(message);
     }
 
     /**
-     * POST
-     * @param message object with message data
-     * @return the call of the save method of the class MessageRepository if the message id don´t exist or is empty else return to message
+     * @param messageRequest message to save
      */
-    public Message save(Message message){
-        if(message.getIdMessage()==null){
-            return messageRepository.save(message);
-        }else{
-            Optional<Message> message1= messageRepository.getMessage(message.getIdMessage());
-            if(message1.isEmpty()){
-                return messageRepository.save(message);
-            }else{
-                return message;
-            }
+    @Override
+    public void saveMessage(MessageRequest messageRequest) {
+        Optional<Message> messageInDB = messageRepository.findByMessageTextAndVehicleAndClientAndReservation(messageRequest.getMessageText(), messageRequest.getVehicle(), messageRequest.getClient(), messageRequest.getReservation());
+        if (messageInDB.isPresent()) {
+            throw new MessageAlreadyExistsException();
         }
+        messageRepository.save(messageMapper.toMessage(messageRequest));
     }
 
     /**
-     * UPDATE
-     * @param message message to update
-     * @return messageUpdate.get() if message.getIdMessage() is not null and idMessage is not empty else return message
+     * @param messageId id of message to delete
      */
-    public Message update(Message message){
-        if(message.getIdMessage() != null){
-            Optional<Message> messageUpdate= messageRepository.getMessage(message.getIdMessage());
-            if(messageUpdate.isPresent()){
-                if(message.getMessageText()!=null){
-                    messageUpdate.get().setMessageText(message.getMessageText());
-                }
-                if(message.getScore() > 0.0){
-                    messageUpdate.get().setScore(message.getScore());
-                }
-                messageRepository.save(messageUpdate.get());
-                return messageUpdate.get();
-            }else{
-                return message;
-            }
-        }else{
-            return message;
+    @Override
+    public void deleteMessage(int messageId) {
+        if (!messageRepository.existsById(messageId)) {
+            throw new MessageNotFoundException();
         }
+        messageRepository.deleteById(messageId);
     }
 
     /**
-     * DELETE
-     * @param messageId id of the message to delete
-     * @return true if message is deleted else return false
+     * @param messageUpdate message to update
      */
-    public boolean deleteMessage(Integer messageId) {
-        return getMessage(messageId).map(message -> {
-            messageRepository.delete(message);
-            return true;
-        }).orElse(false);
+    @Override
+    public void updateMessage(MessageUpdate messageUpdate) {
+        Message messageInDB = messageRepository.findById(messageUpdate.getIdMessage()).orElseThrow(MessageNotFoundException::new);
+        if (messageUpdate.getMessageText() != null) {
+            messageInDB.setMessageText(messageUpdate.getMessageText());
+        }
+        if (messageUpdate.getScore() >=0) {
+            messageInDB.setScore(messageUpdate.getScore());
+        }
+        messageRepository.save(messageInDB);
     }
 }

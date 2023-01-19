@@ -1,10 +1,19 @@
 package com.vehicle.model;
 
-import com.vehicle.pojo.CategoryPojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,8 +23,8 @@ import java.util.List;
  */
 @Getter
 @Setter
-@AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
-@NoArgsConstructor                              // Le dice a LOMBO que cree un constructor sin argumentos
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "category")
 public class Category implements Serializable {
@@ -23,20 +32,15 @@ public class Category implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idCategory;
     @Column(length=45)
-    private String name;
+    private String categoryName;
     @Column(length=250)
-    private String description;
+    private String categoryDescription;
 
-    public Category(CategoryPojo categoryPojo) {
-        this.idCategory = categoryPojo.getIdCategory();
-        this.name = categoryPojo.getName();
-        this.description = categoryPojo.getDescription();
-        this.vehicle = categoryPojo.getVehicle();
-
-    }
-
-    @Column()
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy="category")
-    @JsonIgnoreProperties("category")
-    private List<Vehicle> vehicle;
+    @JsonIgnoreProperties({"category", "client", "messages", "reservations"})
+    private List<Vehicle> vehicles;
+
+    public Category(Integer idCategory) {
+        this.idCategory = idCategory;
+    }
 }

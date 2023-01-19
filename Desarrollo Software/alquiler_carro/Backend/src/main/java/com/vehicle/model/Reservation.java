@@ -1,13 +1,24 @@
 package com.vehicle.model;
 
-import com.vehicle.pojo.ReservationPojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
@@ -23,33 +34,31 @@ import lombok.*;
 public class Reservation implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column()
     private Integer idReservation;
+    @Column()
     private Date startDate;
+    @Column()
     private Date devolutionDate;
+    @Column()
     private String status = "created";
-
-    public Reservation(ReservationPojo reservationPojo) {
-        this.idReservation = reservationPojo.getIdReservation();
-        this.startDate = reservationPojo.getStartDate();
-        this.devolutionDate = reservationPojo.getDevolutionDate();
-        this.status = reservationPojo.getStatus();
-        this.vehicle = reservationPojo.getVehicle();
-        this.client = reservationPojo.getClient();
-        this.messages = reservationPojo.getMessage();
-    }
 
     @ManyToOne
     @JoinColumn(name = "idVehicle")
-    @JsonIgnoreProperties({"reservations","vehicle","messages"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private Vehicle vehicle;
 
     @ManyToOne
     @JoinColumn(name = "idClient")
-    @JsonIgnoreProperties({"reservations","messages"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private Client client;
 
     @Column()
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy= "reservation")
-    @JsonIgnoreProperties({ "reservations", "client", "vehicle"})
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private List<Message> messages;
+
+    public Reservation(Integer idReservation) {
+        this.idReservation = idReservation;
+    }
 }

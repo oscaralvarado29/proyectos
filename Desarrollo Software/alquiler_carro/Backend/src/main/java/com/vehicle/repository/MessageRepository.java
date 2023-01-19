@@ -1,51 +1,13 @@
 package com.vehicle.repository;
-import java.util.List;
-import java.util.Optional;
-import com.vehicle.intrface.MessageInterface;
+
+import com.vehicle.model.Client;
 import com.vehicle.model.Message;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import com.vehicle.model.Reservation;
+import com.vehicle.model.Vehicle;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-/**
- *
- * @author Oscar Alvarado
- */
-@Repository
-public class MessageRepository {
-    @Autowired
-    private MessageInterface messageInterface;
+import java.util.Optional;
 
-    /**
-     * get all
-     * @return the call of the findAll method of the interface MessageInterface
-     */
-    public List<Message> getAll(){
-        return (List<Message>) messageInterface.findAll();
-    }
-
-    /**
-     * get by specific id
-     * @param messageId message id to get
-     * @return the call of the findById method of the interface MessageInterface
-     */
-    public Optional<Message> getMessage(int messageId){
-        return messageInterface.findById(messageId);
-    }
-
-    /**
-     * Insert
-     * @param message objet with message data
-     * @return the call of the save method of the interface MessageInterface
-     */
-    public Message save(Message message){
-        return messageInterface.save(message);
-    }
-
-    /**
-     * Delete
-     * @param message  message to delete
-     */
-    public void delete(Message message){
-        messageInterface.delete(message);
-    }
+public interface MessageRepository extends JpaRepository<Message,Integer> {
+    Optional<Message> findByMessageTextAndVehicleAndClientAndReservation(String messageText, Vehicle idVehicle, Client idClient, Reservation idReservation);
 }

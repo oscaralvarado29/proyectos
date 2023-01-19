@@ -1,10 +1,22 @@
 package com.vehicle.model;
 
-import com.vehicle.pojo.VehiclePojo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,11 +24,13 @@ import java.util.List;
  *
  * @author Oscar Alvarado
  */
-@SuppressWarnings("JpaDataSourceORMInspection")
+
+@SuppressWarnings("ALL")
+@SuppressAjWarnings
 @Getter
 @Setter
-@AllArgsConstructor                             // Le dice a LOMBO que cree un constructor con todos los argumentos
-@NoArgsConstructor                              // Le dice a LOMBO que cree un constructor sin argumentos
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "vehicle")
 public class Vehicle implements Serializable {
@@ -38,26 +52,9 @@ public class Vehicle implements Serializable {
     @Column(length = 3)
     private Integer seating;
 
-    public Vehicle(VehiclePojo vehiclePojo) {
-        this.idVehicle = vehiclePojo.getIdVehicle();
-        this.name = vehiclePojo.getName();
-        this.color = vehiclePojo.getColor();
-        this.brand = vehiclePojo.getBrand();
-        this.model = vehiclePojo.getModel();
-        this.horsePower = vehiclePojo.getHorsePower();
-        this.engineCylinders = vehiclePojo.getEngineCylinders();
-        this.seating = vehiclePojo.getSeating();
-        this.category = vehiclePojo.getCategory();
-        this.messages = vehiclePojo.getMessages();
-        this.reservations = vehiclePojo.getReservations();
-    }
-    public Vehicle (int idVehicle){
-        this.idVehicle=idVehicle;
-    }
-
     @ManyToOne
     @JoinColumn(name = "idCategory")
-    @JsonIgnoreProperties("vehicle")
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private Category category;
 
     @Column()
@@ -67,6 +64,10 @@ public class Vehicle implements Serializable {
 
     @Column()
     @OneToMany(cascade = {CascadeType.PERSIST},mappedBy= "vehicle")
-    @JsonIgnoreProperties("vehicle")
+    @JsonIgnoreProperties({"messages", "category", "client", "vehicle", "reservations"})
     private List<Reservation> reservations;
+
+    public Vehicle(Integer idVehicle) {
+        this.idVehicle = idVehicle;
+    }
 }

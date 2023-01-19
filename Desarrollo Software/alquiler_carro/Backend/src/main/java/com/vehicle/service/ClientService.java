@@ -1,94 +1,85 @@
 package com.vehicle.service;
 
 import java.util.List;
-import java.util.Optional;
-
+import com.vehicle.dto.ClientRequest;
+import com.vehicle.dto.ClientResponse;
+import com.vehicle.dto.ClientUpdate;
+import com.vehicle.exception.ClientAlreadyExistsException;
+import com.vehicle.exception.ClientNotFoundException;
+import com.vehicle.mapper.ClientMapper;
 import com.vehicle.model.Client;
 import com.vehicle.repository.ClientRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Oscar Alvarado
  */
+@RequiredArgsConstructor
 @Service
-public class ClientService {
-    @Autowired
-    private ClientRepository clientRepository;
+@Transactional
+public class ClientService implements IClientService {
+    private final ClientRepository clientRepository;
+    private final ClientMapper clientMapper;
+
 
     /**
-     * GET
-     * @return the call of the getAll method of the class ClientRepository
+     * @return all client in database
      */
-    public List<Client> getAll(){
-        return clientRepository.getAll();
+    @Override
+    public List<ClientResponse> getAllClients() {
+        return clientMapper.toClientResponseList(clientRepository.findAll());
     }
 
     /**
-     * GET select a specific id
-     * @param clientId client id to get
-     * @return the call of the getClient method of the class ClientRepository
+     * @param idClient id of client to search
+     * @return client with id equals to idClient
      */
-    public Optional<Client> getClient(int clientId) {
-        return clientRepository.getClient(clientId);
+    @Override
+    public ClientResponse getClient(int idClient) {
+        Client client = clientRepository.findById(idClient).orElseThrow(ClientNotFoundException::new);
+        return clientMapper.toClientResponse(client);
     }
 
     /**
-     * POST
-     * @param client object with client data
-     * @return the call of the save method of the class ClientRepository if the client id don´t exist or is empty else return to client
+     * @param clientRequest client to save
      */
-    public Client save(Client client){
-        if(client.getIdClient()==null){
-            return clientRepository.save(client);
-        }else{
-            Optional<Client> client1= clientRepository.getClient(client.getIdClient());
-            if(client1.isEmpty()){
-                return clientRepository.save(client);
-            }else{
-                return client;
-            }
+    @Override
+    public void saveClient(ClientRequest clientRequest) {
+        if (clientRepository.existsByName(clientRequest.getName())) {
+            throw new ClientAlreadyExistsException();
         }
+        clientRepository.save(clientMapper.toClient(clientRequest));
     }
 
     /**
-     * UPDATE
-     * @param client object with client data
-     * @return the call of the update method of the class ClientRepository if the client exist else return to client
+     * @param clientId id of client to delete
      */
-    public Client update(Client client){
-        if(client.getIdClient()!=null){
-            Optional<Client> clientUpdate= clientRepository.getClient(client.getIdClient());
-            if(clientUpdate.isPresent()){
-                if(client.getName()!=null){
-                    clientUpdate.get().setName(client.getName());
-                }
-                if(client.getEmail()!= null){
-                    clientUpdate.get().setEmail(client.getEmail());
-                }
-                if(client.getAge()!= null){
-                    clientUpdate.get().setAge(client.getAge());
-                }
-                clientRepository.save(clientUpdate.get());
-                return clientUpdate.get();
-            }else{
-                return client;
-            }
-        }else{
-            return client;
+    @Override
+    public void deleteClient(int clientId) {
+        if (!clientRepository.existsById(clientId)) {
+            throw new ClientNotFoundException();
         }
+        clientRepository.deleteById(clientId);
     }
 
     /**
-     * DELETE
-     * @param clientId client id to delete
-     * @return true if the client is deleted else return false
+     * @param clientUpdate client to update
      */
-    public boolean deleteClient(Integer clientId) {
-        return getClient(clientId).map(client -> {
-            clientRepository.delete(client);
-            return true;
-        }).orElse(false);
+    @Override
+    public void updateClient(ClientUpdate clientUpdate) {
+        Client clientInDB = clientRepository.findById(clientUpdate.getIdClient()).orElseThrow(ClientNotFoundException::new);
+        if (clientUpdate.getName() != null) {
+            clientInDB.setName(clientUpdate.getName());
+        }
+        if (clientUpdate.getEmail() != null) {
+            clientInDB.setEmail(clientUpdate.getEmail());
+        }
+        if (clientUpdate.getAge() != null) {
+            clientInDB.setAge(clientUpdate.getAge());
+        }
+        clientRepository.save(clientInDB);
     }
 }
