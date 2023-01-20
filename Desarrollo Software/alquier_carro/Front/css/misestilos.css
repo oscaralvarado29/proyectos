@@ -1,0 +1,13 @@
+.sin-padding {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    }
+th {
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    }
+td {
+    align-items: center;
+    text-align: center;
+    }
