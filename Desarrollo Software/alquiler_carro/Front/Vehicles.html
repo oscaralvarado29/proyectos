@@ -11,17 +11,10 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
             src="js/generalFunctions.js">
         </script>
         <script type="text/javascript"
-            src="js/reservationFunciton.js">
-========
-                src="js/generalFunctions.js">
-        </script>
-        <script type="text/javascript"
-            src="js/misFuncionesReservas.js">
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
+            src="js/vehicleFunction.js">
         </script>
         <title>Alquiler de Vehiculos</title>
     </head>
@@ -32,7 +25,7 @@
                 py-3 mb-3 border-bottom sin-padding" style="background-color:
                 #b813ce">
                 <div class="container text-light ">
-                    <h1>Reservaciones </h1>
+                    <h1>Vehiculos </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
@@ -88,81 +81,101 @@
             <div class="container position-relative w-50 float-left">
 
                 <div class="input-group mb-3 ">
-                    <button onclick="getDataClientAndVehicle()">
-                        Consultar clientes y vehiculos</button>
-                </div>
-                <div class="input-group mb-3 ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="incioR">Apertura de
-                            la
-                            reserva:</span>
+                        <span class="input-group-text" id="nombre">Nombre:</span>
                     </div>
-                    <label for="startDate"></label>
-                    <input type="date" class="form-control" id="startDate"
-                        aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="finalR">Cierre de la
-                            reserva:</span>
-                    </div>
-                    <label for="devolutionDate"></label>
-                    <input type="date" class="form-control "
-                        id="devolutionDate"
-                        aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="estado">Estado:</span>
-                    </div>
-                    <label for="status"></label>
-                    <input type="text" class="form-control " id="status"
+                    <label for="name"></label>
+                    <input type="text" class="form-control" id="name"
                         aria-describedby="basic-addon3"
-                        placeholder="Estado de la reserva: completed o cancelled
-                        ">
+                        placeholder="Nombre del vehiculo">
                 </div>
                 <div class="input-group mb-3 ">
-                    <button onclick="getDataClientAndVehicle()">
-                        Consultar clientes y vehiculos</button>
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="spanColor">Color:</span>
+                    </div>
+                    <label for="color"></label>
+                    <input type="text" class="form-control "
+                        id="color"
+                        aria-describedby="basic-addon3"
+                        placeholder="Color del vehiiculo">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="marca">Marca:</span>
+                    </div>
+                    <label for="brand"></label>
+                    <input type="text" class="form-control " id="brand"
+                        aria-describedby="basic-addon3"
+                        placeholder="Marca del vehiculo">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="modelo">Modelo:</span>
+                    </div>
+                    <label for="model"></label>
+                    <input type="text" class="form-control " id="model"
+                        aria-describedby="basic-addon3"
+                        placeholder="Modelo del vehiculo">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="caballosFuerza">Caballos
+                            de fuerza:</span>
+                    </div>
+                    <label for="horsePower"></label>
+                    <input type="text" class="form-control "
+                        id="horsePower"
+                        aria-describedby="basic-addon3"
+                        placeholder="Caballos de fuerza del motor">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="cilindrosMotor">Cilindros
+                            del motor:</span>
+                    </div>
+                    <label for="engineCylinders"></label>
+                    <input type="text" class="form-control "
+                        id="engineCylinders"
+                        aria-describedby="basic-addon3"
+                        placeholder="Cilindros del motor">
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="puestos">Cantidad de
+                            puestos:</span>
+                    </div>
+                    <label for="seating"></label>
+                    <input type="text" class="form-control " id="seating"
+                        aria-describedby="basic-addon3"
+                        placeholder="Cantidad de puestos del vehiculo">
+                </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getCategories()">
+                        Consultar categorias</button>
                 </div>
                 <div class="input-group mb-3 ">
                     <div class="me-2">
-                        <label for="select-client">Cliente:</label>
+                        <label for="select-category">Categoria:</label>
                     </div>
-                    <select name="cliente" id="select-client"></select>
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="me-2">
-                        <label for="select-vehicle" class="me-2">Vehiculo:</label>
-                    </div>
-                    <select name="vehicle" id="select-vehicle"></select>
+                    <select id="select-category" class="mb-3"></select>
                 </div>
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="postReservation()">Guardar
-                            reservación</button>
+                        <button onclick="postVehicle()">Guardar
+                            vehiculo</button>
                     </div>
                     <div>
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
-                        <button onclick="getReservation()">
-========
-                        <button onclick="getReservations()">
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
-                            Consultar reservaciones</button>
+                        <button onclick="getVehicles()">
+                            Consultar vehiculos</button>
                     </div>
                 </div>
             </div>
 
-            <table id="mostrarReservas" class="mt-4 d-flex
+            <table id="mostrarVehiculos" class="mt-4 d-flex
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
-                <caption id="captionReservation">Tabla de reservaciones de los
-                    vehiculos</caption>
-========
-                <caption id="captionReservation">Tabla de reservación de los vehiculos</caption>
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
+                <caption id="captionVehicle">Tabla de vehiculos</caption>
             </table>
 
         </div>

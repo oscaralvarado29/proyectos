@@ -60,7 +60,7 @@ section {
 
 #barra-gris {
     background-color: #efefef;
-    position: sticky !important;
+    position: center !important;
     top: 0;
     flex-direction: row-reverse;
     z-index: 300;

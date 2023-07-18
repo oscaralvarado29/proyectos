@@ -11,17 +11,10 @@
             src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
         </script>
         <script type="text/javascript"
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
             src="js/generalFunctions.js">
         </script>
         <script type="text/javascript"
-            src="js/reservationFunciton.js">
-========
-                src="js/generalFunctions.js">
-        </script>
-        <script type="text/javascript"
-            src="js/misFuncionesReservas.js">
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
+            src="js/messageFunciton.js">
         </script>
         <title>Alquiler de Vehiculos</title>
     </head>
@@ -32,7 +25,7 @@
                 py-3 mb-3 border-bottom sin-padding" style="background-color:
                 #b813ce">
                 <div class="container text-light ">
-                    <h1>Reservaciones </h1>
+                    <h1>Mensajes </h1>
                 </div>
                 <nav class="navbar navbar-expand-lg navbar-dark fs-4"
                     style="background-color: #b813ce">
@@ -92,40 +85,6 @@
                         Consultar clientes y vehiculos</button>
                 </div>
                 <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="incioR">Apertura de
-                            la
-                            reserva:</span>
-                    </div>
-                    <label for="startDate"></label>
-                    <input type="date" class="form-control" id="startDate"
-                        aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="finalR">Cierre de la
-                            reserva:</span>
-                    </div>
-                    <label for="devolutionDate"></label>
-                    <input type="date" class="form-control "
-                        id="devolutionDate"
-                        aria-describedby="basic-addon3">
-                </div>
-                <div class="input-group mb-3 ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="estado">Estado:</span>
-                    </div>
-                    <label for="status"></label>
-                    <input type="text" class="form-control " id="status"
-                        aria-describedby="basic-addon3"
-                        placeholder="Estado de la reserva: completed o cancelled
-                        ">
-                </div>
-                <div class="input-group mb-3 ">
-                    <button onclick="getDataClientAndVehicle()">
-                        Consultar clientes y vehiculos</button>
-                </div>
-                <div class="input-group mb-3 ">
                     <div class="me-2">
                         <label for="select-client">Cliente:</label>
                     </div>
@@ -137,32 +96,49 @@
                     </div>
                     <select name="vehicle" id="select-vehicle"></select>
                 </div>
+                <div class="input-group mb-3 ">
+                    <button onclick="getDataReservationsByClientAndVehicle()">
+                        Consultar Reservaciones</button>
+                </div>
+                <div class="input-group mb-3 ">
+                    <div class="me-2">
+                        <label for="select-reservation">Fechas de
+                            reservaciones:</label>
+                    </div>
+                    <select name="reservaciones" id="select-reservation"></select>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="messagetext">Comentarios:</label>
+                    <textarea class="form-control" id="messagetext" rows="3"></textarea>
+                </div>
+
+                <div class="input-group mb-3 ">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="califcacion">Califcación:</span>
+                    </div>
+                    <label for="score"></label>
+                    <input type="text" class="form-control " id="score"
+                        aria-describedby="basic-addon3"
+                        placeholder="Calfcacion del vehculo entre 0.0 y 5.0">
+                </div>
+
                 <div class="row d-flex flex-nowrap">
                     <div class="w-auto">
-                        <button onclick="postReservation()">Guardar
-                            reservación</button>
+                        <button onclick="postMessage()">Guardar
+                            mensaje</button>
                     </div>
                     <div>
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
-                        <button onclick="getReservation()">
-========
-                        <button onclick="getReservations()">
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
-                            Consultar reservaciones</button>
+                        <button onclick="getMessages()">
+                            Consultar mensajes</button>
                     </div>
                 </div>
             </div>
 
-            <table id="mostrarReservas" class="mt-4 d-flex
+            <table id="mostrarMensajes" class="mt-4 d-flex
                 justify-content-center align-items-center table
                 table-striped
                 table-hover">
-<<<<<<<< Updated upstream:Desarrollo Software/alquier_carro/Front/reservations.html
-                <caption id="captionReservation">Tabla de reservaciones de los
-                    vehiculos</caption>
-========
-                <caption id="captionReservation">Tabla de reservación de los vehiculos</caption>
->>>>>>>> Stashed changes:Desarrollo Software/alquiler_carro/Front/Reservaciones.html
+                <caption id="captionMessage">Tabla de mensajes de los clientes</caption>
             </table>
 
         </div>
