@@ -1,11 +1,35 @@
 plugins {
 	id 'java'
+	id 'java-library'
+	id 'maven-publish'
 	id 'org.springframework.boot' version '2.7.13'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+	id 'jacoco'
 }
 
-group = 'com.medicine.register'
-version = '0.0.1-SNAPSHOT'
+// Configuración de JaCoCo
+jacoco {
+	toolVersion = "0.8.9"
+	reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
+}
+
+// Configuración de las fuentes y clases para JaCoCo (excluyendo los paquetes y clases deseadas)
+jacocoTestReport {
+	dependsOn test // Ejecutar pruebas antes de generar el informe de cobertura
+	reports {
+		xml.required = false
+		csv.required = false
+		html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+	}
+	afterEvaluate {
+		classDirectories.setFrom(files(classDirectories.files.collect {
+			fileTree(dir: it, exclude: 'com/medicine/register/config/**')
+			fileTree(dir: it, exclude: 'com/medicine/register/dao/entity/**')
+			fileTree(dir: it, exclude: 'com/medicine/register/RegisterApplication.class')
+		}))
+	}
+}
+
 
 java {
 	sourceCompatibility = '11'
@@ -20,31 +44,45 @@ configurations {
 repositories {
 	mavenCentral()
 	google()
-	jcenter()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	compileOnly 'org.projectlombok:lombok'
+
+	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.13'
+	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.13'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.3.4.RELEASE'
+	implementation 'org.hibernate:hibernate-core'
+	implementation 'commons-codec:commons-codec:1.15'
+	implementation 'org.apache.commons:commons-lang3:3.13.0'
+
+	//h2
+	runtimeOnly 'com.h2database:h2'
+
+	//google
+	implementation 'com.google.code.gson:gson:2.8.8'
+	//aws
+	api 'com.amazonaws:aws-java-sdk-dynamodb:1.12.533'
+	api 'com.github.derjust:spring-data-dynamodb:5.1.0'
+
+	//lombok
+    implementation 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
 	//mapstruct
 	implementation 'org.mapstruct:mapstruct:1.4.0.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 
-	//springboot
-	implementation 'org.springframework.boot:spring-boot-starter-web:2.3.8.RELEASE'
-	implementation 'org.springframework.boot:spring-boot-starter-validation:2.3.8.RELEASE'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.3.4.RELEASE'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.3.4.RELEASE'
-
-	implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.3'
-
-	//springfox
-	implementation "io.springfox:springfox-boot-starter:3.0.0"
-	compileOnly "io.springfox:springfox-swagger-ui:3.0.0"
-
 	//graphql
-	implementation 'com.graphql-java:graphql-spring-boot-starter:5.0.2'
-	implementation 'com.graphql-java:graphql-java-tools:5.2.4'
-	implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'}
+	implementation 'com.graphql-java:graphql-java:21.0'
+	implementation 'org.springframework.boot:spring-boot-starter-graphql'
+	implementation 'com.graphql-java-kickstart:graphql-java-tools:13.1.0'
+    //test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework:spring-webflux'
+	testImplementation 'org.springframework.graphql:spring-graphql-test'
+}
+
+group = 'com.medicine.register'
+version = '0.0.1-SNAPSHOT'
+description = 'Registro'
+
