@@ -8,14 +8,14 @@ import com.medicine.register.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PatientService {
     private final IPatientRepository patientRepository;
     private final ILoggerStrategy logStrategy;
-    @Transactional
+
     public String createPatient (String id, String firstName, String secondName, String firstSurName,
                                 String secondSurName, String address, String email,
                                 String landline, String cellPhone, String residencesType,
@@ -46,5 +46,9 @@ public class PatientService {
         logStrategy.logInfo("request body: " + gson.toJson(patient));
         patientRepository.save(patient);
         return String.format(Constants.MSG_CREATE_PATIENT, patient.getFirstName(), patient.getSecondName());
+    }
+
+    public Optional<Patient> getPatient(String id){
+        return patientRepository.findById(id);
     }
 }

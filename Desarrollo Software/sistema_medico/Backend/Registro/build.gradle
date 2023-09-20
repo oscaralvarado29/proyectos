@@ -50,13 +50,8 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator:2.7.13'
 	implementation 'org.springframework.boot:spring-boot-starter-web:2.7.13'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.3.4.RELEASE'
-	implementation 'org.hibernate:hibernate-core'
 	implementation 'commons-codec:commons-codec:1.15'
 	implementation 'org.apache.commons:commons-lang3:3.13.0'
-
-	//h2
-	runtimeOnly 'com.h2database:h2'
 
 	//google
 	implementation 'com.google.code.gson:gson:2.8.8'
@@ -76,6 +71,7 @@ dependencies {
 	implementation 'com.graphql-java:graphql-java:21.0'
 	implementation 'org.springframework.boot:spring-boot-starter-graphql'
 	implementation 'com.graphql-java-kickstart:graphql-java-tools:13.1.0'
+	implementation 'com.graphql-java:graphiql-spring-boot-starter:5.0.2'
     //test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework:spring-webflux'

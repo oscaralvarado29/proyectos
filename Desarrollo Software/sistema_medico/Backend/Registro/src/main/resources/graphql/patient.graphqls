@@ -29,3 +29,7 @@ type Mutation {
         neighborhood: String!
         password: String!):String!
 }
+
+type Query{
+    getPatient(id:ID!):Patient
+}

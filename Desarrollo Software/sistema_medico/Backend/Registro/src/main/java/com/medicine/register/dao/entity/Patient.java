@@ -7,10 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -57,10 +55,4 @@ public class Patient {
     @NotEmpty(message = "La contraseña no puede estar vacío")
     private String password;
 
-    public Patient(Patient patient, String password){
-        this.firstName = patient.getFirstName();
-        this.secondName = patient.getSecondName();
-        this.firstSurName = patient.getFirstSurName();
-        this.secondSurName = patient.getSecondSurName();
-    }
 }
