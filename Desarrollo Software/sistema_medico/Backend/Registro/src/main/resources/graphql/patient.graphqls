@@ -1,35 +1,35 @@
-type Patient{
-    id: ID!
-    firstName: String!
+type RequestResponse{
+    id: String
+    firstName: String
     secondName: String
-    firstSurName: String!
-    secondSurName: String!
-    address: String!
-    email: String!
+    firstSurName: String
+    secondSurName: String
+    address: String
+    email: String
     landline: String
-    cellPhone: String!
-    residencesType: String!
+    cellPhone: String
+    residencesType: String
     descriptionResidence: String
-    neighborhood: String!
-    password: String!
+    neighborhood: String
 }
 
 type Mutation {
-    createPatient (id: ID!
-        firstName: String!
+    createPatient (id: String
+        firstName: String
         secondName: String
-        firstSurName: String!
-        secondSurName: String!
-        address: String!
-        email: String!
+        firstSurName: String
+        secondSurName: String
+        address: String
+        email: String
         landline: String
-        cellPhone: String!
-        residencesType: String!
+        cellPhone: String
+        residencesType: String
         descriptionResidence: String
-        neighborhood: String!
-        password: String!):String!
+        neighborhood: String
+        password: String!):String
 }
 
 type Query{
-    getPatient(id:ID!):Patient
+    getPatient(id:String):RequestResponse
 }
+
