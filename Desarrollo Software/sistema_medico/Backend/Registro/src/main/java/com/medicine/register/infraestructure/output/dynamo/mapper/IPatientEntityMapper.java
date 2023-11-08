@@ -9,6 +9,8 @@ import org.mapstruct.ReportingPolicy;
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface IPatientEntityMapper {
+
     PatientEntity toPatientEntity(Patient patient);
+
     Patient toPatient(PatientEntity patientEntity);
 }
