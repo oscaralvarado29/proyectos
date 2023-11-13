@@ -6,7 +6,6 @@ import com.medicine.register.application.mapper.IPatientMapper;
 import com.medicine.register.domain.api.IPatientEncryptionServicePort;
 import com.medicine.register.domain.api.IPatientServicePort;
 import com.medicine.register.domain.model.Patient;
-import com.medicine.register.infrastructure.encryption.systemEncryption.Encryption;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
