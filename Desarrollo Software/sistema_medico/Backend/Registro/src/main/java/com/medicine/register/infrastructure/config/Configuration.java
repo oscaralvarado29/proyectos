@@ -1,4 +1,4 @@
-package com.medicine.register.infraestructure.config;
+package com.medicine.register.infrastructure.config;
 
 import java.io.IOException;
 import java.util.Properties;

@@ -1,4 +1,4 @@
-package com.medicine.register.infraestructure.output.dynamo.entity;
+package com.medicine.register.infrastructure.output.dynamo.entity;
 
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;

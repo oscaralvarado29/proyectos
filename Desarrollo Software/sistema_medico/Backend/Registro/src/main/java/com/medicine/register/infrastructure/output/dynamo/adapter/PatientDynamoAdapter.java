@@ -1,12 +1,12 @@
-package com.medicine.register.infraestructure.output.dynamo.Adapter;
+package com.medicine.register.infrastructure.output.dynamo.adapter;
 
 import com.medicine.register.domain.model.Patient;
 import com.medicine.register.domain.spi.IPatientPersistencePort;
-import com.medicine.register.infraestructure.exception.PatientNotFoundException;
-import com.medicine.register.infraestructure.output.dynamo.entity.PatientEntity;
-import com.medicine.register.infraestructure.output.dynamo.mapper.IPatientEntityMapper;
-import com.medicine.register.infraestructure.output.dynamo.repository.IPatientRepository;
-import com.medicine.register.infraestructure.util.Constants;
+import com.medicine.register.infrastructure.exception.PatientNotFoundException;
+import com.medicine.register.infrastructure.output.dynamo.entity.PatientEntity;
+import com.medicine.register.infrastructure.output.dynamo.mapper.IPatientEntityMapper;
+import com.medicine.register.infrastructure.output.dynamo.repository.IPatientRepository;
+import com.medicine.register.infrastructure.util.Constants;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

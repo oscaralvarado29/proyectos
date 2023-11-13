@@ -1,4 +1,4 @@
-package com.medicine.register.infraestructure.exception;
+package com.medicine.register.infrastructure.exception;
 
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
@@ -22,7 +22,7 @@ public class ExceptionHandlers extends DataFetcherExceptionResolverAdapter {
         }
 
 
-    private GraphQLError graphQLError(ErrorType errorType, PatientNotFoundException ex, DataFetchingEnvironment env){
+    private GraphQLError graphQLError(ErrorType errorType, Exception ex, DataFetchingEnvironment env){
         return GraphqlErrorBuilder.newError()
                 .errorType(errorType)
                 .message(ex.getMessage())

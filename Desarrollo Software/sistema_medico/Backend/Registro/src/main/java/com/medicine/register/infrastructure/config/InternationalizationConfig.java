@@ -1,4 +1,4 @@
-package com.medicine.register.infraestructure.config;
+package com.medicine.register.infrastructure.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

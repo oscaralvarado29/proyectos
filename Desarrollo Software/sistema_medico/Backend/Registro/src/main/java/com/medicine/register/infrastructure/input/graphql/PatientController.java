@@ -1,9 +1,9 @@
-package com.medicine.register.infraestructure.input.graphql;
+package com.medicine.register.infrastructure.input.graphql;
 
 import com.medicine.register.application.dto.PatientRequest;
 import com.medicine.register.application.dto.RequestResponse;
 import com.medicine.register.application.handler.IPatientHandler;
-import com.medicine.register.infraestructure.util.Constants;
+import com.medicine.register.infrastructure.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.Arguments;

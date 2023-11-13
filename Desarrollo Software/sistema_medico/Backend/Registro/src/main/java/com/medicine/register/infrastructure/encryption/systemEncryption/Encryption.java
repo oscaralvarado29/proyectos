@@ -1,12 +1,12 @@
-package com.medicine.register.infraestructure.util;
+package com.medicine.register.infrastructure.encryption.systemEncryption;
 
-import com.medicine.register.infraestructure.config.Configuration;
+import com.medicine.register.infrastructure.util.Constants;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.Cipher;
-import java.io.File;
 import java.io.FileInputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -16,16 +16,18 @@ import java.util.Base64;
 
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class Encryption {
-    //@Value("${alias}")
-    protected String alias="registro";
-    //@Value("${password}")
-    protected String keystorePassword="#RegistroStore4620";
-    //@Value("${path}")
-    protected String keystorePath="E:\\proyectos\\Desarrollo Software\\sistema_medico\\Backend\\Registro\\src\\main\\resources\\registro.jks";
-    //@Value("${privateKey.password}")
-    protected String privateKeyPassword="#KeyRegistro8426";
-    private Configuration config;
+    @Value("${alias}")
+    protected String alias;
+    @Value("${password}")
+    protected String keystorePassword;
+    @Value("${path}")
+    protected String keystorePath;
+    @Value("${privateKey.password}")
+    protected String privateKeyPassword;
+
+
     protected PublicKey getPublicKey() {
        try (FileInputStream fis = new FileInputStream(keystorePath)){
             KeyStore keyStore = KeyStore.getInstance(Constants.TYPE_KEYSTORE);
@@ -59,8 +61,8 @@ public class Encryption {
                 Cipher cipher = Cipher.getInstance(Constants.TRANSFORMATION);
                 cipher.init(Cipher.ENCRYPT_MODE, publicKey);
 
-                byte[] textoCifrado = cipher.doFinal(text.getBytes());
-                return Base64.getEncoder().encodeToString(textoCifrado);
+                byte[] wordEncrypted = cipher.doFinal(text.getBytes());
+                return Base64.getEncoder().encodeToString(wordEncrypted);
             }
             return null;
         } catch (Exception e) {
@@ -69,13 +71,13 @@ public class Encryption {
         }
     }
 
-    public String desencryptWithPrivateKey(String textoCifrado) {
+    public String decryptWithPrivateKey(String wordEncrypted) {
         PrivateKey privateKey = getPrivateKey();
         try {
             Cipher cipher = Cipher.getInstance(Constants.TRANSFORMATION);
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
 
-            byte[] cipherTextBytes = Base64.getDecoder().decode(textoCifrado);
+            byte[] cipherTextBytes = Base64.getDecoder().decode(wordEncrypted);
             byte[] decryptedTextBytes = cipher.doFinal(cipherTextBytes);
 
             return new String(decryptedTextBytes);
