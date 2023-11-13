@@ -23,8 +23,9 @@ jacocoTestReport {
 	}
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it, exclude: 'com/medicine/register/config/**')
-			fileTree(dir: it, exclude: 'com/medicine/register/dao/entity/**')
+			fileTree(dir: it, exclude: 'com/medicine/register/infrastructure/config/**')
+			fileTree(dir: it, exclude: 'com/medicine/register/application/**')
+			fileTree(dir: it, exclude: 'com/medicine/register/domain/model/**')
 			fileTree(dir: it, exclude: 'com/medicine/register/RegisterApplication.class')
 		}))
 	}
